@@ -13,6 +13,9 @@
             margin: 0;
             overflow: hidden;
             border-bottom: 1px solid #dee2e6; /* Add a subtle bottom border */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .menu-item {
@@ -29,6 +32,14 @@
 
         .menu-item:hover {
             color: #f8f9fa; /* Change text color on hover to lighter shade */
+        }
+
+        /* Add some decorative elements */
+        .decorative-icon {
+            color: #ffffff;
+            font-size: 24px;
+            margin-left: 10px;
+            cursor: pointer;
         }
 
         /* Styles for the organization list */
@@ -56,6 +67,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
             box-sizing: border-box;
             margin-right: 20px; /* Add margin between items */
+            cursor: pointer; /* Change cursor to pointer */
         }
 
         .organization-card:hover {
@@ -115,6 +127,32 @@
             line-height: 1.5;
             color: #6c757d; /* Gray text color */
         }
+
+        /* Styles for the organization details */
+        .details-container {
+            display: none; /* Hide details by default */
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            z-index: 1;
+            top: calc(100% + 10px); /* Position below organization card */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px; /* Adjust width as needed */
+            text-align: left;
+        }
+
+        /* Styles for the close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #6c757d;
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
@@ -123,22 +161,44 @@
             <li class="menu-item" onclick="toggleOrganizations()">View Organizations List</li> <!-- Menu item to show organizations -->
             <li class="menu-item" onclick="toggleDonors()">View Donor List</li> <!-- Menu item to show donors -->
         </ul>
+        <div class="settings-button">
+            <span class="menu-item">Settings</span>
+            <span class="decorative-icon settings-icon">⚙️</span> <!-- Settings button -->
+        </div>
     </nav>
 
     <div class="container">
         <div id="organization-list" class="organization-list">
             <!-- Organization cards -->
-            <div class="organization-card">
+            <div class="organization-card" onclick="toggleDetails('magdi-details')">
                 <div class="organization-title">Magdi Yacoub Hospital</div>
                 <div class="organization-description">Global Heart Centre for Kids</div>
+                <div id="magdi-details" class="details-container">
+                    <span class="close-btn" onclick="toggleDetails('magdi-details')">&times;</span>
+                    <p>Contact: +01154456783</p>
+                    <p>Address: 456 Street, Zamalek, Cairo Governorate, Egypt</p>
+                    <p>Type: Hospital</p>
+                </div>
             </div>
-            <div class="organization-card">
+            <div class="organization-card" onclick="toggleDetails('57357-details')">
                 <div class="organization-title">57357</div>
                 <div class="organization-description">Children's Cancer Hospital</div>
+                <div id="57357-details" class="details-container">
+                    <span class="close-btn" onclick="toggleDetails('57357-details')">&times;</span>
+                    <p>Contact: 0115445673</p>
+                    <p>Address: 456 Street, Nasrcity, Egypt</p>
+                    <p>Type: Hospital</p>
+                </div>
             </div>
-            <div class="organization-card">
+            <div class="organization-card" onclick="toggleDetails('elnour-details')">
                 <div class="organization-title">Elnour School</div>
                 <div class="organization-description">School for Children</div>
+                <div id="elnour-details" class="details-container">
+                    <span class="close-btn" onclick="toggleDetails('elnour-details')">&times;</span>
+                    <p>Contact: +1122334455</p>
+                    <p>Address: 789 Street, New Cairo, Egypt</p>
+                    <p>Type: School</p>
+                </div>
             </div>
         </div>
 
@@ -190,6 +250,16 @@
                     <div class='donor-role'>Volunteer as Doctor</div>
                 </div>
             `;
+        }
+
+        // Function to toggle organization details visibility
+        function toggleDetails(detailsId) {
+            var detailsContainer = document.getElementById(detailsId);
+            if (detailsContainer.style.display === "none" || detailsContainer.style.display === "") {
+                detailsContainer.style.display = "block"; // Display the details if they're hidden
+            } else {
+                detailsContainer.style.display = "none"; // Hide the details if they're visible
+            }
         }
     </script>
 </body>
