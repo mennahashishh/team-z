@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization List</title>
+    <style>
+        /* Styles for the menu bar */
+        .menu-bar {
+            background: linear-gradient(to right, #53c43a, #587ac4); /* Gradient background */
+            padding: 10px 20px;
+            list-style-type: none;
+            margin: 0;
+            overflow: hidden;
+            border-bottom: 1px solid #dee2e6; /* Add a subtle bottom border */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-item {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px;
+            color: #ffffff; /* White text color */
+            font-weight: bold; /* Bold font weight */
+            text-transform: uppercase; /* Uppercase text */
+            text-decoration: none; /* Remove default underline */
+            transition: color 0.3s; /* Smooth color transition */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .menu-item:hover {
+            color: #f8f9fa; /* Change text color on hover to lighter shade */
+        }
+
+        /* Add some decorative elements */
+        .decorative-icon {
+            color: #ffffff;
+            font-size: 24px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        /* Styles for the organization list */
+        .container {
+            max-width: 1000px; /* Adjusted max-width */
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .organization-list {
+            list-style-type: none;
+            padding: 0;
+            display: none; /* Hide the list by default */
+            margin-top: 20px; /* Add margin to separate from the button */
+        }
+
+        /* Styles for list items */
+        .organization-card {
+            background-color: #ffffff;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            width: calc(50% - 20px); /* Adjust width based on desired layout */
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+            margin-right: 20px; /* Add margin between items */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .organization-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .organization-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .organization-description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #6c757d; /* Gray text color */
+        }
+
+        /* Styles for the donor list */
+        .donor-list {
+            list-style-type: none;
+            padding: 0;
+            display: none; /* Hide the list by default */
+            margin-top: 20px; /* Add margin to separate from the button */
+            display: flex; /* Make the list items display horizontally */
+            flex-wrap: wrap; /* Wrap the items if they exceed container width */
+            justify-content: center; /* Center the items horizontally */
+        }
+
+        /* Styles for donor items */
+        .donor-card {
+            background-color: #ffffff;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            width: calc(30% - 20px); /* Adjust width based on desired layout */
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+            margin-right: 20px; /* Add margin between items */
+        }
+
+        .donor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .donor-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .donor-role {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #6c757d; /* Gray text color */
+        }
+
+        /* Styles for the organization details */
+        .details-container {
+            display: none; /* Hide details by default */
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            z-index: 1;
+            top: calc(100% + 10px); /* Position below organization card */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px; /* Adjust width as needed */
+            text-align: left;
+        }
+
+        /* Styles for the close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #6c757d;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="menu-bar">
+        <ul>
+            <li class="menu-item" onclick="toggleOrganizations()">View Organizations List</li> <!-- Menu item to show organizations -->
+            <li class="menu-item" onclick="toggleDonors()">View Donor List</li> <!-- Menu item to show donors -->
+        </ul>
+        <div class="settings-button">
+            <span class="menu-item">Settings</span>
+            <span class="decorative-icon settings-icon">⚙</span> <!-- Settings button -->
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="organization-list" class="organization-list">
+            <!-- Organization cards -->
+            <div class="organization-card" onclick="toggleDetails('magdi-details')">
+                <div class="organization-title">Magdi Yacoub Hospital</div>
+                <div class="organization-description">Global Heart Centre for Kids</div>
+                <div id="magdi-details" class="details-container">
+                    <span class="close-btn" onclick="toggleDetails('magdi-details')">&times;</span>
+                    <p>Contact: +01154456783</p>
+                    <p>Address: 456 Street, Zamalek, Cairo Governorate, Egypt</p>
+                    <p>Type: Hospital</p>
+                </div>
+            </div>
+            <div class="organization-card" onclick="toggleDetails('57357-details')">
+                <div class="organization-title">57357</div>
+                <div class="organization-description">Children's Cancer Hospital</div>
+                <div id="57357-details" class="details-container">
+                    <span class="close-btn" onclick="toggleDetails('57357-details')">&times;</span>
+                    <p>Contact: 0115445673</p>
+                    <p>Address: 456 Street, Nasrcity, Egypt</p>
+                    <p>Type: Hospital</p>
+                </div>
+            </div>
+            <div class="organization-card" onclick="toggleDetails('elnour-details')">
+                <div class="organization-title">Elnour School</div>
+                <div class="organization-description">School for Children</div>
+                <div id="elnour-details" class="details-container">
+                    <span class="close-btn" onclick="toggleDetails('elnour-details')">&times;</span>
+                    <p>Contact: +1122334455</p>
+                    <p>Address: 789 Street, New Cairo, Egypt</p>
+                    <p>Type: School</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="donor-list" class="donor-list">
+            <!-- Donor list will be shown after clicking the button -->
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the organization list visibility
+        function toggleOrganizations() {
+            var organizationList = document.getElementById("organization-list");
+            var donorList = document.getElementById("donor-list");
+            organizationList.style.display = "flex"; // Display the organization list
+            donorList.style.display = "none"; // Hide the donor list
+        }
+
+        // Function to toggle the donor list visibility
+        function toggleDonors() {
+            var organizationList = document.getElementById("organization-list");
+            var donorList = document.getElementById("donor-list");
+            organizationList.style.display = "none"; // Hide the organization list
+            donorList.style.display = "flex"; // Display the donor list
+
+            // Add donor list content here
+            donorList.innerHTML = `
+                <div class='donor-card'>
+                    <div class='donor-name'>John Doe</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Jane Smith</div>
+                    <div class='donor-role'>Volunteer as Teacher</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Michael Johnson</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Salma ahmed</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Nadeen ashraf</div>
+                    <div class='donor-role'>Volunteer as Teacher</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Nelly alaa</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+            `;
+        }
+
+        // Function to toggle organization details visibility
+        function toggleDetails(detailsId) {
+            var detailsContainer = document.getElementById(detailsId);
+            if (detailsContainer.style.display === "none" || detailsContainer.style.display === "") {
+                detailsContainer.style.display = "block"; // Display the details if they're hidden
+            } else {
+                detailsContainer.style.display = "none"; // Hide the details if they're visible
+            }
+        }
+    </script>
+</body>
+</html>
