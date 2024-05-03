@@ -6,27 +6,33 @@
     <title>Donor Registration</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-color: #587ac4; /* Changed the background color */
+            font-family: Arial, sans-serif;
         }
 
         .container {
             background-color: #fff;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            max-width: 300px; /* Set maximum width */
         }
 
         h2 {
             text-align: center;
             color: #333;
+            margin-top: 10px; /* Adjusted margin */
+            margin-bottom: 20px;
+            font-size: 18px; /* Reduced font size */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Added font family */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Added text shadow */
+            letter-spacing: 0.5px; /* Added letter spacing */
         }
 
         label {
@@ -40,10 +46,10 @@
         input[type="password"],
         select,
         textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 10px;
+            width: calc(100% - 22px); /* Adjusted width */
+            padding: 8px; /* Reduced padding */
+            margin-top: 3px; /* Reduced margin */
+            margin-bottom: 5px; /* Reduced margin */
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
@@ -59,6 +65,7 @@
             cursor: pointer;
             width: 100%;
             font-size: 16px;
+            margin-top: 10px;
         }
 
         input[type="submit"]:hover {
@@ -89,8 +96,9 @@
 </head>
 <body>
     <div class="container">
-        <h2>Donor Registration Form</h2>
-        <form action="DonSubmit.html" method="post" enctype="multipart/form-data">
+        <h2>✨ Donor Registration ✨</h2> <!-- Added fancy title -->
+        <form action="submit_donor_registration.php" method="post" enctype="multipart/form-data">
+            <!-- Your form fields here -->
             <label for="firstname">First Name:</label>
             <input type="text" id="firstname" name="firstname" required>
 
@@ -102,7 +110,6 @@
                 <option value="" disabled selected>Select gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
-                
             </select>
 
             <label for="email">Email:</label>
@@ -123,9 +130,35 @@
             <label for="governorate">Governorate:</label>
             <input type="text" id="governorate" name="governorate" required>
 
+            <label for="role">Volunteer Role:</label>
+            <select id="role" name="role" required>
+                <option value="" disabled selected>Select role</option>
+                <option value="regular">Regular Donor</option>
+                <option value="teacher">Teacher</option>
+                <option value="doctor">Doctor</option>
+            </select>
+
+            <div id="document-upload" style="display: none;">
+                <label for="verification_document">Upload Document:</label>
+                <input type="file" id="verification_document" name="verification_document" accept="image/*, .pdf">
+            </div>
+
             <input type="submit" value="Submit">
             
         </form>
     </div>
+    
+    <script>
+        document.getElementById('role').addEventListener('change', function() {
+            const role = this.value;
+            const documentUpload = document.getElementById('document-upload');
+            
+            if (role === 'teacher' || role === 'doctor') {
+                documentUpload.style.display = 'block';
+            } else {
+                documentUpload.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
