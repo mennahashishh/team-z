@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization List</title>
+    <style>
+        /* Styles for the menu bar */
+        .menu-bar {
+            background: linear-gradient(to right, #53c43a, #587ac4); /* Gradient background */
+            padding: 10px 20px;
+            list-style-type: none;
+            margin: 0;
+            overflow: hidden;
+            border-bottom: 1px solid #dee2e6; /* Add a subtle bottom border */
+        }
+
+        .menu-item {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px;
+            color: #ffffff; /* White text color */
+            font-weight: bold; /* Bold font weight */
+            text-transform: uppercase; /* Uppercase text */
+            text-decoration: none; /* Remove default underline */
+            transition: color 0.3s; /* Smooth color transition */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .menu-item:hover {
+            color: #f8f9fa; /* Change text color on hover to lighter shade */
+        }
+
+        /* Styles for the organization list */
+        .container {
+            max-width: 1000px; /* Adjusted max-width */
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .organization-list {
+            list-style-type: none;
+            padding: 0;
+            display: none; /* Hide the list by default */
+            margin-top: 20px; /* Add margin to separate from the button */
+        }
+
+        /* Styles for list items */
+        .organization-card {
+            background-color: #ffffff;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            width: calc(50% - 20px); /* Adjust width based on desired layout */
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+            margin-right: 20px; /* Add margin between items */
+        }
+
+        .organization-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .organization-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .organization-description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #6c757d; /* Gray text color */
+        }
+
+        /* Styles for the donor list */
+        .donor-list {
+            list-style-type: none;
+            padding: 0;
+            display: none; /* Hide the list by default */
+            margin-top: 20px; /* Add margin to separate from the button */
+            display: flex; /* Make the list items display horizontally */
+            flex-wrap: wrap; /* Wrap the items if they exceed container width */
+            justify-content: center; /* Center the items horizontally */
+        }
+
+        /* Styles for donor items */
+        .donor-card {
+            background-color: #ffffff;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            width: calc(30% - 20px); /* Adjust width based on desired layout */
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+            margin-right: 20px; /* Add margin between items */
+        }
+
+        .donor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .donor-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .donor-role {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #6c757d; /* Gray text color */
+        }
+    </style>
+</head>
+<body>
+    <nav class="menu-bar">
+        <ul>
+            <li class="menu-item" onclick="toggleOrganizations()">View Organizations List</li> <!-- Menu item to show organizations -->
+            <li class="menu-item" onclick="toggleDonors()">View Donor List</li> <!-- Menu item to show donors -->
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div id="organization-list" class="organization-list">
+            <!-- Organization cards -->
+            <div class="organization-card">
+                <div class="organization-title">Magdi Yacoub Hospital</div>
+                <div class="organization-description">Global Heart Centre for Kids</div>
+            </div>
+            <div class="organization-card">
+                <div class="organization-title">57357</div>
+                <div class="organization-description">Children's Cancer Hospital</div>
+            </div>
+            <div class="organization-card">
+                <div class="organization-title">Elnour School</div>
+                <div class="organization-description">School for Children</div>
+            </div>
+        </div>
+
+        <div id="donor-list" class="donor-list">
+            <!-- Donor list will be shown after clicking the button -->
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the organization list visibility
+        function toggleOrganizations() {
+            var organizationList = document.getElementById("organization-list");
+            var donorList = document.getElementById("donor-list");
+            organizationList.style.display = "flex"; // Display the organization list
+            donorList.style.display = "none"; // Hide the donor list
+        }
+
+        // Function to toggle the donor list visibility
+        function toggleDonors() {
+            var organizationList = document.getElementById("organization-list");
+            var donorList = document.getElementById("donor-list");
+            organizationList.style.display = "none"; // Hide the organization list
+            donorList.style.display = "flex"; // Display the donor list
+
+            // Add donor list content here
+            donorList.innerHTML = `
+                <div class='donor-card'>
+                    <div class='donor-name'>John Doe</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Jane Smith</div>
+                    <div class='donor-role'>Volunteer as Teacher</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Michael Johnson</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Salma ahmed</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Nadeen ashraf</div>
+                    <div class='donor-role'>Volunteer as Teacher</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Nelly alaa</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
