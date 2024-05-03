@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .notification-example {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .notification-example h3 {
+            color: #4caf50;
+            margin-top: 0;
+        }
+
+        .notification-example p {
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .details {
+            display: none;
+        }
+
+        .show-details {
+            display: block;
+        }
+
+        .details p {
+            margin-bottom: 10px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Notification Page</h2>
+
+        <div class="notification-example">
+            <h3>A donation has been accepted!</h3>
+            <p> 1. ABC donation </p> 
+        
+            <p><strong>Notification:</strong> Your donation post for Clothes has been chosen by a donor.</p>
+            <button class="btn" id="view-details-btn">View Details</button>
+        </div>
+
+        <div class="notification-example details" id="details-section">
+            <h3>Details of Fulfilled Donation Posts</h3>
+
+            <p><strong>Donor Name:</strong> Fasfoosa</p>
+            <p><strong>Item Category:</strong> Clothes</p>
+            <p><strong>Pickup Date:</strong> 2024-05-01</p>
+            <p><strong>Pickup Address:</strong> banafseg, New Cairo</p>
+            <p><strong>City:</strong> Cairo</p>
+            <p><strong>State:</strong> Egypt</p>
+            <p><strong>Zip Code:</strong> 11765</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('view-details-btn').addEventListener('click', function() {
+            document.getElementById('details-section').classList.toggle('show-details');
+        });
+    </script>
+</body>
+
+</html>
