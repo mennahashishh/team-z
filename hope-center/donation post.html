@@ -52,16 +52,21 @@
             border-radius: 5px;
         }
 
-        input[type="submit"] {
+        input[type="submit"],
+        .notification-button {
             background-color: #4caf50;
             color: #fff;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
             border-radius: 5px;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
         }
 
-        input[type="submit"]:hover {
+        input[type="submit"]:hover,
+        .notification-button:hover {
             background-color: #45a049;
         }
     </style>
@@ -88,6 +93,7 @@
                 <textarea id="item_details" name="item_details" rows="4" required></textarea>
             </div>
             <input type="submit" value="Submit">
+            <a href="notifications.html" class="notification-button">Notifications</a>
         </form>
     </div>
 </body>

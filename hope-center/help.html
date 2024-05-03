@@ -38,8 +38,7 @@
         }
 
         input[type="text"],
-        input[type="email"],
-        select {
+        input[type="email"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -67,40 +66,19 @@
 
 <body>
     <div class="container">
-        <h2>Organization Registration</h2>
+        <h2>Registration</h2>
         <form action="#" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="first_name">First Name:</label>
-                <input type="text" id="first_name" name="first_name" required>
-            </div>
-            <div class="form-group">
-                <label for="last_name">Last Name:</label>
-                <input type="text" id="last_name" name="last_name" required>
-            </div>
-            <div class="form-group">
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required>
-                    <option value="">Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="contact_number">Contact Number:</label>
-                <input type="tel" id="contact_number" name="contact_number" required>
-            </div>
             <div class="form-group">
                 <label for="organization_name">Organization Name:</label>
                 <input type="text" id="organization_name" name="organization_name" required>
+            </div>
+            <div class="form-group">
+                <label for="contact_email">Contact Email:</label>
+                <input type="email" id="contact_email" name="contact_email" required>
+            </div>
+            <div class="form-group">
+                <label for="contact_phone">Contact Phone:</label>
+                <input type="text" id="contact_phone" name="contact_phone" required>
             </div>
             <div class="form-group">
                 <label for="organization_type">Organization Type:</label>
@@ -118,21 +96,9 @@
                 <input type="text" id="organization_address" name="organization_address" required>
             </div>
             <div class="form-group">
-                <label for="area">Area:</label>
-                <input type="text" id="area" name="area" required>
-            </div>
-            <div class="form-group">
-                <label for="governorate">Governorate:</label>
-                <input type="text" id="governorate" name="governorate" required>
-            </div>
-            <div class="form-group">
-                <label for="google_map_location">Google Map Location:</label>
-                <input type="text" id="google_map_location" name="google_map_location" placeholder="Paste Google Map Location URL">
-            </div>
-            <div class="form-group">
-                <label for="verification_documents">Verification Documents:</label>
-                <input type="file" id="verification_documents" name="verification_documents" accept=".pdf,.doc,.docx" required multiple>
-                <small>Allowed file types: PDF, Word (.doc, .docx). You can upload multiple files.</small>
+                <label for="upload_documents">Upload Required Documents:</label>
+                <input type="file" id="upload_documents" name="upload_documents" accept=".pdf,.doc,.docx" required>
+                <small>Allowed file types: PDF, Word (.doc, .docx)</small>
             </div>
             <input type="submit" value="Submit">
         </form>
@@ -140,4 +106,3 @@
 </body>
 
 </html>
-
