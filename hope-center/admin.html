@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            background-color: #f4f4f4;
+            background-color: black;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -58,24 +58,11 @@
             background-color: #45a049;
         }
         
-        .change-password-link {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #666;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        
         .error-message {
             color: red;
             font-size: 14px;
         }
         
-        .reset-password-form {
-            display: none;
-            margin-top: 20px;
-        }
-
         .success-message {
             color: green;
             font-size: 16px;
@@ -98,36 +85,10 @@
             <button type="submit">Login</button>
         </form>
         <p id="error-message" class="error-message"></p>
-        <p class="change-password-link" id="change-password-link">Change Password?</p>
-        
-        <form id="reset-password-form" class="reset-password-form">
-            <h2>Reset Password</h2>
-            <input type="text" id="reset-username" placeholder="Username" required>
-            <input type="password" id="old-password" placeholder="Old Password" required>
-            <input type="password" id="new-password" placeholder="New Password" required>
-            <input type="password" id="confirm-password" placeholder="Confirm New Password" required>
-            <button type="submit">Reset Password</button>
-        </form>
-
-        <p id="success-message" class="success-message"></p>
-        <button id="return-to-login" onclick="returnToLogin()">Return to Login</button>
     </div>
 
     <script src="script.js"></script>
     <script>
-        document.getElementById('change-password-link').addEventListener('click', function() {
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('reset-password-form').style.display = 'block';
-        });
-
-        function returnToLogin() {
-            document.getElementById('login-form').style.display = 'block';
-            document.getElementById('reset-password-form').style.display = 'none';
-            document.getElementById('success-message').style.display = 'none';
-            document.getElementById('return-to-login').style.display = 'none';
-            document.getElementById('error-message').innerText = '';
-        }
-
         document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault();
             var username = document.getElementById('username').value;
@@ -135,22 +96,11 @@
             // Perform authentication here
             // For demonstration purposes, let's assume authentication succeeds
             if (username === 'admin' && password === 'admin') {
-             
                 // Redirect to admin2.html
                 window.location.href = 'admin2.html';
             } else {
                 document.getElementById('error-message').innerText = 'Invalid username or password';
             }
-        });
-
-        document.getElementById('reset-password-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Reset password logic here
-            // Assuming password reset is successful
-            document.getElementById('reset-password-form').style.display = 'none';
-            document.getElementById('success-message').innerText = 'Password reset successfully!';
-            document.getElementById('success-message').style.display = 'block';
-            document.getElementById('return-to-login').style.display = 'block';
         });
     </script>
 </body>

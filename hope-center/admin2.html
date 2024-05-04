@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organization List</title>
     <style>
+        body {
+            background-color: black; /* Set the background color to black */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
         /* Styles for the menu bar */
         .menu-bar {
             background: linear-gradient(to right, #53c43a, #587ac4); /* Gradient background */
@@ -38,7 +45,7 @@
         .decorative-icon {
             color: #ffffff;
             font-size: 24px;
-            margin-left: 10px;
+            margin-left: 5px; /* Adjusted margin */
             cursor: pointer;
         }
 
@@ -158,12 +165,12 @@
 <body>
     <nav class="menu-bar">
         <ul>
+            <li class="menu-item" onclick="goToHomePage()">Home</li> <!-- Home button -->
             <li class="menu-item" onclick="toggleOrganizations()">View Organizations List</li> <!-- Menu item to show organizations -->
             <li class="menu-item" onclick="toggleDonors()">View Donor List</li> <!-- Menu item to show donors -->
         </ul>
         <div class="settings-button">
-            <span class="menu-item">Settings</span>
-            <span class="decorative-icon settings-icon">⚙️</span> <!-- Settings button -->
+            <a href="settings.html" class="menu-item">Settings <span class="decorative-icon settings-icon">⚙️</span></a> <!-- Redirect to settings.html -->
         </div>
     </nav>
 
@@ -260,6 +267,11 @@
             } else {
                 detailsContainer.style.display = "none"; // Hide the details if they're visible
             }
+        }
+
+        // Function to go to the home page (index.html)
+        function goToHomePage() {
+            window.location.href = "index.html"; // Redirect to the home page
         }
     </script>
 </body>
