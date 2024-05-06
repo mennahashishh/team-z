@@ -160,6 +160,21 @@
             color: #6c757d;
             font-size: 20px;
         }
+
+        /* Styles for the search input */
+        .search-input {
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            margin-right: 10px;
+            font-size: 16px;
+            transition: box-shadow 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -169,6 +184,7 @@
             <li class="menu-item" onclick="toggleOrganizations()">View Organizations List</li> <!-- Menu item to show organizations -->
             <li class="menu-item" onclick="toggleDonors()">View Donor List</li> <!-- Menu item to show donors -->
         </ul>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search Organizations" oninput="filterOrganizations()">
         <div class="settings-button">
             <a href="settings.html" class="menu-item">Settings <span class="decorative-icon settings-icon">⚙️</span></a> <!-- Redirect to settings.html -->
         </div>
@@ -183,7 +199,7 @@
                 <div id="magdi-details" class="details-container">
                     <span class="close-btn" onclick="toggleDetails('magdi-details')">&times;</span>
                     <p>Contact: +01154456783</p>
-                    <p>Address: 456 Street, Zamalek, Cairo Governorate, Egypt</p>
+                    <p>Address: 456 Street, Zamalek, Cairo, Egypt</p>
                     <p>Type: Hospital</p>
                 </div>
             </div>
@@ -193,7 +209,7 @@
                 <div id="57357-details" class="details-container">
                     <span class="close-btn" onclick="toggleDetails('57357-details')">&times;</span>
                     <p>Contact: 0115445673</p>
-                    <p>Address: 456 Street, Nasrcity, Egypt</p>
+                    <p>Address: 456 Street, Nasrcity,cairo, Egypt</p>
                     <p>Type: Hospital</p>
                 </div>
             </div>
@@ -203,7 +219,7 @@
                 <div id="elnour-details" class="details-container">
                     <span class="close-btn" onclick="toggleDetails('elnour-details')">&times;</span>
                     <p>Contact: +1122334455</p>
-                    <p>Address: 789 Street, New Cairo, Egypt</p>
+                    <p>Address: 789 Street, New Cairo,cairo, Egypt</p>
                     <p>Type: School</p>
                 </div>
             </div>
@@ -272,6 +288,24 @@
         // Function to go to the home page (index.html)
         function goToHomePage() {
             window.location.href = "index.html"; // Redirect to the home page
+        }
+
+        // Function to filter organizations based on search input
+        function filterOrganizations() {
+            var input = document.getElementById("searchInput").value.toLowerCase();
+            var organizationCards = document.querySelectorAll(".organization-card");
+
+            organizationCards.forEach(function(card) {
+                var title = card.querySelector(".organization-title").textContent.toLowerCase();
+                var description = card.querySelector(".organization-description").textContent.toLowerCase();
+                var details = card.querySelector(".details-container").textContent.toLowerCase();
+
+                if (title.includes(input) || description.includes(input) || details.includes(input)) {
+                    card.style.display = "block"; // Show the organization if it matches the search query
+                } else {
+                    card.style.display = "none"; // Hide the organization if it doesn't match the search query
+                }
+            });
         }
     </script>
 </body>
