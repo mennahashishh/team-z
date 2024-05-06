@@ -175,6 +175,19 @@
             outline: none;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
         }
+
+        /* New style for the delete icon */
+        .delete-icon {
+            color: #6c757d; /* Gray color */
+            font-size: 24px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        /* New style for the delete icon when in delete mode */
+        .delete-icon.delete-mode {
+            color: red; /* Change color to red */
+        }
     </style>
 </head>
 <body>
@@ -184,6 +197,8 @@
             <li class="menu-item" onclick="toggleOrganizations()">View Organizations List</li> <!-- Menu item to show organizations -->
             <li class="menu-item" onclick="toggleDonors()">View Donor List</li> <!-- Menu item to show donors -->
         </ul>
+        <!-- New delete icon added here -->
+        <span class="delete-icon" onclick="toggleDeleteMode()">🗑️</span>
         <input type="text" id="searchInput" class="search-input" placeholder="Search Organizations" oninput="filterOrganizations()">
         <div class="settings-button">
             <a href="settings.html" class="menu-item">Settings <span class="decorative-icon settings-icon">⚙️</span></a> <!-- Redirect to settings.html -->
@@ -306,6 +321,43 @@
                     card.style.display = "none"; // Hide the organization if it doesn't match the search query
                 }
             });
+        }
+
+        // Function to toggle delete mode
+        function toggleDeleteMode() {
+            var deleteIcon = document.querySelector(".delete-icon");
+            var organizationCards = document.querySelectorAll(".organization-card");
+            var donorCards = document.querySelectorAll(".donor-card");
+
+            if (deleteIcon.classList.contains("delete-mode")) {
+                // If already in delete mode, remove the class and stop deletion
+                deleteIcon.classList.remove("delete-mode");
+
+                organizationCards.forEach(function(card) {
+                    card.removeEventListener("click", deleteSelectedCard);
+                });
+
+                donorCards.forEach(function(card) {
+                    card.removeEventListener("click", deleteSelectedCard);
+                });
+            } else {
+                // If not in delete mode, add the class and start deletion
+                deleteIcon.classList.add("delete-mode");
+
+                organizationCards.forEach(function(card) {
+                    card.addEventListener("click", deleteSelectedCard);
+                });
+
+                donorCards.forEach(function(card) {
+                    card.addEventListener("click", deleteSelectedCard);
+                });
+            }
+        }
+
+        // Function to delete the selected card
+        function deleteSelectedCard(event) {
+            var selectedCard = event.currentTarget;
+            selectedCard.parentNode.removeChild(selectedCard); // Remove the selected card
         }
     </script>
 </body>
