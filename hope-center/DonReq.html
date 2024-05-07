@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View and Search Donation Items</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #0067a3; /* Deep blue header */
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        .main {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .controls input[type="text"], .controls select {
+            flex: 1;
+            margin: 0 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        li:hover {
+            background-color: #efefef;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+        }
+        .item-details {
+            display: none;
+            font-size: 0.9em;
+            padding: 10px;
+            background-color: #fff8dc;
+            margin-top: 5px;
+            border-left: 3px solid #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>View and Search Requested Donation Items</h1>
+    </header>
+    <div class="main">
+        <div class="controls">
+            <select id="categoryFilter" onchange="filterItemsByCategory()">
+                <option value="">Filter by Category</option>
+                <option value="clothes">Clothes</option>
+                <option value="books">Books</option>
+                <option value="medical">Medical Supplies</option>
+                <option value="toys">Toys</option>
+                <option value="food">Food</option>
+            </select>
+            <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search items (e.g., jackets, books)">
+        </div>
+        <ul id="itemList">
+            <!-- Clothes Items -->
+            <li data-category="clothes" onclick="toggleDetails(this)">
+                Winter jackets for children (Clothes)
+                <div class="item-details">
+                    Type: Jacket, Age: Children, Gender: Unisex, Season: Winter, Material: Polyester, Quantity: 50
+                </div>
+            </li>
+            <!-- More items with detailed descriptions in similar format -->
+            <!-- Other Categories -->
+            <li data-category="books">Math textbooks for high school (Books)</li>
+            <li data-category="medical">Sanitizers and masks (Medical Supplies)</li>
+            <li data-category="toys">Puzzles and educational games (Toys)</li>
+            <li data-category="food">Canned foods and non-perishables (Food)</li>
+        </ul>
+    </div>
+    <footer>
+        <p>Hope Center Donations</p>
+    </footer>
+    <script>
+        function filterItems() {
+            var input = document.getElementById('searchInput');
+            var filter = input.value.toLowerCase();
+            var nodes = document.querySelectorAll('#itemList li');
+
+            nodes.forEach(function(node) {
+                if (node.textContent.toLowerCase().includes(filter)) {
+                    node.style.display = 'block';
+                } else {
+                    node.style.display = 'none';
+                }
+            });
+        }
+
+        function filterItemsByCategory() {
+            var category = document.getElementById('categoryFilter').value;
+            var nodes = document.querySelectorAll('#itemList li');
+
+            nodes.forEach(function(node) {
+                if (node.dataset.category === category || category === "") {
+                    node.style.display = 'block';
+                } else {
+                    node.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleDetails(element) {
+            var details = element.querySelector('.item-details');
+            if (details.style.display === 'none' || !details.style.display) {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
