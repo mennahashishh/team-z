@@ -67,8 +67,18 @@
 
     <script>
         function selectCategory(category) {
-            // Perform actions based on the selected category
-            console.log("Selected Category:", category);
+            if (category === 'Clothes') {
+                window.location.href = 'clothselection.html';
+            } else if (category === 'Toys') {
+                window.location.href = 'toyselection.html';
+            } else if (category === 'Food') {
+                window.location.href = 'foodselection.html';
+            } else if (category === 'School Supplies') {
+                window.location.href = 'stat&book.html';
+            } else {
+                // For other categories, perform actions based on the selected category
+                console.log("Selected Category:", category);
+            }
         }
     </script>
 </body>

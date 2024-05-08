@@ -12,12 +12,13 @@
             background-color: #f3f3f3;
         }
         .container {
-            max-width: 600px;
+            max-width: 900px;
             margin: 20px auto;
             padding: 20px;
             border-radius: 10px;
             background-color: #fff;
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         h1 {
             text-align: center;
@@ -28,6 +29,16 @@
             color: #333;
             margin-bottom: 10px;
         }
+        .donation-form {
+            display: inline-block;
+            width: 45%;
+            vertical-align: top;
+            margin-right: 5%;
+            box-sizing: border-box;
+        }
+        .donation-form:last-child {
+            margin-right: 0;
+        }
         .form-group {
             margin-bottom: 20px;
         }
@@ -36,7 +47,7 @@
             color: #555;
         }
         select, input, textarea {
-            width: 100%;
+            width: calc(100% - 22px);
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 6px;
@@ -52,7 +63,6 @@
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            width: 100%;
             font-size: 16px;
             transition: background-color 0.3s;
         }
@@ -63,15 +73,35 @@
             background-color: #cccccc;
             cursor: not-allowed;
         }
+        .message {
+            text-align: center;
+            color: #4CAF50;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .return-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .home-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px; /* Adjusted padding */
+            font-size: 14px; /* Adjusted font size */
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <button onclick="returnToCategorySelection()" class="return-button">Return to category selection</button>
+        <button onclick="goToHome()" class="home-button">Home</button>
         <h1>Donation Form</h1>
 
         <!-- Quantity Selection for Book Donations -->
-        <h2>Quantity Selection for Book Donations</h2>
-        <div id="bookDonation">
+        <div class="donation-form">
+            <h2>Quantity Selection for Book Donations</h2>
             <div class="form-group">
                 <label for="bookGenre">Book genre:</label>
                 <select id="bookGenre">
@@ -102,11 +132,12 @@
             <div class="form-group">
                 <button onclick="submitBookDonation()" id="bookSubmitButton" disabled>Submit Donation</button>
             </div>
+            <div class="message" id="bookSuccessMessage"></div>
         </div>
 
         <!-- Quantity Selection for Stationery Donations -->
-        <h2>Quantity Selection for Stationery Donations</h2>
-        <div id="stationeryDonation">
+        <div class="donation-form">
+            <h2>Quantity Selection for Stationery Donations</h2>
             <div class="form-group">
                 <label for="stationeryItem">Stationery Item:</label>
                 <select id="stationeryItem">
@@ -134,6 +165,7 @@
             <div class="form-group">
                 <button onclick="submitStationeryDonation()" id="stationerySubmitButton" disabled>Submit Donation</button>
             </div>
+            <div class="message" id="stationerySuccessMessage"></div>
         </div>
     </div>
 
@@ -147,8 +179,8 @@
 
             // Here you can perform further actions with the donation data, like sending it to a server or storing it locally
             console.log("Book Donation submitted:");
-            console.log("Genre:", genre);
-            console.log("Book Title:", name);
+            console.log("Book Genre:", genre);
+            console.log("Book Name:", name);
             console.log("Quantity:", quantity);
             console.log("Additional Details:", details);
 
@@ -158,6 +190,9 @@
 
             // Disable submit button after submission
             document.getElementById("bookSubmitButton").disabled = true;
+
+            // Show success message
+            document.getElementById("bookSuccessMessage").innerText = "Donation submitted successfully";
         }
 
         // Stationery Donation Form Functions
@@ -170,6 +205,7 @@
             // Here you can perform further actions with the donation data, like sending it to a server or storing it locally
             console.log("Stationery Donation submitted:");
             console.log("Stationery Item:", item);
+            console.log("Item Name:", name);
             console.log("Quantity:", quantity);
             console.log("Additional Details:", details);
 
@@ -179,6 +215,9 @@
 
             // Disable submit button after submission
             document.getElementById("stationerySubmitButton").disabled = true;
+
+            // Show success message
+            document.getElementById("stationerySuccessMessage").innerText = "Donation submitted successfully";
         }
 
         // Enable submit button when all fields are filled - Book Donation
@@ -216,6 +255,18 @@
         document.getElementById("stationeryItem").addEventListener("change", checkStationeryForm);
         document.getElementById("stationeryName").addEventListener("input", checkStationeryForm);
         document.getElementById("stationeryQuantity").addEventListener("input", checkStationeryForm);
+
+        // Function to navigate to category selection
+        function returnToCategorySelection() {
+            // Replace this with the URL or function to go back to category selection
+            alert("Returning to category selection...");
+        }
+
+        // Function to navigate to home
+        function goToHome() {
+            // Replace this with the URL or function to go to home page
+            alert("Going to home...");
+        }
     </script>
 </body>
 </html>
