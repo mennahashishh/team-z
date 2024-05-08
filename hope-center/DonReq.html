@@ -6,35 +6,55 @@
     <title>View and Search Donation Items</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fafafa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
             margin: 0;
             padding: 0;
+            color: #333;
         }
         header {
-            background-color: #0067a3; /* Deep blue header */
+            background-color: #0056b3; /* Updated color */
             color: white;
-            padding: 15px 20px;
+            padding: 20px 15px;
             text-align: center;
+            font-size: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .main {
-            max-width: 900px;
-            margin: 30px auto;
+            max-width: 960px;
+            margin: 20px auto;
             background: white;
             padding: 20px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
         .controls {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            flex-wrap: wrap;
             margin-bottom: 20px;
         }
-        .controls input[type="text"], .controls select {
-            flex: 1;
-            margin: 0 10px;
+        .category-button {
+            padding: 10px 20px;
+            background-color: #007bff; /* Bootstrap primary color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            margin: 5px;
+        }
+        .category-button:hover {
+            background-color: #0069d9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        input[type="text"] {
             padding: 10px;
+            margin: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            width: calc(100% - 22px); /* Responsive width adjustment */
         }
         ul {
             list-style-type: none;
@@ -42,28 +62,24 @@
             padding: 0;
         }
         li {
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-            background-color: #f9f9f9;
+            padding: 15px;
+            margin-top: 10px;
+            border-bottom: 1px solid #ddd;
+            background-color: #ffffff;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s;
+            border-radius: 5px;
         }
         li:hover {
-            background-color: #efefef;
+            background-color: #f8f9fa;
+            transform: scale(1.02); /* Slight scale on hover */
         }
         footer {
-            background-color: #333;
+            background-color: #212529; /* Slightly darker footer */
             color: white;
             text-align: center;
-            padding: 10px 20px;
-        }
-        .item-details {
-            display: none;
-            font-size: 0.9em;
-            padding: 10px;
-            background-color: #fff8dc;
-            margin-top: 5px;
-            border-left: 3px solid #ffd700;
+            padding: 12px 20px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -73,30 +89,27 @@
     </header>
     <div class="main">
         <div class="controls">
-            <select id="categoryFilter" onchange="filterItemsByCategory()">
-                <option value="">Filter by Category</option>
-                <option value="clothes">Clothes</option>
-                <option value="books">Books</option>
-                <option value="medical">Medical Supplies</option>
-                <option value="toys">Toys</option>
-                <option value="food">Food</option>
-            </select>
-            <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search items (e.g., jackets, books)">
+            <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search items by category (e.g., clothes, toys)">
+            <a href="clothes.html" class="category-button">Clothes</a>
+            <a href="schoolsupp.html" class="category-button">School Supplies</a>
+            <a href="medical.html" class="category-button">Medical Supplies</a>
+            <a href="toys.html" class="category-button">Toys</a>
+            <a href="food.html" class="category-button">Food</a>
         </div>
         <ul id="itemList">
-            <!-- Clothes Items -->
-            <li data-category="clothes" onclick="toggleDetails(this)">
-                Winter jackets for children (Clothes)
-                <div class="item-details">
-                    Type: Jacket, Age: Children, Gender: Unisex, Season: Winter, Material: Polyester, Quantity: 50
-                </div>
-            </li>
-            <!-- More items with detailed descriptions in similar format -->
-            <!-- Other Categories -->
-            <li data-category="books">Math textbooks for high school (Books)</li>
-            <li data-category="medical">Sanitizers and masks (Medical Supplies)</li>
-            <li data-category="toys">Puzzles and educational games (Toys)</li>
-            <li data-category="food">Canned foods and non-perishables (Food)</li>
+            <!-- Expanded list of items -->
+            <li data-category="clothes">Winter jackets for children</li>
+            <li data-category="clothes">T-shirts for teenagers</li>
+            <li data-category="clothes">Business suits for adults</li>
+            <li data-category="books">Math textbooks for high school</li>
+            <li data-category="books">Science fiction novels</li>
+            <li data-category="books">Children's storybooks</li>
+            <li data-category="medical">Sanitizers and masks</li>
+            <li data-category="medical">First aid kits</li>
+            <li data-category="toys">Puzzles and educational games</li>
+            <li data-category="toys">Action figures</li>
+            <li data-category="food">Canned foods and non-perishables</li>
+            <li data-category="food">Baby formula and cereals</li>
         </ul>
     </div>
     <footer>
@@ -106,37 +119,16 @@
         function filterItems() {
             var input = document.getElementById('searchInput');
             var filter = input.value.toLowerCase();
-            var nodes = document.querySelectorAll('#itemList li');
+            var items = document.querySelectorAll('#itemList li');
 
-            nodes.forEach(function(node) {
-                if (node.textContent.toLowerCase().includes(filter)) {
-                    node.style.display = 'block';
+            items.forEach(function(item) {
+                const category = item.getAttribute('data-category');
+                if (category.toLowerCase().includes(filter)) {
+                    item.style.display = 'block';
                 } else {
-                    node.style.display = 'none';
+                    item.style.display = 'none';
                 }
             });
-        }
-
-        function filterItemsByCategory() {
-            var category = document.getElementById('categoryFilter').value;
-            var nodes = document.querySelectorAll('#itemList li');
-
-            nodes.forEach(function(node) {
-                if (node.dataset.category === category || category === "") {
-                    node.style.display = 'block';
-                } else {
-                    node.style.display = 'none';
-                }
-            });
-        }
-
-        function toggleDetails(element) {
-            var details = element.querySelector('.item-details');
-            if (details.style.display === 'none' || !details.style.display) {
-                details.style.display = 'block';
-            } else {
-                details.style.display = 'none';
-            }
         }
     </script>
 </body>
