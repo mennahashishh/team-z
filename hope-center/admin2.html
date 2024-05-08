@@ -14,28 +14,28 @@
 
         /* Styles for the menu bar */
         .menu-bar {
-            background: linear-gradient(to right, #53c43a, #587ac4); /* Gradient background */
+            background: linear-gradient(to right, #53c43a, #587ac4);
             padding: 10px 20px;
             list-style-type: none;
             margin: 0;
             overflow: hidden;
-            border-bottom: 1px solid #dee2e6; /* Add a subtle bottom border */
+            border-bottom: 1px solid #dee2e6;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .menu-item {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-right: 10px;
-            color: #ffffff; /* White text color */
-            font-weight: bold; /* Bold font weight */
-            text-transform: uppercase; /* Uppercase text */
-            text-decoration: none; /* Remove default underline */
-            transition: color 0.3s; /* Smooth color transition */
-            cursor: pointer; /* Change cursor to pointer */
+            color: #ffffff;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+            margin-right: 20px; /* Add spacing between menu items */
+            display: inline-block; /* Display menu items horizontally */
         }
+
 
         .menu-item:hover {
             color: #f8f9fa; /* Change text color on hover to lighter shade */
@@ -166,7 +166,6 @@
             border: none;
             border-radius: 5px;
             padding: 8px 12px;
-            margin-right: 10px;
             font-size: 16px;
             transition: box-shadow 0.3s;
         }
@@ -178,9 +177,9 @@
 
         /* New style for the delete icon */
         .delete-icon {
-            color: #6c757d; /* Gray color */
+            color: #ffffff;
             font-size: 24px;
-            margin-right: 10px;
+            margin-left: 20px; /* Add spacing between delete icon and search input */
             cursor: pointer;
         }
 
@@ -192,16 +191,19 @@
 </head>
 <body>
     <nav class="menu-bar">
-        <ul>
-            <li class="menu-item" onclick="goToHomePage()">Home</li> <!-- Home button -->
-            <li class="menu-item" onclick="toggleOrganizations()">View Organizations List</li> <!-- Menu item to show organizations -->
-            <li class="menu-item" onclick="toggleDonors()">View Donor List</li> <!-- Menu item to show donors -->
-        </ul>
-        <!-- New delete icon added here -->
-        <span class="delete-icon" onclick="toggleDeleteMode()">🗑️</span>
-        <input type="text" id="searchInput" class="search-input" placeholder="Search Organizations" oninput="filterOrganizations()">
-        <div class="settings-button">
-            <a href="settings.html" class="menu-item">Settings <span class="decorative-icon settings-icon">⚙️</span></a> <!-- Redirect to settings.html -->
+        <div>
+            <ul>
+                <li class="menu-item" onclick="goToHomePage()">Home</li>
+                <li class="menu-item" onclick="toggleOrganizations()">View Organizations List</li>
+                <li class="menu-item" onclick="toggleDonors()">View Donor List</li>
+                <li class="menu-item" onclick="redirectToOrgPage()">Organizations Submissions</li>
+                <li class="menu-item" onclick="redirectToDonorPage()">Donor Submissions</li> <!-- Added Donor Submissions button -->
+            </ul>
+        </div>
+        <div>
+            <!-- Search input and delete icon -->
+            <input type="text" id="searchInput" class="search-input" placeholder="Search Organizations" oninput="filterOrganizations()">
+            <span class="delete-icon" onclick="toggleDeleteMode()">🗑️</span> <!-- Delete icon -->
         </div>
     </nav>
 
@@ -238,7 +240,18 @@
                     <p>Type: School</p>
                 </div>
             </div>
+            <div class="organization-card" onclick="toggleDetails('resala-details')">
+                <div class="organization-title">Resala Charity</div>
+                <div class="organization-description">Charity Organization</div>
+                <div id="resala-details" class="details-container">
+                    <span class="close-btn" onclick="toggleDetails('resala-details')">&times;</span>
+                    <p>Contact: 01154478456</p>
+                    <p>Address: Street 12, Nasr City, Cairo, Egypt</p>
+                    <p>Type: Charity</p>
+                </div>
+            </div>
         </div>
+       
 
         <div id="donor-list" class="donor-list">
             <!-- Donor list will be shown after clicking the button -->
@@ -284,7 +297,31 @@
                     <div class='donor-role'>Volunteer as Teacher</div>
                 </div>
                 <div class='donor-card'>
-                    <div class='donor-name'>Nelly alaa</div>
+                    <div class='donor-name'>nada ahmed</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>yasmin omar</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>ahmed mohamed</div>
+                    <div class='donor-role'>Volunteer as Teacher</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>ahmed omar</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>nada tamer</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>youssef omar </div>
+                    <div class='donor-role'>Volunteer as Teacher</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Marie mario</div>
                     <div class='donor-role'>Volunteer as Doctor</div>
                 </div>
             `;
@@ -359,6 +396,12 @@
             var selectedCard = event.currentTarget;
             selectedCard.parentNode.removeChild(selectedCard); // Remove the selected card
         }
+        function redirectToOrgPage() {
+            window.location.href = "org.html";
+        }
+        function redirectToDonorPage() {
+        window.location.href = "don.html";
+    }
     </script>
 </body>
 </html>
