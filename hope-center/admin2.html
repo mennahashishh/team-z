@@ -32,10 +32,9 @@
             text-decoration: none;
             transition: color 0.3s;
             cursor: pointer;
-            margin-right: 20px; /* Add spacing between menu items */
+            margin-right: 10px; /* Add spacing between menu items */
             display: inline-block; /* Display menu items horizontally */
         }
-
 
         .menu-item:hover {
             color: #f8f9fa; /* Change text color on hover to lighter shade */
@@ -179,7 +178,7 @@
         .delete-icon {
             color: #ffffff;
             font-size: 24px;
-            margin-left: 20px; /* Add spacing between delete icon and search input */
+            margin-left: 8px; /* Add spacing between delete icon and search input */
             cursor: pointer;
         }
 
@@ -194,16 +193,15 @@
         <div>
             <ul>
                 <li class="menu-item" onclick="goToHomePage()">Home</li>
-                <li class="menu-item" onclick="toggleOrganizations()">View Organizations List</li>
-                <li class="menu-item" onclick="toggleDonors()">View Donor List</li>
+                <li class="menu-item" onclick="toggleOrganizations()">View OrganizationsList</li>
+                <li class="menu-item" onclick="toggleDonors()">View DonorList</li>
                 <li class="menu-item" onclick="redirectToOrgPage()">Organizations Submissions</li>
                 <li class="menu-item" onclick="redirectToDonorPage()">Donor Submissions</li> <!-- Added Donor Submissions button -->
-            </ul>
-        </div>
-        <div>
+                <li class="menu-item" onclick="redirectToSettings()">Settings</li> <!-- Added Settings option -->
             <!-- Search input and delete icon -->
             <input type="text" id="searchInput" class="search-input" placeholder="Search Organizations" oninput="filterOrganizations()">
             <span class="delete-icon" onclick="toggleDeleteMode()">🗑️</span> <!-- Delete icon -->
+            </ul>
         </div>
     </nav>
 
@@ -396,12 +394,17 @@
             var selectedCard = event.currentTarget;
             selectedCard.parentNode.removeChild(selectedCard); // Remove the selected card
         }
+
         function redirectToOrgPage() {
             window.location.href = "org.html";
         }
+
         function redirectToDonorPage() {
-        window.location.href = "don.html";
-    }
+            window.location.href = "don.html";
+        }
+        function redirectToSettings() {
+            window.location.href = "settings.html"; // Redirect to the settings page
+        }
     </script>
 </body>
 </html>
