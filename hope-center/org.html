@@ -11,14 +11,17 @@
             background-color: black;
             color: white;
             font-family: Arial, sans-serif;
+            font-size: 25px;
+            font-weight: bold;
             margin: 0;
             padding: 0;
         }
 
         .container {
             max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
+            margin: 30px auto;
+            padding: 30px;
+            position: relative; /* Required for absolute positioning of image */
         }
 
         h1 {
@@ -27,15 +30,16 @@
 
         .submission {
             margin-bottom: 20px;
-            border: 1px solid #fff;
-            padding: 10px;
+            border: 3px solid hsl(33, 94%, 49%);
+            padding: 20px;
             border-radius: 5px;
+            position: relative; /* Required for absolute positioning of image */
         }
 
         .submission-details {
             margin-top: 10px;
             padding: 10px;
-            background-color: #333;
+            background-color: hwb(0 0% 100%);
             border-radius: 5px;
         }
 
@@ -76,6 +80,16 @@
             cursor: pointer;
             margin-bottom: 20px;
         }
+
+        /* Styles for top-right image */
+        .top-right-image {
+            position: absolute;
+            top: 130px;
+            right: 10px;
+            max-width: 300px; /* Adjust the width as needed */
+            max-height: 400px; /* Adjust the height as needed */
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -84,6 +98,9 @@
         
         <!-- Organization Submission 1 -->
         <div class="submission">
+            <!-- Top right image -->
+            <figure><img src="images/map pri.jpeg"class="top-right-image" alt=""></figure>
+            
             <div class="submission-details">
                 <p><strong>Name:</strong> Ahmed Tamer</p>
                 <p><strong>Email:</strong> Ahmed200@gmail.com</p>
@@ -103,9 +120,11 @@
         
         <!-- Organization Submission 2 -->
         <div class="submission">
+            <figure><img src="images/mapjess.jpeg"class="top-right-image" alt=""></figure>
+            
             <div class="submission-details">
                 <p><strong>Name:</strong> Jasmine Ashraf</p>
-                <p><strong>Email:</strong> jess2004@example.com</p>
+                <p><strong>Email:</strong> jess2004@gmail.com</p>
                 <p><strong>Contact Number:</strong> +Oll54456898</p>
                 <p><strong>Organization:</strong> JOEY Hospital</p>
                 <p><strong>Type:</strong> Hospital for Cancer</p>

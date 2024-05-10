@@ -12,6 +12,8 @@
             background-color: black;
             color: white;
             font-family: Arial, sans-serif;
+            font-size: 25px;
+            font-weight: bold;
             margin: 0;
             padding: 0;
         }
@@ -29,15 +31,16 @@
         /* Submission styles */
         .submission {
             margin-bottom: 20px;
-            border: 1px solid #fff;
+            border: 3px solid hsl(33, 94%, 49%);
             padding: 10px;
             border-radius: 5px;
+            position: relative; /* Add position relative for image positioning */
         }
 
         .submission-details {
             margin-top: 10px;
             padding: 10px;
-            background-color: #333;
+            background-color: #000000;
             border-radius: 5px;
         }
 
@@ -70,6 +73,17 @@
             margin-top: 10px;
             font-weight: bold;
         }
+
+        /* Image style */
+        .top-right-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 200px; /* Adjust width as needed */
+            height: auto; /* Automatically adjust height to maintain aspect ratio */
+            z-index: 1;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -78,6 +92,11 @@
         
         <!-- Donor Submission 1 -->
         <div class="submission">
+            <!-- Image for John -->
+            <figure>
+                <img src="images/johndon.jpeg" class="top-right-image" alt="John's Image">
+            </figure>
+            
             <div id="submission-details-1" class="submission-details">
                 <p><strong>First Name:</strong> John</p>
                 <p><strong>Last Name:</strong> Doe</p>
@@ -99,6 +118,9 @@
         
         <!-- Donor Submission 2 -->
         <div class="submission">
+            <figure>
+                <img src="images/jessdon.jpeg" class="top-right-image" alt="John's Image">
+            </figure>
             <div id="submission-details-2" class="submission-details">
                 <p><strong>First Name:</strong> Jane</p>
                 <p><strong>Last Name:</strong> Smith</p>
