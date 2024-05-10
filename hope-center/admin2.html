@@ -50,7 +50,7 @@
 
         /* Styles for the organization list */
         .container {
-            max-width: 1000px; /* Adjusted max-width */
+            max-width: 1200px; /* Adjusted max-width */
             margin: 20px auto;
             text-align: center;
         }
@@ -191,6 +191,10 @@
         .delete-icon.delete-mode {
             color: red; /* Change color to red */
         }
+        .details-container img {
+            width: 200px; /* Adjust to your desired width */
+            height: auto; /* This will maintain the aspect ratio */
+        }
     </style>
 </head>
 <body>
@@ -221,6 +225,10 @@
                     <p>Contact: +01154456783</p>
                     <p>Address: 456 Street, Zamalek, Cairo, Egypt</p>
                     <p>Type: Hospital</p>
+                    <figure>
+                        <img src="images/magdi.jpeg" alt="Location">
+                        <figcaption>Location</figcaption>
+                    </figure>
                 </div>
             </div>
             <div class="organization-card" onclick="toggleDetails('57357-details')">
@@ -231,6 +239,10 @@
                     <p>Contact: 0115445673</p>
                     <p>Address: 456 Street, Nasrcity,cairo, Egypt</p>
                     <p>Type: Hospital</p>
+                    <figure>
+                        <img src="images/57357.jpeg" alt="Location">
+                        <figcaption>Location</figcaption>
+                    </figure>
                 </div>
             </div>
             <div class="organization-card" onclick="toggleDetails('PRI-details')">
@@ -241,6 +253,10 @@
                     <p>Contact: 01134567891</p>
                     <p>Address: street 12, New Cairo,cairo, Egypt</p>
                     <p>Type: School</p>
+                    <figure>
+                        <img src="images/map pri.jpeg" alt="Location">
+                        <figcaption>Location</figcaption>
+                    </figure>
                 </div>
             </div>
             <div class="organization-card" onclick="toggleDetails('resala-details')">
@@ -251,6 +267,10 @@
                     <p>Contact: 01154478456</p>
                     <p>Address: Street 12, Nasr City, Cairo, Egypt</p>
                     <p>Type: Charity</p>
+                    <figure>
+                        <img src="images/Resala.jpeg" alt="location">
+                        <figcaption>Location</figcaption>
+                    </figure>
                 </div>
             </div>
         </div>
