@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching Posts</title>
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: hsl(0, 0%, 4%);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow:0 0 30px #ef8606e0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .post {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+
+        .post:hover {
+            background-color: #e9e9e9;
+        }
+
+        .post-details {
+            display: none;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+        .post img {
+            max-width: 400px; /* Set maximum width */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove any default margins */
+            margin: 0 auto; /* Center the image */
+        }
+
+        /* Style for search input */
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Teaching Posts</h1>
+
+        <!-- Search Input -->
+        <input type="text" id="search-input" class="search-input" placeholder="Search by subject, area, or governorate">
+
+        <!-- Teaching Posts -->
+        <div id="teaching-posts">
+            <div class="post" onclick="toggleDetails('post1')">
+                <h2>PRI School </h2>
+                <p>Looking for a teacher for grade 2</p>
+                <p>Number of Students: 30</p>
+                <p>Address: street 12, New Cairo,cairo, Egypt</p>
+                <p>Subjects: Math, Science</p>
+                <figure>
+                    <img src="images/map pri.jpeg" alt="Location">
+                </figure>
+                <div id="post1-details" class="post-details">
+                    <!-- Additional details here -->
+                </div>
+            </div>
+            <div class="post" onclick="toggleDetails('post2')">
+                <h2>NORA school</h2>
+                <p>Looking for a teacher for grade 4</p>
+                <p>Number of Students: 40</p>
+                <p>Address: street 13, nasr city, cairo ,Egypt</p>
+                <p>Subjects: English, History</p>
+                <figure>
+                    <img src="images/57357.jpeg" alt="Location">
+                </figure>
+                <div id="post2-details" class="post-details">
+                    <!-- Additional details here -->
+                </div>
+            </div>
+            <!-- Add more teaching posts as needed -->
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle post details
+        function toggleDetails(postId) {
+            var details = document.getElementById(postId + '-details');
+            if (details.style.display === 'none') {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
+
+        // Function to filter teaching posts based on search input
+        function filterPosts() {
+            var searchInput = document.getElementById('search-input').value.toLowerCase();
+            var posts = document.querySelectorAll('.post');
+
+            posts.forEach(function(post) {
+                var textContent = post.textContent.toLowerCase();
+                if (textContent.includes(searchInput)) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        }
+
+        // Event listener for search input
+        document.getElementById('search-input').addEventListener('input', filterPosts);
+    </script>
+</body>
+</html>
