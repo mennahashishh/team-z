@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantity Selection for Food Donations</title>
+    <title>Quantity Selection for Blood Donations</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,17 +15,14 @@
             max-width: 600px;
             margin: 20px auto;
             padding: 20px;
-            padding-bottom: 200px; /* Increased bottom padding to make the page longer */
             border-radius: 10px;
             background-color: #ba6b0a;
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-            position: relative;
         }
         h1 {
             text-align: center;
             color: #333;
             margin-bottom: 20px;
-            margin-top: 60px;
         }
         .form-group {
             margin-bottom: 20px;
@@ -43,6 +40,11 @@
             font-size: 16px;
             margin-top: 6px;
         }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
         button {
             background-color: #ffffff;
             color: rgb(235, 141, 10);
@@ -53,7 +55,6 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
-            position: absolute;
         }
         button:hover {
             background-color: #000000;
@@ -68,63 +69,51 @@
             font-weight: bold;
             margin-top: 20px;
         }
-        .return-button {
-            left: 20px;
-            top: 20px;
-        }
-        .home-button {
-            right: 20px;
-            top: 20px;
-        }
-        .content {
-            margin-top: 80px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Quantity Selection for Food Donations</h1>
-        <button onclick="returnToCategorySelection()" class="return-button">Return to category selection</button>
-        <button onclick="goToHome()" class="home-button">Home</button>
-        <div class="content">
-            <div class="form-group">
-                <label for="food type">Food type:</label>
-                <select id="food">
-                    <option value="rice">Rice</option>
-                    <option value="beans">Beans</option>
-                    <option value="cannedGoods">Canned Goods</option>
-                    <option value="pasta">Pasta</option>
-                    <option value="cereal">Cereal</option>
-                    <option value="other">other</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="Food name">Food name:</label>
-                <input type="text" id="item" placeholder="Enter item name">
-            </div>
-            <div class="form-group">
-                <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" min="1" value="1">
-            </div>
-            <div class="form-group">
-                <label for="details">Additional Details:</label>
-                <textarea id="details" rows="4" placeholder="Enter any additional details"></textarea>
-            </div>
-            <div class="form-group">
-                <button onclick="submitDonation()" id="submitButton" disabled>Submit Donation</button>
-            </div>
-            <div class="message" id="successMessage"></div>
+        <div class="button-container">
+            <button onclick="goToCategorySelection()">Return to category selection</button>
+            <button onclick="goToHome()">Home</button>
         </div>
+        <h1>Quantity Selection for Blood Donations</h1>
+        <div class="form-group">
+            <label for="item">Blood type:</label>
+            <select id="item">
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="other">other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" min="1" value="1">
+        </div>
+        <div class="form-group">
+            <label for="details">Additional Details:</label>
+            <textarea id="details" rows="4" placeholder="Enter any additional details"></textarea>
+        </div>
+        <div class="form-group">
+            <button onclick="submitDonation()" id="submitButton" disabled>Submit Donation</button>
+        </div>
+        <div class="message" id="successMessage"></div>
     </div>
 
     <script>
         function submitDonation() {
-            var food = document.getElementById("food").value;
+            var item = document.getElementById("item").value;
             var quantity = document.getElementById("quantity").value;
 
             // Here you can perform further actions with the donation data, like sending it to a server or storing it locally
             console.log("Donation submitted:");
-            console.log("Food Item:", food);
+            console.log("Blood Type:", item);
             console.log("Quantity:", quantity);
 
             // Reset the form after submission
@@ -139,10 +128,10 @@
 
         // Enable submit button when all fields are filled
         function checkForm() {
-            var food = document.getElementById("food").value;
+            var item = document.getElementById("item").value;
             var quantity = document.getElementById("quantity").value;
 
-            if (food !== "" && quantity > 0) {
+            if (item !== "" && quantity > 0) {
                 document.getElementById("submitButton").disabled = false;
             } else {
                 document.getElementById("submitButton").disabled = true;
@@ -150,11 +139,11 @@
         }
 
         // Call checkForm() on input change
-        document.getElementById("food").addEventListener("change", checkForm);
+        document.getElementById("item").addEventListener("change", checkForm);
         document.getElementById("quantity").addEventListener("input", checkForm);
 
         // Function to navigate to category selection
-        function returnToCategorySelection() {
+        function goToCategorySelection() {
             window.location.href = 'catselection.html'; // Redirect to catselection.html
         }
 
