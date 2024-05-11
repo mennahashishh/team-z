@@ -3,433 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organization List</title>
+    <title>Donor Main</title>
     <style>
         body {
-            background-color: black; /* Set the background color to black */
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-        }
-
-        /* Styles for the menu bar */
-        .menu-bar {
-            background: linear-gradient(to right, hsl(50, 90%, 48%), rgb(235, 141, 10));
-            padding: 10px 20px;
-            list-style-type: none;
-            margin: 0;
-            overflow: hidden;
-            border-bottom: 1px solid #dee2e6;
+            background-color: #000000; /* Black background for high contrast */
+            color: #FFFFFF; /* White text */
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-        }
-
-        .menu-item {
-            color: #ffffff;
-            font-weight: bold;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: color 0.3s;
-            cursor: pointer;
-            margin-right: 10px; /* Add spacing between menu items */
-            display: inline-block; /* Display menu items horizontally */
-        }
-
-        .menu-item:hover {
-            color: #f8f9fa; /* Change text color on hover to lighter shade */
-        }
-
-        /* Add some decorative elements */
-        .decorative-icon {
-            color: #ffffff;
-            font-size: 24px;
-            margin-left: 5px; /* Adjusted margin */
-            cursor: pointer;
-        }
-
-        /* Styles for the organization list */
-        .container {
-            max-width: 1200px; /* Adjusted max-width */
-            margin: 20px auto;
+            height: 100vh;
             text-align: center;
+            background-image: url("C:/Users/nelly/Downloads/kids2.jpg"); /* Background image for added depth */
+            background-size: cover;
+            background-position: center;
         }
-
-        .organization-list {
-            list-style-type: none;
-            padding: 0;
-            display: none; /* Hide the list by default */
-            margin-top: 50px; /* Add margin to separate from the button */
-            
-            flex-wrap: wrap; /* Wrap the items if they exceed container width */
-            justify-content: center; /* Center the items horizontally */
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px); /* Soft blur effect for modern look */
         }
-
-           
-        
-
-        /* Styles for list items */
-        .organization-card {
-            background-color: #ffffff;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            width: calc(200% - 200px); /* Adjust width based on desired layout */
-            margin-bottom: 50px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-sizing: border-box;
-            margin-right: 50px; /* Add margin between items */
+        h1 {
+            margin-bottom: 30px; /* Increased bottom margin for better spacing */
         }
-
-        .organization-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .organization-title {
-            font-size: 25px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .organization-description {
-            font-size: 20px;
-            line-height: 1.5;
-            color: #6c757d; /* Gray text color */
-        }
-
-        /* Styles for the donor list */
-        .donor-list {
-            list-style-type: none;
-            padding: 0;
-            display: none; /* Hide the list by default */
-            margin-top: 20px; /* Add margin to separate from the button */
-            display: flex; /* Make the list items display horizontally */
-            flex-wrap: wrap; /* Wrap the items if they exceed container width */
-            justify-content: center; /* Center the items horizontally */
-        }
-
-        /* Styles for donor items */
-        .donor-card {
-            background-color: #ffffff;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 50px;
-            width: calc(50% - 100px); /* Adjust width based on desired layout */
-            margin-bottom: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-sizing: border-box;
-            margin-right: 30px; /* Add margin between items */
-        }
-
-        .donor-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .donor-name {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .donor-role {
-            font-size: 17px;
-            line-height: 1.5;
-            color: #6c757d; /* Gray text color */
-        }
-
-        /* Styles for the organization details */
-        .details-container {
-            display: none; /* Hide details by default */
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            position: absolute;
-            z-index: 1;
-            top: calc(100% + 10px); /* Position below organization card */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px; /* Adjust width as needed */
-            text-align: left;
-        }
-
-        /* Styles for the close button */
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            color: #6c757d;
-            font-size: 20px;
-        }
-
-        /* Styles for the search input */
-        .search-input {
+        .button {
+            background-color: #FFC107; /* Bright accent color for buttons */
+            color: #000000; /* Black text for contrast */
             border: none;
-            border-radius: 5px;
-            padding: 8px 12px;
-            font-size: 16px;
-            transition: box-shadow 0.3s;
-        }
-
-        .search-input:focus {
-            outline: none;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        /* New style for the delete icon */
-        .delete-icon {
-            color: #ffffff;
-            font-size: 24px;
-            margin-left: 8px; /* Add spacing between delete icon and search input */
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 25px;
             cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
         }
-
-        /* New style for the delete icon when in delete mode */
-        .delete-icon.delete-mode {
-            color: red; /* Change color to red */
+        .button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
         }
-        .details-container img {
-            width: 200px; /* Adjust to your desired width */
-            height: auto; /* This will maintain the aspect ratio */
-        }
+      
     </style>
 </head>
 <body>
-    <nav class="menu-bar">
-        <div>
-            <ul>
-                <li class="menu-item" onclick="goToHomePage()">Home</li>
-                <li class="menu-item" onclick="toggleOrganizations()">View OrganizationsList</li>
-                <li class="menu-item" onclick="toggleDonors()">View DonorList</li>
-                <li class="menu-item" onclick="redirectToOrgPage()">Organizations Submissions</li>
-                <li class="menu-item" onclick="redirectToDonorPage()">Donor Submissions</li> <!-- Added Donor Submissions button -->
-                <li class="menu-item" onclick="redirectToSettings()">Settings</li> <!-- Added Settings option -->
-            <!-- Search input and delete icon -->
-            <input type="text" id="searchInput" class="search-input" placeholder="Search Organizations" oninput="filterOrganizations()">
-            <span class="delete-icon" onclick="toggleDeleteMode()">🗑️</span> <!-- Delete icon -->
-            </ul>
-        </div>
-    </nav>
-
     <div class="container">
-        <div id="organization-list" class="organization-list">
-            <!-- Organization cards -->
-            <div class="organization-card" onclick="toggleDetails('magdi-details')">
-                <div class="organization-title">Magdi Yacoub Hospital</div>
-                <div class="organization-description">Global Heart Centre for Kids</div>
-                <div id="magdi-details" class="details-container">
-                    <span class="close-btn" onclick="toggleDetails('magdi-details')">&times;</span>
-                    <p>Contact: +01154456783</p>
-                    <p>Address: 456 Street, Zamalek, Cairo, Egypt</p>
-                    <p>Type: Hospital</p>
-                    <figure>
-                        <img src="images/magdi.jpeg" alt="Location">
-                        <figcaption>Location</figcaption>
-                    </figure>
-                </div>
-            </div>
-            <div class="organization-card" onclick="toggleDetails('57357-details')">
-                <div class="organization-title">57357</div>
-                <div class="organization-description">Children's Cancer Hospital</div>
-                <div id="57357-details" class="details-container">
-                    <span class="close-btn" onclick="toggleDetails('57357-details')">&times;</span>
-                    <p>Contact: 0115445673</p>
-                    <p>Address: 456 Street, Nasrcity,cairo, Egypt</p>
-                    <p>Type: Hospital</p>
-                    <figure>
-                        <img src="images/57357.jpeg" alt="Location">
-                        <figcaption>Location</figcaption>
-                    </figure>
-                </div>
-            </div>
-            <div class="organization-card" onclick="toggleDetails('PRI-details')">
-                <div class="organization-title">PRI School</div>
-                <div class="organization-description">School for Children</div>
-                <div id="PRI-details" class="details-container">
-                    <span class="close-btn" onclick="toggleDetails('PRI-details')">&times;</span>
-                    <p>Contact: 01134567891</p>
-                    <p>Address: street 12, New Cairo,cairo, Egypt</p>
-                    <p>Type: School</p>
-                    <figure>
-                        <img src="images/map pri.jpeg" alt="Location">
-                        <figcaption>Location</figcaption>
-                    </figure>
-                </div>
-            </div>
-            <div class="organization-card" onclick="toggleDetails('resala-details')">
-                <div class="organization-title">Resala Charity</div>
-                <div class="organization-description">Charity Organization</div>
-                <div id="resala-details" class="details-container">
-                    <span class="close-btn" onclick="toggleDetails('resala-details')">&times;</span>
-                    <p>Contact: 01154478456</p>
-                    <p>Address: Street 12, Nasr City, Cairo, Egypt</p>
-                    <p>Type: Charity</p>
-                    <figure>
-                        <img src="images/Resala.jpeg" alt="location">
-                        <figcaption>Location</figcaption>
-                    </figure>
-                </div>
-            </div>
-        </div>
-       
-
-        <div id="donor-list" class="donor-list">
-            <!-- Donor list will be shown after clicking the button -->
-        </div>
+        <h1>Welcome</h1>
+        <a href="index.html" class="button">Home</a>
+        <a href="Orgadmin.html" class="button">View Organiztion List</a>
+        <a href="donoradmin.html" class="button">View Donor List</a>
+        <a href="org.html" class="button">Organization submissions</a>
+        <a href="don.html" class="button">Donor submissions</a>
+        <a href="settings.html" class="button">settings</a>
+        
     </div>
-
-    <script>
-        // Function to toggle the organization list visibility
-        function toggleOrganizations() {
-            var organizationList = document.getElementById("organization-list");
-            var donorList = document.getElementById("donor-list");
-            organizationList.style.display = "flex"; // Display the organization list
-            donorList.style.display = "none"; // Hide the donor list
-        }
-
-        // Function to toggle the donor list visibility
-        function toggleDonors() {
-            var organizationList = document.getElementById("organization-list");
-            var donorList = document.getElementById("donor-list");
-            organizationList.style.display = "none"; // Hide the organization list
-            donorList.style.display = "flex"; // Display the donor list
-
-            // Add donor list content here
-            donorList.innerHTML = `
-                <div class='donor-card'>
-                    <div class='donor-name'>John Doe</div>
-                    <div class='donor-role'>Volunteer as Doctor</div>
-                </div>
-                <div class='donor-card'>
-                    <div class='donor-name'>Jane Smith</div>
-                    <div class='donor-role'>Volunteer as Teacher</div>
-                </div>
-                <div class='donor-card'>
-                    <div class='donor-name'>Michael Johnson</div>
-                    <div class='donor-role'>Volunteer as Doctor</div>
-                </div>
-                <div class='donor-card'>
-                    <div class='donor-name'>Salma ahmed</div>
-                    <div class='donor-role'>Volunteer as Doctor</div>
-                </div>
-                <div class='donor-card'>
-                    <div class='donor-name'>Nadeen ashraf</div>
-                    <div class='donor-role'>Volunteer as Teacher</div>
-                </div>
-                <div class='donor-card'>
-                    <div class='donor-name'>nada ahmed</div>
-                    <div class='donor-role'>Volunteer as Doctor</div>
-                </div>
-                <div class='donor-card'>
-                    <div class='donor-name'>yasmin omar</div>
-                    <div class='donor-role'>Volunteer as Doctor</div>
-                </div>
-                <div class='donor-card'>
-                    <div class='donor-name'>ahmed mohamed</div>
-                    <div class='donor-role'>Volunteer as Teacher</div>
-                </div>
-                <div class='donor-card'>
-                    <div class='donor-name'>ahmed omar</div>
-                    <div class='donor-role'>Volunteer as Doctor</div>
-                </div>
-                <div class='donor-card'>
-                    <div class='donor-name'>nada tamer</div>
-                    <div class='donor-role'>Volunteer as Doctor</div>
-                </div>
-                <div class='donor-card'>
-                    <div class='donor-name'>youssef omar </div>
-                    <div class='donor-role'>Volunteer as Teacher</div>
-                </div>
-                <div class='donor-card'>
-                    <div class='donor-name'>Marie mario</div>
-                    <div class='donor-role'>Volunteer as Doctor</div>
-                </div>
-            `;
-        }
-
-        // Function to toggle organization details visibility
-        function toggleDetails(detailsId) {
-            var detailsContainer = document.getElementById(detailsId);
-            if (detailsContainer.style.display === "none" || detailsContainer.style.display === "") {
-                detailsContainer.style.display = "block"; // Display the details if they're hidden
-            } else {
-                detailsContainer.style.display = "none"; // Hide the details if they're visible
-            }
-        }
-
-        // Function to go to the home page (index.html)
-        function goToHomePage() {
-            window.location.href = "index.html"; // Redirect to the home page
-        }
-
-        // Function to filter organizations based on search input
-        function filterOrganizations() {
-            var input = document.getElementById("searchInput").value.toLowerCase();
-            var organizationCards = document.querySelectorAll(".organization-card");
-
-            organizationCards.forEach(function(card) {
-                var title = card.querySelector(".organization-title").textContent.toLowerCase();
-                var description = card.querySelector(".organization-description").textContent.toLowerCase();
-                var details = card.querySelector(".details-container").textContent.toLowerCase();
-
-                if (title.includes(input) || description.includes(input) || details.includes(input)) {
-                    card.style.display = "block"; // Show the organization if it matches the search query
-                } else {
-                    card.style.display = "none"; // Hide the organization if it doesn't match the search query
-                }
-            });
-        }
-
-        // Function to toggle delete mode
-        function toggleDeleteMode() {
-            var deleteIcon = document.querySelector(".delete-icon");
-            var organizationCards = document.querySelectorAll(".organization-card");
-            var donorCards = document.querySelectorAll(".donor-card");
-
-            if (deleteIcon.classList.contains("delete-mode")) {
-                // If already in delete mode, remove the class and stop deletion
-                deleteIcon.classList.remove("delete-mode");
-
-                organizationCards.forEach(function(card) {
-                    card.removeEventListener("click", deleteSelectedCard);
-                });
-
-                donorCards.forEach(function(card) {
-                    card.removeEventListener("click", deleteSelectedCard);
-                });
-            } else {
-                // If not in delete mode, add the class and start deletion
-                deleteIcon.classList.add("delete-mode");
-
-                organizationCards.forEach(function(card) {
-                    card.addEventListener("click", deleteSelectedCard);
-                });
-
-                donorCards.forEach(function(card) {
-                    card.addEventListener("click", deleteSelectedCard);
-                });
-            }
-        }
-
-        // Function to delete the selected card
-        function deleteSelectedCard(event) {
-            var selectedCard = event.currentTarget;
-            selectedCard.parentNode.removeChild(selectedCard); // Remove the selected card
-        }
-
-        function redirectToOrgPage() {
-            window.location.href = "org.html";
-        }
-
-        function redirectToDonorPage() {
-            window.location.href = "don.html";
-        }
-        function redirectToSettings() {
-            window.location.href = "settings.html"; // Redirect to the settings page
-        }
-    </script>
 </body>
 </html>

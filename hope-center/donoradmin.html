@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor List</title>
+    <style>
+        body {
+            background-color: black; /* Set the background color to black */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .orange-container {
+            background-color: #ffc170; /* Orange container background */
+            padding: 20px;
+            max-width: 900px; /* Smaller max-width for the container */
+            margin: 50px auto; /* Center the container */
+            border-radius: 10px;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .donor-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px; /* Add margin to separate from the button */
+            display: flex; /* Make the list items display horizontally */
+            flex-wrap: wrap; /* Wrap the items if they exceed container width */
+            justify-content: center; /* Center the items horizontally */
+        }
+
+        /* Styles for donor items */
+        .donor-card {
+            background-color: #ffffff;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 50px;
+            width: calc(50% - 100px); /* Adjust width based on desired layout */
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+            margin-right: 30px; /* Add margin between items */
+        }
+
+        .donor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .donor-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .donor-role {
+            font-size: 17px;
+            line-height: 1.5;
+            color: #6c757d; /* Gray text color */
+        }
+
+        .black-button {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-top: 20px; /* Add margin to separate from the donor list */
+            display: inline-block; /* Ensure button is displayed inline */
+        }
+
+        .black-button:hover {
+            background-color: #333; /* Darken button color on hover */
+        }
+        .delete-icon {
+            color: #ffffff;
+            font-size: 24px;
+            margin-left: 800px; /* Add spacing between delete icon and search input */
+            cursor: pointer;
+            
+        }
+
+        /* New style for the delete icon when in delete mode */
+        .delete-icon.delete-mode {
+            color: red; /* Change color to red */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="orange-container"> <!-- Orange container -->
+        <div class="container">
+            <span class="delete-icon" onclick="toggleDeleteMode()">🗑️</span> <!-- Delete icon -->
+            <div id="donor-list" class="donor-list">
+                <div class='donor-card'>
+                    <div class='donor-name'>John Doe</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Jane Smith</div>
+                    <div class='donor-role'>Volunteer as Teacher</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Michael Johnson</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Salma ahmed</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Nadeen ashraf</div>
+                    <div class='donor-role'>Volunteer as Teacher</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>nada ahmed</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>yasmin omar</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>ahmed mohamed</div>
+                    <div class='donor-role'>Volunteer as Teacher</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>ahmed omar</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>nada tamer</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>youssef omar </div>
+                    <div class='donor-role'>Volunteer as Teacher</div>
+                </div>
+                <div class='donor-card'>
+                    <div class='donor-name'>Marie mario</div>
+                    <div class='donor-role'>Volunteer as Doctor</div>
+                </div>
+            </div>
+            <a href="admin2.html" class="black-button">Go to main page </a> <!-- Black button to redirect -->
+        </div>
+        </div>
+    </div><script>
+         function toggleDeleteMode() {
+            var deleteIcon = document.querySelector(".delete-icon");
+            var organizationCards = document.querySelectorAll(".organization-card");
+            var donorCards = document.querySelectorAll(".donor-card");
+
+            if (deleteIcon.classList.contains("delete-mode")) {
+                // If already in delete mode, remove the class and stop deletion
+                deleteIcon.classList.remove("delete-mode");
+
+                organizationCards.forEach(function(card) {
+                    card.removeEventListener("click", deleteSelectedCard);
+                });
+
+                donorCards.forEach(function(card) {
+                    card.removeEventListener("click", deleteSelectedCard);
+                });
+            } else {
+                // If not in delete mode, add the class and start deletion
+                deleteIcon.classList.add("delete-mode");
+
+                organizationCards.forEach(function(card) {
+                    card.addEventListener("click", deleteSelectedCard);
+                });
+
+                donorCards.forEach(function(card) {
+                    card.addEventListener("click", deleteSelectedCard);
+                });
+            }
+        }
+
+        // Function to delete the selected card
+        function deleteSelectedCard(event) {
+            var selectedCard = event.currentTarget;
+            selectedCard.parentNode.removeChild(selectedCard); // Remove the selected card
+        }
+
+        function redirectToOrgPage() {
+            window.location.href = "org.html";
+        }
+
+        function redirectToDonorPage() {
+            window.location.href = "don.html";
+        }
+        function redirectToSettings() {
+            window.location.href = "settings.html"; // Redirect to the settings page
+        }
+    </script>
+</body>
+</html>
