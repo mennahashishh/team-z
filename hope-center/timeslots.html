@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeslots</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 100px;
+            border-radius: 50px;
+            background-color: #FFC107;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .time-slots {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .time-slot {
+            background-color: #ffffff;
+            color: rgb(235, 141, 10);
+            padding: 10px 20px;
+            margin: 8px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .time-slot:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .time-slot.selected {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .submit-button {
+            background-color: #ffffff;
+            color: rgb(235, 141, 10);
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .submit-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        #selected-time {
+            font-weight: bold;
+        }
+
+        #organization_logo {
+            width: 200px;
+            height: auto;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="/Users/mennaabouhashish/Documents/GitHub/team-z/hope-center/images/logo.png" alt="Logo">
+    <div class="container">
+        <h2>Schedule Donation Drop-off</h2>
+        <p>Please select a time slot for the donation drop-off:</p>
+        <ul class="time-slots">
+            <li class="time-slot" data-time="9:00 AM">9:00 AM</li>
+            <li class="time-slot" data-time="10:00 AM">10:00 AM</li>
+            <li class="time-slot" data-time="11:00 AM">11:00 AM</li>
+            <li class="time-slot" data-time="12:00 PM">12:00 PM</li>
+            <li class="time-slot" data-time="1:00 PM">1:00 PM</li>
+            <li class="time-slot" data-time="2:00 PM">2:00 PM</li>
+            <li class="time-slot" data-time="3:00 PM">3:00 PM</li>
+            <li class="time-slot" data-time="4:00 PM">4:00 PM</li>
+            <li class="time-slot" data-time="5:00 PM">5:00 PM</li>
+        </ul>
+        <p>You selected: <span id="selected-time">None</span></p>
+        <button class="submit-button" onclick="submitForm()">Submit</button>
+    </div>
+
+    <script>
+        function submitForm() {
+            var selectedTime = document.querySelector('.time-slot.selected');
+            if (selectedTime) {
+                var time = selectedTime.dataset.time;
+                alert('Donation time selected: ' + time);
+            } else {
+                alert('Please select a time slot.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const timeSlots = document.querySelectorAll('.time-slot');
+            const selectedTimeDisplay = document.getElementById('selected-time');
+
+            timeSlots.forEach(slot => {
+                slot.addEventListener('click', function () {
+                    // Remove the selected class from all time slots
+                    timeSlots.forEach(slot => slot.classList.remove('selected'));
+                    // Add the selected class to the clicked time slot
+                    this.classList.add('selected');
+                    // Update the selected time display
+                    selectedTimeDisplay.textContent = this.dataset.time;
+                });
+            });
+        });
+    </script>
+</body>
+<button class="btn" onclick="goToMainPage()">Back to Main Page</button>
+</div>
+
+<script>
+    document.getElementById('view-details-btn').addEventListener('click', function () {
+        document.getElementById('details-section').classList.toggle('show-details');
+    });
+
+    // Function to redirect to main page
+    function goToMainPage() {
+        window.location.href = "mainpage.html"; // Replace "/path/to/main/page.html" with the actual path to your main page
+    }
+</script>
+</html>

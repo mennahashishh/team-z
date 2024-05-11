@@ -2,24 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Fulfilled Donation Posts</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #080808;
         }
 
         .container {
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 100px;
+            border-radius: 50px;
+            background-color: #FFC107;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
         h2 {
@@ -84,15 +83,26 @@
             border-radius: 5px;
             margin-top: 10px;
         }
+
+        .contact-image {
+            width: 50px; /* Adjust as needed */
+            height: auto;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
     </style>
 </head>
 
 <body>
+    <img src="/Users/mennaabouhashish/Documents/GitHub/team-z/hope-center/images/logo.png" alt="Logo">
     <div class="container">
         <h2>View Fulfilled Donation Posts</h2>
 
         <div class="donation-post">
             <h3>Donation Post 1</h3>
+            <p></p>
+            <p></p>
+            <p></p>
             <p><strong>Item Category:</strong> Clothes</p>
             <p><strong>Donor Name:</strong> John Doe</p>
             <p><strong>Pickup Date:</strong> 2024-05-01</p>
@@ -101,7 +111,8 @@
             <button class="expand-button" onclick="toggleDetails(this)">Show Donor Details</button>
             <button class="delete-button" onclick="deletePost(this)">Delete Post</button>
             <div class="donor-details">
-                <p><strong>Contact Details:</strong> john@example.com | 123-456-7890</p>
+                <img src="/Users/mennaabouhashish/Documents/GitHub/team-z/hope-center/kisspng-computer-icons-email-clip-art-portable-network-gra-front-office-staff-colorado-eagles-5ca5a147867bf4.2168492915543585995509.jpg" class="contact-image" alt="Contact Image">
+                <strong>Contact Details:</strong> john@example.com | 123-456-7890
                 <form class="message-form" action="mailto:john@example.com" method="post" enctype="text/plain">
                     <textarea name="message" placeholder="Compose your message of gratitude..." rows="4" required></textarea>
                     <button type="submit" class="send-message-button">Send Message</button>
@@ -128,5 +139,17 @@
         }
     </script>
 </body>
+<button class="btn" onclick="goToMainPage()">Back to Main Page</button>
+</div>
 
+<script>
+    document.getElementById('view-details-btn').addEventListener('click', function () {
+        document.getElementById('details-section').classList.toggle('show-details');
+    });
+
+    // Function to redirect to main page
+    function goToMainPage() {
+        window.location.href = "mainpage.html"; // Replace "/path/to/main/page.html" with the actual path to your main page
+    }
+</script>
 </html>

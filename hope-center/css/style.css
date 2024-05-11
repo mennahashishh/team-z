@@ -21,7 +21,7 @@ body {
 	background:url(../images/bg.jpg) top center repeat;
 	border:0;
 	font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;
-	color:#575652;
+	color:#32302a;
 	line-height:22px
 }
 .ic, .ic a {
@@ -55,7 +55,7 @@ body {
 }
 /* ============================= main layout ====================== */
 a {
-	color:#575652;
+	color:#31302b;
 	text-decoration:underline;
 	outline:none
 }
@@ -68,7 +68,7 @@ h1 {
 }
 h2 {
 	font-size:35px;
-	color:#575652;
+	color:#33322d;
 	font-weight:400;
 	line-height:1.2em;
 	letter-spacing:-1px;
@@ -94,7 +94,7 @@ h2.color3 strong {
 }
 h3 {
 	font-size:35px;
-	color:#dad6cc;
+	color:#6b6962;
 	font-weight:400;
 	line-height:1.2em;
 	padding:25px 0 0 35px;
