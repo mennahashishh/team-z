@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pickup Transportation</title>
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: hsl(0, 0%, 2%);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 80px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 30px #ef8606e0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6); /* Semi-transparent background */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .modal-content {
+    background-color: hsl(0, 10%, 94%);
+    margin: 5% auto; /* Adjust the distance from the top */
+    padding: 40px; /* Increase padding for better spacing */
+    border: 1px solid #888;
+    width: 90%; /* Increase width */
+    height: 60px; /* Increase height */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative; /* Position relative for close button */
+    animation: slideIn 0.5s ease;
+}
+
+        .modal-close {
+            color: #aaa;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #000;
+        }
+
+        /* Keyframe animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); }
+            to { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Choose Pickup Transportation and Time Slot</h1>
+        <form id="pickupForm"> <!-- Added id attribute to the form for easier selection -->
+            <label for="transportation">Select Transportation:</label>
+            <select id="transportation" name="transportation">
+                <option value="truck">Truck</option>
+                <option value="car">Car</option>
+                <option value="motorcycle">Motorcycle</option>
+            </select>
+
+            <label for="time-slot">Select Time Slot:</label>
+            <select id="time-slot" name="time-slot">
+                <option value="morning">Morning (8:00 AM - 12:00 PM)</option>
+                <option value="afternoon">Afternoon (12:00 PM - 4:00 PM)</option>
+                <option value="evening">Evening (4:00 PM - 8:00 PM)</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <p>Your <span id="selectedTransportation"></span> will arrive during the <span id="selectedTimeSlot"></span> time slot. ETA: <span id="eta"></span>. Thank you!</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("pickupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            // Retrieve selected options
+            var transportation = document.getElementById('transportation').value;
+            var timeSlot = document.getElementById('time-slot').value;
+            var eta = calculateETA(timeSlot); // Calculate ETA based on selected time slot
+
+            // Display message in modal
+            document.getElementById("selectedTransportation").textContent = transportation;
+            document.getElementById("selectedTimeSlot").textContent = timeSlot;
+            document.getElementById("eta").textContent = eta;
+            document.getElementById("myModal").style.display = "block";
+        });
+
+        // Close the modal when the close button is clicked
+        document.getElementsByClassName("modal-close")[0].addEventListener("click", function() {
+            document.getElementById("myModal").style.display = "none";
+        });
+
+        // Close the modal when clicked outside the modal content
+        window.addEventListener("click", function(event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        // Function to calculate ETA based on time slot
+        function calculateETA(timeSlot) {
+            switch (timeSlot) {
+                case 'morning':
+                    return '9:00 AM';
+                case 'afternoon':
+                    return '3:00 pm';
+                case 'evening':
+                    return '6:00 pm';
+                default:
+                    return 'N/A';
+            }
+        }
+    </script>
+</body>
+</html>
