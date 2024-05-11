@@ -10,81 +10,84 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000000;
+            background-color: #121212; /* Dark background for modern look */
         }
         .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 100px;
-            border-radius: 50px;
-            background-color: #FFC107;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+            padding: 50px;
+            border-radius: 10px;
+            background-color: #333333; /* Dark theme for the container */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
             text-align: center;
+            color: #FFFFFF; /* White text for better contrast */
         }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 20px;
+        h2 {
+            color: #FFC107; /* Gold color for headers */
+            margin-bottom: 30px;
         }
         label {
-            font-weight: bold;
-            color: #555;
-            text-align: left; /* Align label text to the left */
-            display: block; /* Make label a block-level element for full width */
+            display: block;
+            margin-bottom: 5px;
+            color: #FFC107; /* Gold color for labels */
+            text-align: left;
         }
-        select, input, textarea {
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea,
+        input[type="file"] {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 16px;
-            margin-top: 6px;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            border: 1px solid #FFC107; /* Gold border for focus */
+            background-color: transparent;
+            color: #FFC170; /* White text */
         }
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        button {
-            background-color: #ffffff;
-            color: rgb(235, 141, 10);
-            padding: 10px 15px; /* Adjusted padding */
-            margin: 8px 0;
+        input[type="submit"] {
+            background-color: #FFC107; /* Gold background for submit button */
+            color: #000000; /* Black text for contrast */
             border: none;
-            border-radius: 6px;
+            padding: 12px 24px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 14px; /* Adjusted font size */
             transition: background-color 0.3s;
         }
-        button:hover {
-            background-color: #000000;
+        input[type="submit"]:hover {
+            background-color: #DAA520; /* Darker gold on hover */
         }
-        button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
+        .btn {
+            background-color: #666666; /* Dark gray button for home */
+            color: #FFFFFF; /* White text */
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s;
         }
-        .message {
-            text-align: center;
-            color: #555;
-            font-weight: bold;
+        .btn:hover {
+            background-color: #777777; /* Lighter gray on hover */
+        }
+        input[type="submit"], .login-button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #FFC107;
+            color: white;
+            cursor: pointer;
             margin-top: 20px;
         }
-        .return-button {
-            left: 20px;
-            top: 20px;
+        input[type="submit"]:hover, .login-button:hover {
+            background-color: #000000;
         }
-        .home-button {
-            right: 20px;
-            top: 20px;
-        }
-        #organization_logo {
-            width: 200px; /* Adjusted width */
-            height: auto; /* Maintain aspect ratio */
-            margin: 20px auto; /* Adjusted margin */
+        .login-button {
+            display: none; /* Initially hide the login button */
         }
     </style>
 </head>
@@ -163,20 +166,22 @@
             </div>
             <input type="submit" value="Submit">
         </form>
+        <button class="login-button" onclick="window.location='organization login.html';">Go to Login Page</button>
+        <button class="btn" onclick="goToMainPage()">Back to Login</button>
     </div>
 </body>
-<button class="btn" onclick="goToMainPage()">Back to Main Page</button>
 </div>
 
 <script>
-    document.getElementById('view-details-btn').addEventListener('click', function () {
-        document.getElementById('details-section').classList.toggle('show-details');
-    });
-
     // Function to redirect to main page
     function goToMainPage() {
-        window.location.href = "mainpage.html"; // Replace "/path/to/main/page.html" with the actual path to your main page
+        window.location.href = "organization login.html"; // Replace "/path/to/main/page.html" with the actual path to your main page
     }
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            alert('Registration successful!'); // Simulate form processing and success alert
+            document.querySelector('.login-button').style.display = 'inline-block'; // Show the login button
+        })
 </script>
 
 </html>
