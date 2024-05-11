@@ -4,128 +4,101 @@
 <head>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000000;
+            background-color: #121212; /* Dark background for better contrast */
+            color: #ffffff; /* White text for readability */
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 800px;
             margin: 40px auto;
-            padding: 100px;
-            border-radius: 50px;
-            background-color: #FFC107;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #333333; /* Dark grey container for contrast */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             text-align: center;
         }
 
         h2 {
-            text-align: center;
-            color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        h2 img {
-            margin-right: 10px;
-            width: 50px; /* Adjust the width as needed */
-            height: auto; /* Maintain aspect ratio */
-        }
-
-        p {
-            margin-bottom: 10px;
-            line-height: 1;
-        }
-
-        .notification-example {
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
+            color: #FFC107; /* Gold color for headings */
             margin-bottom: 20px;
         }
 
-        .notification-example h3 {
-            color: #4caf50;
-            margin-top: 0;
+        .notification-example {
+            border: 2px solid #FFC107; /* Gold border */
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease; /* Smooth transform on hover */
         }
 
-        .notification-example p {
-            margin-bottom: 5px;
+        .notification-example:hover {
+            transform: translateY(-5px); /* Slight raise effect on hover */
+            border-color: #ffd54f; /* Lighter gold on hover */
+        }
+
+        .notification-example h3 {
+            color: #4caf50; /* Green for success messages */
         }
 
         .btn {
-            background-color: #4caf50;
+            background-color: #4caf50; /* Green background */
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             cursor: pointer;
             border-radius: 5px;
+            font-size: 16px; /* Larger font for buttons */
+            transition: background-color 0.3s ease; /* Smooth background color transition */
         }
 
         .btn:hover {
-            background-color: #45a049;
+            background-color: #43a047; /* Darker green on hover */
         }
 
         .details {
             display: none;
+            background-color: #424242; /* Darker background for details */
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
         }
 
         .show-details {
-            display: block;
-        }
-
-        .details p {
-            margin-bottom: 10px;
-            margin-left: 20px;
+            display: block; /* Show details on click */
         }
     </style>
 </head>
 
 <body>
-    <img src="/Users/mennaabouhashish/Documents/GitHub/team-z/hope-center/images/logo.png" alt="Logo">
     <div class="container">
-        <h2><img src="/Users/mennaabouhashish/Documents/GitHub/team-z/hope-center/images.png" alt="Image"> Notification Page</h2>
-
+        <h2>Notification Center</h2>
         <div class="notification-example">
-            <h3>A donation has been accepted!</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p>1. ABC donation</p>
-            <p><strong>Notification:</strong> Your donation post for Clothes has been chosen by a donor.</p>
+            <h3>Donation Confirmation</h3>
+            <p><strong>Item:</strong> Clothes</p>
+            <p><strong>Donor:</strong> John Doe</p>
+            <p><strong>Date:</strong> 2024-05-01</p>
+            <p><strong>Status:</strong> Fulfilled</p>
             <button class="btn" id="view-details-btn">View Details</button>
+            <div class="details" id="details-section">
+                <p><strong>Donor Email:</strong> john@example.com</p>
+                <p><strong>Contact:</strong> +123-456-7890</p>
+                <p><strong>Pickup Address:</strong> 123 Main St, Anytown</p>
+            </div>
         </div>
-
-        <!-- Moved this line here -->
-
-        <div class="notification-example details" id="details-section">
-            <h3>Details of Fulfilled Donation Posts</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p><strong>Donor Name:</strong> Fasfoosa</p>
-            <p><strong>Item Category:</strong> Clothes</p>
-            <p><strong>Pickup Date:</strong> 2024-05-01</p>
-            <p><strong>Pickup Address:</strong> banafseg, New Cairo</p>
-            <p><strong>City:</strong> Cairo</p>
-            <p><strong>State:</strong> Egypt</p>
-            <p><strong>Zip Code:</strong> 11765</p>
-        </div>
-
-        <!-- Back to main page button -->
         <button class="btn" onclick="goToMainPage()">Back to Main Page</button>
     </div>
 
     <script>
         document.getElementById('view-details-btn').addEventListener('click', function () {
-            document.getElementById('details-section').classList.toggle('show-details');
+            var details = document.getElementById('details-section');
+            details.classList.toggle('show-details');
         });
 
-        // Function to redirect to main page
         function goToMainPage() {
-            window.location.href = "mainpage.html"; // Replace "/path/to/main/page.html" with the actual path to your main page
+            window.location.href = "mainpage.html";
         }
     </script>
 </body>

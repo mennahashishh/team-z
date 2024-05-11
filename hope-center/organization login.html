@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,121 +7,83 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #000000;
             margin: 0;
             padding: 0;
-            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
+
         .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 100px;
-            border-radius: 50px;
-            background-color: #FFC107;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
         }
-        h1 {
+        h2 {
             text-align: center;
             color: #333;
-            margin-bottom: 20px;
         }
-        .form-group {
-            margin-bottom: 20px;
-        }
+
         label {
             font-weight: bold;
             color: #555;
-            text-align: left; /* Align label text to the left */
-            display: block; /* Make label a block-level element for full width */
         }
-        select, input, textarea {
+
+        input[type="text"],
+        input[type="password"] {
             width: 100%;
             padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
-            border-radius: 6px;
+            border-radius: 5px;
             box-sizing: border-box;
-            font-size: 16px;
-            margin-top: 6px;
         }
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        button {
-            background-color: #ffffff;
-            color: rgb(235, 141, 10);
-            padding: 10px 15px; /* Adjusted padding */
-            margin: 8px 0;
+
+        input[type="submit"] {
+            background-color: #FFC170;
+            color: white;
+            padding: 12px 20px;
             border: none;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 14px; /* Adjusted font size */
-            transition: background-color 0.3s;
+            width: 100%;
+            font-size: 16px;
         }
-        button:hover {
+
+        input[type="submit"]:hover {
             background-color: #000000;
         }
-        button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        .message {
+
+        .text-center {
             text-align: center;
-            color: #555;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-        .return-button {
-            left: 20px;
-            top: 20px;
-        }
-        .home-button {
-            right: 20px;
-            top: 20px;
-        }
-        #organization_logo {
-            width: 200px; /* Adjusted width */
-            height: auto; /* Maintain aspect ratio */
-            margin: 20px auto; /* Adjusted margin */
         }
     </style>
+    <script>
+        function redirectToRegistration() {
+            window.location.href = "organization registration.html";
+        }
+    </script>
 </head>
-
-
 <body>
-    <img src="/Users/mennaabouhashish/Documents/GitHub/team-z/hope-center/images/logo.png" alt="Logo">
     <div class="container">
         <h2>Organization Login</h2>
-        <form action="#" method="POST">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="text" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
+        <form action="mainpage.html" method="post">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
             <input type="submit" value="Login">
+
+            <p class="text-center">Don't have an account? <a href="organization registration.html">Register here</a></p>
         </form>
-        <div class="register-link">
-            <button class="register-button" onclick="window.location.href='organization registration.html';">Register here</button>
-        </div>
+        <a href="index.html" class="button button-home">Return to Home Page</a>
     </div>
 </body>
-<button class="btn" onclick="goToMainPage()">Back to Main Page</button>
-</div>
-
-<script>
-    document.getElementById('view-details-btn').addEventListener('click', function () {
-        document.getElementById('details-section').classList.toggle('show-details');
-    });
-
-    // Function to redirect to main page
-    function goToMainPage() {
-        window.location.href = "mainpage.html"; // Replace "/path/to/main/page.html" with the actual path to your main page
-    }
-</script>
-
 </html>
-
