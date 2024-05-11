@@ -93,11 +93,51 @@
                 transform: translateY(0);
             }
         }
+        .top-left-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #FFC107;
+            color: #333;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .top-left-button:hover {
+            background-color: #FFD54F;
+            transform: translateY(-3px);
+        }
+        .top-right-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #FFC107;
+            color: #333;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .top-right-button:hover {
+            background-color: #FFD54F;
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <button class="top-left-button" onclick="returnToDonorMain()">Return to Donor Main</button>
         <h1>Category Selection for Donation</h1>
+        <button class="top-right-button" onclick="goToHome()">Home</button>
         <div class="category-buttons">
             <button class="category-button" onclick="selectCategory('Clothes')">Clothes</button>
             <button class="category-button" onclick="selectCategory('Toys')">Toys</button>
@@ -139,6 +179,14 @@
             } else {
                 console.log("Selected Category:", category);
             }
+        }
+
+        function returnToDonorMain() {
+            window.location.href = 'Donormain.html';
+        }
+
+        function goToHome() {
+            window.location.href = 'index.html';
         }
     </script>
 </body>
