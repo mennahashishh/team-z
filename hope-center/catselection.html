@@ -6,23 +6,31 @@
     <title>Category Selection for Donation</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #000000;
         }
         .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #ba6b0a;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 50px;
+            border-radius: 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         h1 {
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            font-size: 42px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out;
         }
         .category-buttons {
             display: grid;
@@ -30,25 +38,60 @@
             grid-gap: 20px;
             justify-items: center;
             align-items: center;
+            padding-bottom: 20px;
         }
         .category-button {
-            background-color: hsl(60, 100%, 100%);
-            color: rgb(235, 141, 10);
-            width: 200px;
-            height: 80px;
+            background-color: #FFC107;
+            color: #333;
+            width: 180px;
+            height: 70px;
             border: none;
-            border-radius: 10px;
+            border-radius: 35px;
             cursor: pointer;
             font-size: 18px;
             font-weight: bold;
             text-transform: uppercase;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
         .category-button:hover {
-            background-color: #000000;
+            background-color: #FFD54F;
+            transform: translateY(-3px);
+        }
+        .category-button:active {
+            transform: translateY(0);
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .category-button:focus {
+            outline: none;
+        }
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.7);
+            animation: rippleEffect 1s linear;
+        }
+        @keyframes rippleEffect {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -63,9 +106,23 @@
             <button class="category-button" onclick="selectCategory('School Supplies')">School Supplies</button>
             <button class="category-button" onclick="selectCategory('Blood Donations')">Blood Donations</button>
         </div>
+        <div class="ripple"></div>
     </div>
 
     <script>
+        document.querySelectorAll('.category-button').forEach(button => {
+            button.addEventListener('click', function (e) {
+                const ripple = document.createElement('div');
+                ripple.classList.add('ripple');
+                ripple.style.left = e.clientX - e.target.offsetLeft + 'px';
+                ripple.style.top = e.clientY - e.target.offsetTop + 'px';
+                this.appendChild(ripple);
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            });
+        });
+
         function selectCategory(category) {
             if (category === 'Clothes') {
                 window.location.href = 'clothselection.html';
@@ -74,13 +131,12 @@
             } else if (category === 'Food') {
                 window.location.href = 'foodselection.html';
             } else if (category === 'Medical Supplies') {
-                window.location.href = 'medsupply.html'; // Redirect to medsupply.html
+                window.location.href = 'medsupply.html';
             } else if (category === 'School Supplies') {
                 window.location.href = 'stat&book.html';
             } else if (category === 'Blood Donations') {
-                window.location.href = 'bloodselection.html'; // Redirect to bloodselection.html
+                window.location.href = 'bloodselection.html';
             } else {
-                // For other categories, perform actions based on the selected category
                 console.log("Selected Category:", category);
             }
         }
