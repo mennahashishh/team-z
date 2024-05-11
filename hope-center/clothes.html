@@ -89,26 +89,32 @@
         }
 
         .filter-select {
-            padding: 8px;
-            border: 2px solid #0066cc;
-            border-radius: 5px;
-            background-color: #f8f8f8;
-            color: #333;
-            font-size: 16px;
-            transition: border-color 0.3s, background-color 0.3s;
-            animation: fadeIn 0.5s ease-in-out;
-        }
+    padding: 10px 20px;
+    border: 2px solid #0066cc;
+    border-radius: 30px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    transition: all 0.3s;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
 
-        .filter-select:focus {
-            outline: none;
-            border-color: #0055a5;
-            background-color: #fff;
-        }
+.filter-select:hover,
+.filter-select:focus {
+    border-color: #0055a5;
+    background-color: #f5f5f5;
+    outline: none;
+}
 
-        .filter-select:hover {
-            border-color: #0055a5;
-            background-color: #fff;
-        }
+.filter-select option {
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    padding: 10px;
+}
     </style>
 </head>
 <body>
