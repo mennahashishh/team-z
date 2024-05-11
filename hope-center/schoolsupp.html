@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Supplies Donation Requests</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #004d99;
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+            font-size: 24px;
+            position: relative; /* Needed for button positioning */
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Removes underline from links styled as buttons */
+            position: absolute; /* Positioning inside the header */
+            top: 20px;
+        }
+        .button-home {
+            right: 20px;
+        }
+        .button-requests {
+            left: 20px;
+        }
+        .main {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 15px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            background-color: #ffffff;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            border-radius: 5px;
+        }
+        li:hover {
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .item-details {
+            display: none;
+            font-size: 0.9em;
+            padding: 10px;
+            background-color: #e6e6e6;
+            margin-top: 5px;
+            border-left: 4px solid #0066cc;
+            border-radius: 4px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+        }
+
+        /* New styles for filter options */
+        .filter-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .filter-label {
+            margin-right: 10px;
+        }
+
+        .filter-select {
+            padding: 8px;
+            border: 2px solid #0066cc;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+            color: #333;
+            font-size: 16px;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #0055a5;
+            background-color: #fff;
+        }
+
+        .filter-select:hover {
+            border-color: #0055a5;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>School Supplies Donation Requests</h1>
+        <a href="index.html" class="button button-home">Home</a>
+        <a href="DonReq.html" class="button button-requests">Return to Requests</a>
+    </header>
+    <div class="main">
+        <!-- Filter options -->
+        <div class="filter-container">
+            <label class="filter-label" for="categoryFilter">Category:</label>
+            <select id="categoryFilter" class="filter-select" onchange="filterSupplies()">
+                <option value="all">All</option>
+                <option value="books">Books</option>
+                <option value="stationery">Stationery</option>
+            </select>
+        </div>
+        <!-- List of school supplies -->
+        <ul id="schoolSuppliesList">
+            <!-- Books -->
+            <li data-category="books" onclick="toggleDetails(this)">Mathematics Textbooks
+                <div class="item-details">
+                    Type: Textbook, Amount Requested: 50
+                </div>
+            </li>
+            <li data-category="books" onclick="toggleDetails(this)">Science Encyclopedias
+                <div class="item-details">
+                    Type: Encyclopedia, Amount Requested: 30
+                </div>
+            </li>
+            <li data-category="books" onclick="toggleDetails(this)">Literature Novels
+                <div class="item-details">
+                    Type: Novel, Amount Requested: 40
+                </div>
+            </li>
+            <li data-category="books" onclick="toggleDetails(this)">History Textbooks
+                <div class="item-details">
+                    Type: Textbook, Amount Requested: 60
+                </div>
+            </li>
+            <!-- Stationery -->
+            <li data-category="stationery" onclick="toggleDetails(this)">Pencils (No. 2)
+                <div class="item-details">
+                    Type: Pencil, Amount Requested: 100
+                </div>
+            </li>
+            <li data-category="stationery" onclick="toggleDetails(this)">Erasers
+                <div class="item-details">
+                    Type: Eraser, Amount Requested: 80
+                </div>
+            </li>
+            <li data-category="stationery" onclick="toggleDetails(this)">Crayons (24-Pack)
+                <div class="item-details">
+                    Type: Crayons, Amount Requested: 120
+                </div>
+            </li>
+            <li data-category="stationery" onclick="toggleDetails(this)">Glue Sticks
+                <div class="item-details">
+                    Type: Glue Stick, Amount Requested: 50
+                </div>
+            </li>
+            <!-- Add more items with appropriate data-category attribute and item details -->
+        </ul>
+    </div>
+    <footer>
+        <p>Hope Center Donations</p>
+    </footer>
+    <script>
+        // Function to filter supplies based on category
+        function filterSupplies() {
+            var category = document.getElementById('categoryFilter').value;
+            var supplies = document.querySelectorAll('#schoolSuppliesList li');
+
+            supplies.forEach(function(item) {
+                if (category === 'all') {
+                    item.style.display = 'block'; // Show all items
+                } else {
+                    var itemCategory = item.getAttribute('data-category');
+                    if (itemCategory === category) {
+                        item.style.display = 'block'; // Show items matching the selected category
+                    } else {
+                        item.style.display = 'none'; // Hide items not matching the selected category
+                    }
+                }
+            });
+        }
+
+        // Function to toggle item details visibility
+        function toggleDetails(element) {
+            var details = element.querySelector('.item-details');
+            if (details.style.display === 'none' || !details.style.display) {
+                details.style.display = 'block'; // Show details
+            } else {
+                details.style.display = 'none'; // Hide details
+            }
+        }
+
+        // Initial call to filterSupplies() to show all items
+        filterSupplies();
+    </script>
+</body>
+</html>

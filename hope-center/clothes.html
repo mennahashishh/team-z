@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothes Donation Requests</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #004d99;
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+            font-size: 24px;
+            position: relative; /* Needed for button positioning */
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Removes underline from links styled as buttons */
+            position: absolute; /* Positioning inside the header */
+            top: 20px;
+        }
+        .button-home {
+            right: 20px;
+        }
+        .button-requests {
+            left: 20px;
+        }
+        .button:hover {
+            background-color: #0055a5;
+        }
+        .main {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 15px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            background-color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            border-radius: 5px;
+        }
+        li:hover {
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .item-details {
+            display: none;
+            font-size: 0.9em;
+            padding: 10px;
+            background-color: #e6e6e6;
+            margin-top: 5px;
+            border-left: 4px solid #0066cc;
+            border-radius: 4px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .filter-select {
+            padding: 8px;
+            border: 2px solid #0066cc;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+            color: #333;
+            font-size: 16px;
+            transition: border-color 0.3s, background-color 0.3s;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #0055a5;
+            background-color: #fff;
+        }
+
+        .filter-select:hover {
+            border-color: #0055a5;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Clothes Donation Requests</h1>
+        <a href="index.html" class="button button-home">Home</a>
+        <a href="DonReq.html" class="button button-requests">Return to Requests</a>
+        <!-- Adding filter options -->
+        <div class="filter-container">
+            <label class="filter-label" for="ageFilter">Age:</label>
+            <select id="ageFilter" class="filter-select" onchange="filterClothes()">
+                <option value="">All</option>
+                <option value="Children">Children</option>
+                <option value="6-12">6-12</option>
+                <option value="Toddlers">Toddlers</option>
+                <option value="Teenagers">Teenagers</option>
+                <option value="Elderly">Elderly</option>
+            </select>
+            <label class="filter-label" for="genderFilter">Gender:</label>
+            <select id="genderFilter" class="filter-select" onchange="filterClothes()">
+                <option value="">All</option>
+                <option value="Unisex">Unisex</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+            </select>
+            <label class="filter-label" for="seasonFilter">Season:</label>
+            <select id="seasonFilter" class="filter-select" onchange="filterClothes()">
+                <option value="">All</option>
+                <option value="Winter">Winter</option>
+                <option value="Summer">Summer</option>
+                <option value="All-Season">All-Season</option>
+            </select>
+        </div>
+    </header>
+    <div class="main">
+        <ul id="clothesList">
+            <li onclick="toggleDetails(this)">
+                Winter jackets for children
+                <div class="item-details">
+                    Type: Jacket, Age: Children, Gender: Unisex, Season: Winter, Material: Polyester, Quantity: 50
+                </div>
+            </li>
+            <li onclick="toggleDetails(this)">
+                School uniforms (ages 6-12)
+                <div class="item-details">
+                    Type: Uniform, Age: 6-12, Gender: Unisex, Season: All-Season, Material: Cotton, Quantity: 100
+                </div>
+            </li>
+            <li onclick="toggleDetails(this)">
+                Summer dresses for toddlers
+                <div class="item-details">
+                    Type: Dress, Age: Toddlers, Gender: Female, Season: Summer, Material: Cotton, Quantity: 75
+                </div>
+            </li>
+            <li onclick="toggleDetails(this)">
+                Casual wear for teenagers
+                <div class="item-details">
+                    Type: Casual, Age: Teenagers, Gender: Male, Season: All-Season, Material: Mixed Fibers, Quantity: 60
+                </div>
+            </li>
+            <li onclick="toggleDetails(this)">
+                Winter coats for the elderly
+                <div class="item-details">
+                    Type: Coat, Age: Elderly, Gender: Unisex, Season: Winter, Material: Wool, Quantity: 40
+                </div>
+            </li>
+        </ul>
+    </div>
+    <footer>
+        <p>Hope Center Donations</p>
+    </footer>
+    <script>
+        // New function to toggle details visibility
+        function toggleDetails(element) {
+            var details = element.querySelector('.item-details');
+            if (details.style.display === 'none' || !details.style.display) {
+                details.style.display = 'block'; // Show details
+            } else {
+                details.style.display = 'none'; // Hide details
+            }
+        }
+
+        // New function to filter clothes based on age, gender, and season
+        function filterClothes() {
+            var age = document.getElementById('ageFilter').value;
+            var gender = document.getElementById('genderFilter').value;
+            var season = document.getElementById('seasonFilter').value;
+            var clothes = document.querySelectorAll('#clothesList li');
+
+            clothes.forEach(function(item) {
+                var details = item.querySelector('.item-details');
+                var ageText = details.textContent.includes('Age: ' + age);
+                var genderText = details.textContent.includes('Gender: ' + gender);
+                var seasonText = details.textContent.includes('Season: ' + season);
+
+                if (age === '' || ageText) {
+                    if (gender === '' || genderText) {
+                        if (season === '' || seasonText) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    } else {
+                        item.style.display = 'none';
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Initial call to filterClothes() to show all items
+        filterClothes();
+    </script>
+</body>
+</html>
