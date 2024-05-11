@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Fulfilled Donation Posts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .donation-post {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .donation-post h3 {
+            margin-top: 0;
+            color: #4caf50;
+        }
+
+        .donation-post p {
+            margin-bottom: 5px;
+        }
+
+        .donor-details {
+            display: none;
+        }
+
+        .expand-button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        .delete-button {
+            background-color: #ff3333;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .message-form textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+            resize: vertical;
+        }
+
+        .send-message-button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>View Fulfilled Donation Posts</h2>
+
+        <div class="donation-post">
+            <h3>Donation Post 1</h3>
+            <p><strong>Item Category:</strong> Clothes</p>
+            <p><strong>Donor Name:</strong> John Doe</p>
+            <p><strong>Pickup Date:</strong> 2024-05-01</p>
+            <p><strong>Pickup Address:</strong> 123 Main St, Anytown</p>
+            <p><strong>Status:</strong> Fulfilled</p>
+            <button class="expand-button" onclick="toggleDetails(this)">Show Donor Details</button>
+            <button class="delete-button" onclick="deletePost(this)">Delete Post</button>
+            <div class="donor-details">
+                <p><strong>Contact Details:</strong> john@example.com | 123-456-7890</p>
+                <form class="message-form" action="mailto:john@example.com" method="post" enctype="text/plain">
+                    <textarea name="message" placeholder="Compose your message of gratitude..." rows="4" required></textarea>
+                    <button type="submit" class="send-message-button">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Add more donation posts as needed -->
+    </div>
+
+    <script>
+        function toggleDetails(button) {
+            var details = button.parentElement.querySelector(".donor-details");
+            if (details.style.display === "none" || details.style.display === "") {
+                details.style.display = "block";
+            } else {
+                details.style.display = "none";
+            }
+        }
+
+        function deletePost(button) {
+            var post = button.parentElement;
+            post.remove();
+        }
+    </script>
+</body>
+
+</html>
