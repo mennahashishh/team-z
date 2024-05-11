@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update/Delete Account Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 100px;
+            border-radius: 50px;
+            background-color: #FFC107;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+            text-align: left; /* Align label text to the left */
+            display: block; /* Make label a block-level element for full width */
+        }
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin-top: 6px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; /* Center buttons horizontally */
+            align-items: center; /* Center buttons vertically */
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #ffffff;
+            color: rgb(235, 141, 10);
+            padding: 10px 15px; /* Adjusted padding */
+            margin: 8px 5px; /* Adjusted margin */
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px; /* Adjusted font size */
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #000000;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .message {
+            text-align: center;
+            color: #ffffff; /* Set font color to white */
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .return-button {
+            margin-right: 5px; /* Adjust margin to space buttons */
+        }
+        .home-button {
+            margin-left: 5px; /* Adjust margin to space buttons */
+        }
+        .confirmation {
+            display: none; /* Initially hide the confirmation message */
+            margin-top: 20px; /* Add margin to separate from buttons */
+        }
+        .hide {
+            display: none; /* Initially hide the new password input */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Update/Delete Account Information</h1>
+        <form action="#" method="post" id="accountForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+
+            <label for="newPassword" class="newPwdLabel hide">New Password:</label>
+            <input type="password" id="newPassword" name="newPassword" placeholder="Enter your new password" class="newPwdInput hide">
+
+            <div class="confirmation" id="confirmation">
+                <label for="confirmDelete">Are you sure you want to delete the account?</label><br>
+                <button onclick="deleteAccount(true)">Yes</button>
+                <button onclick="deleteAccount(false)">No</button>
+            </div>
+        </form>
+        <div class="button-container">
+            <button type="button" onclick="updateAccount()">Update Account</button>
+            <button type="button" onclick="showConfirmation()" id="deleteButton">Delete Account</button>
+        </div>
+        <div class="button-container">
+            <button class="return-button" onclick="returnHome()">Home</button>
+            <button class="home-button" onclick="returnToorganizationPage()">organization's Mainpage</button>
+        </div>
+        <div class="message" id="message"></div>
+        <div id="returnHome" class="hide">
+            <button onclick="returnHome()">Return to Home</button>
+        </div>
+        <div id="organizationMainpage" class="hide">
+            <button onclick="returnToorganizationPage()">organization's Mainpage</button>
+        </div>
+    </div>
+
+    <script>
+        var updateClicks = 0;
+        var accountUpdated = false;
+        var confirmDeleteShown = false;
+
+        function updateAccount() {
+            var newPasswordInputs = document.querySelectorAll('.newPwdInput');
+            var newPasswordLabels = document.querySelectorAll('.newPwdLabel');
+            var messageDiv = document.getElementById('message');
+            var updateBtn = document.querySelector('button[type="button"]');
+            var deleteBtn = document.getElementById('deleteButton');
+
+            for (var i = 0; i < newPasswordInputs.length; i++) {
+                newPasswordInputs[i].classList.toggle('hide');
+                newPasswordLabels[i].classList.toggle('hide');
+            }
+
+            if (!newPasswordInputs[0].classList.contains('hide')) {
+                updateClicks++;
+                if (updateClicks === 2 && !accountUpdated) {
+                    messageDiv.innerHTML = '<p style="color: white;">Account updated successfully!</p>';
+                    updateBtn.setAttribute('disabled', 'true');
+                    accountUpdated = true;
+                } else if (updateClicks >= 3) {
+                    messageDiv.innerHTML = '<p style="color: white;">You have already updated your account.</p>';
+                }
+            } else {
+                updateBtn.innerHTML = 'Update';
+                updateBtn.setAttribute('disabled', 'true');
+            }
+        }
+
+        function showConfirmation() {
+            document.getElementById('confirmation').style.display = 'block';
+            confirmDeleteShown = true;
+        }
+
+        function deleteAccount(confirm) {
+            if (confirm) {
+                document.getElementById('message').innerHTML = '<p style="color: white;">Account deleted successfully!</p>';
+                document.getElementById('accountForm').classList.toggle('hide');
+                document.getElementById('returnHome').classList.toggle('hide');
+                document.getElementById('donorMainpage').classList.toggle('hide');
+            } else {
+                document.getElementById('confirmation').style.display = 'none';
+            }
+            confirmDeleteShown = false;
+        }
+
+        function returnHome() {
+            // Code to return to the home page
+            alert('Returning to home page...');
+        }
+
+        function returnToorganizationPage() {
+            // Code to return to the organization's main page
+            alert('Returning to organization\'s main page...');
+        }
+
+        // Enable or disable delete button based on username and password input
+        function checkDeleteButton() {
+            var deleteBtn = document.getElementById('deleteButton');
+            if (document.getElementById('username').value.trim() && document.getElementById('password').value.trim() && !confirmDeleteShown) {
+                deleteBtn.removeAttribute('disabled');
+            } else {
+                deleteBtn.setAttribute('disabled', 'true');
+            }
+        }
+
+        // Call checkDeleteButton function on username and password input change
+        document.getElementById('username').addEventListener('input', checkDeleteButton);
+        document.getElementById('password').addEventListener('input', checkDeleteButton);
+    </script>
+</body>
+</html>
