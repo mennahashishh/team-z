@@ -19,6 +19,7 @@
             background-image: url("C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/charity.png"); /* Background image for added depth */
             background-size: cover;
             background-position: center;
+            position: relative; /* Add relative positioning to the body */
         }
         .container {
             width: 90%;
@@ -33,7 +34,7 @@
             margin-bottom: 30px; /* Increased bottom margin for better spacing */
         }
         .button {
-            background-color: #FFC107; /* Bright accent color for buttons */
+            background-color: #FFC170; /* Bright accent color for buttons */
             color: #000000; /* Black text for contrast */
             border: none;
             padding: 15px 30px;
@@ -54,9 +55,19 @@
             font-size: 30px; /* Larger bell icon */
             position: absolute;
             top: 20px;
-            right: 20px;
+            right: 20px; /* Positioned on the top right corner */
             cursor: pointer;
-            color: #FFC107;
+            color: #FFC170;
+        }
+        .notification-window {
+            position: absolute;
+            top: 80px; /* Adjust as needed */
+            right: 20px;
+            color: #000000;
+            background-color: #FFC170; /* Semi-transparent white background */
+            border-radius: 10px;
+            padding: 20px;
+            display: none;
         }
     </style>
 </head>
@@ -67,8 +78,24 @@
         <a href="DonReq.html" class="button">View Donation Requests</a>
         <a href="catselection.html" class="button">Make Donations</a>
         <a href="pickup.html" class="button">Pickup Transportation</a>
-        <a href="try.html" class="button">View Organization list</a>
-        <div class="notification-bell">&#x1F514;</div> <!-- Notification bell icon -->
     </div>
+
+    <div class="notification-bell" onclick="toggleNotification()">🔔</div> <!-- Notification bell icon -->
+    <div class="notification-window" id="notificationWindow">
+        <h2> Notifications</h2>
+        <p></p>
+        <p><strong>Notification:</strong> Driver has arrived. Please proceed to retrieve your donated items.</p>
+    </div>
+
+    <script>
+        function toggleNotification() {
+            var notificationWindow = document.getElementById('notificationWindow');
+            if (notificationWindow.style.display === 'block') {
+                notificationWindow.style.display = 'none';
+            } else {
+                notificationWindow.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
