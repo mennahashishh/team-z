@@ -44,6 +44,8 @@
             <li><a href="donlogin.html"> Donor Login</a></li>
             <li><a href="help.html">How to Help</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <!-- Add the Admin Login button here -->
+            <li><a href="admin.html" id="admin_login">Admin Login</a></li>
           </ul>
         </nav>
       </div>
@@ -203,7 +205,12 @@ $(window).load(function () {
             }, 600, 'easeOutExpo');
         }
     })
-})
+
+    // Redirect to admin.html page when admin login button is clicked
+    $('#admin_login').click(function() {
+        window.location.href = 'admin.html';
+    });
+});
 </script>
 </body>
 </html>

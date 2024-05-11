@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization Submissions</title>
+    <style>
+        /* Add your CSS styles here */
+
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 25px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            position: relative; /* Required for absolute positioning of image */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .submission {
+            margin-bottom: 20px;
+            border: 3px solid hsl(33, 94%, 49%);
+            padding: 20px;
+            border-radius: 5px;
+            position: relative; /* Required for absolute positioning of image */
+        }
+
+        .submission-details {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: hwb(0 0% 100%);
+            border-radius: 5px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #53c43a;
+            color: white;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .btn-secondary {
+            background-color: #587ac4;
+        }
+
+        /* Additional styles for accept and reject buttons */
+        .btn-accept {
+            background-color: green;
+        }
+
+        .btn-reject {
+            background-color: red;
+        }
+
+        .confirmation-message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .download-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #587ac4;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        /* Styles for top-right image */
+        .top-right-image {
+            position: absolute;
+            top: 130px;
+            right: 10px;
+            max-width: 300px; /* Adjust the width as needed */
+            max-height: 400px; /* Adjust the height as needed */
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Organization Submissions</h1>
+        
+        <!-- Organization Submission 1 -->
+        <div class="submission">
+            <!-- Top right image -->
+            <figure><img src="images/map pri.jpeg"class="top-right-image" alt=""></figure>
+            
+            <div class="submission-details">
+                <p><strong>Name:</strong> Ahmed Tamer</p>
+                <p><strong>Email:</strong> Ahmed200@gmail.com</p>
+                <p><strong>Contact Number:</strong> 01134567891</p>
+                <p><strong>Organization:</strong> PRI School</p>
+                <p><strong>Type:</strong> Primary School</p>
+                <p><strong>Address:</strong> Street 12, New Cairo, Cairo, Egypt</p>
+                <!-- Add more details as needed -->
+            </div>
+            <div>
+                <button id="accept-1" class="btn btn-accept" onclick="acceptSubmission(1)">Accept</button>
+                <button id="reject-1" class="btn btn-reject" onclick="rejectSubmission(1)">Reject</button>
+                <button class="download-btn" onclick="downloadSubmission(1)">Download</button>
+            </div>
+            <div id="confirmation-message-1" class="confirmation-message"></div>
+        </div>
+        
+        <!-- Organization Submission 2 -->
+        <div class="submission">
+            <figure><img src="images/mapjess.jpeg"class="top-right-image" alt=""></figure>
+            
+            <div class="submission-details">
+                <p><strong>Name:</strong> Jasmine Ashraf</p>
+                <p><strong>Email:</strong> jess2004@gmail.com</p>
+                <p><strong>Contact Number:</strong> +Oll54456898</p>
+                <p><strong>Organization:</strong> JOEY Hospital</p>
+                <p><strong>Type:</strong> Hospital for Cancer</p>
+                <p><strong>Address:</strong> Rehab City, Cairo, Egypt</p>
+                <!-- Include more details here -->
+            </div>
+            
+            <div>
+                <button id="accept-2" class="btn btn-accept" onclick="acceptSubmission(2)">Accept</button>
+                <button id="reject-2" class="btn btn-reject" onclick="rejectSubmission(2)">Reject</button>
+                <button class="download-btn" onclick="downloadSubmission(2)">Download</button>
+            </div>
+            <div id="confirmation-message-2" class="confirmation-message"></div>
+        </div>
+
+        <!-- Add more submission sections as needed -->
+
+        <!-- Main page button -->
+        <button class="btn btn-secondary" onclick="goToMainPage()">Main Page</button>
+    </div>
+
+    <script>
+        function acceptSubmission(submissionId) {
+            var acceptButton = document.getElementById("accept-" + submissionId);
+            var rejectButton = document.getElementById("reject-" + submissionId);
+            var confirmationMessage = document.getElementById("confirmation-message-" + submissionId);
+
+            if (acceptButton.classList.contains("disabled")) {
+                confirmationMessage.innerText = "You already accepted this submission.";
+                confirmationMessage.style.color = "green";
+            } else {
+                acceptButton.classList.add("disabled");
+                rejectButton.disabled = true;
+
+                confirmationMessage.innerText = "Submission accepted.";
+                confirmationMessage.style.color = "green";
+            }
+        }
+
+        function rejectSubmission(submissionId) {
+            var acceptButton = document.getElementById("accept-" + submissionId);
+            var rejectButton = document.getElementById("reject-" + submissionId);
+            var confirmationMessage = document.getElementById("confirmation-message-" + submissionId);
+
+            if (rejectButton.classList.contains("disabled")) {
+                confirmationMessage.innerText = "You already rejected this submission.";
+                confirmationMessage.style.color = "red";
+            } else {
+                rejectButton.classList.add("disabled");
+                acceptButton.disabled = true;
+
+                confirmationMessage.innerText = "Submission rejected.";
+                confirmationMessage.style.color = "red";
+            }
+        }
+
+        function goToMainPage() {
+            window.location.href = "admin2.html"; // Redirect to the main admin page
+        }
+
+        function downloadSubmission(submissionId) {
+            // Assuming you have submission data in JavaScript objects
+            var submissions = [
+                { name: "Ahmed Tamer", email: "Ahmed200@gmail.com", contact: "01134567891", organization: "PRI School", type: " Primary School", address: "Street 12, New Cairo, Cairo, Egypt" },
+                { name: "Jasmine Ashraf", email: "jess2004@example.com", contact: "+Oll54456898", organization: "JOEY Hospital", type: "Hospital for Cancer", address: "Rehab City, Cairo, Egypt" }
+                // Add more submission data as needed
+            ];
+
+            // Get the submission data for the clicked submissionId
+            var submissionData = submissions[submissionId - 1];
+
+            // Convert submission data to CSV format
+            var csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Name,Email,Contact,Organization,Type,Address\n"; // CSV header
+            var row = Object.values(submissionData).join(","); // Convert object values to CSV row
+            csvContent += row + "\n";
+
+            // Create a temporary anchor element to trigger download
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", submissionData.name + "_submission.csv"); // Set download filename
+            document.body.appendChild(link);
+
+            // Trigger the download
+            link.click();
+        }
+    </script>
+</body>
+</html>

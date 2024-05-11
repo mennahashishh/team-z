@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantity Selection for Food Donations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 100px;
+            border-radius: 50px;
+            background-color: #FFC107;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            margin-top: 60px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+            text-align: left; /* Align label text to the left */
+            display: block; /* Make label a block-level element for full width */
+        }
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin-top: 6px;
+        }
+        button {
+            background-color: #ffffff;
+            color: rgb(235, 141, 10);
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #000000;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .message {
+            text-align: center;
+            color: #555;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .return-button {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+        }
+        .home-button {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+        .content {
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quantity Selection for Food Donations</h1>
+        <button onclick="returnToCategorySelection()" class="return-button">Return to category selection</button>
+        <button onclick="goToHome()" class="home-button">Home</button>
+        <div class="content">
+            <div class="form-group">
+                <label for="food type">Food type:</label>
+                <select id="food">
+                    <option value="Fruit&vegetables">Fruits & vegetables</option>
+                    <option value="Freshmeals">Fresh meals</option>
+                    <option value="cannedfood">Canned food</option>
+                    <option value="Bakedgoods">Baked goods</option>
+                    <option value="other">other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Food name">Food name:</label>
+                <input type="text" id="item" placeholder="Enter item name">
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" min="1" value="1">
+            </div>
+            <div class="form-group">
+                <label for="details">Additional Details:</label>
+                <textarea id="details" rows="4" placeholder="Enter any additional details"></textarea>
+            </div>
+            <div class="form-group">
+                <button onclick="submitDonation()" id="submitButton" disabled>Submit Donation</button>
+            </div>
+            <div class="message" id="successMessage"></div>
+        </div>
+    </div>
+
+    <script>
+        function submitDonation() {
+            var food = document.getElementById("food").value;
+            var quantity = document.getElementById("quantity").value;
+
+            // Here you can perform further actions with the donation data, like sending it to a server or storing it locally
+            console.log("Donation submitted:");
+            console.log("Food Item:", food);
+            console.log("Quantity:", quantity);
+
+            // Reset the form after submission
+            document.getElementById("quantity").value = 1;
+
+            // Disable submit button after submission
+            document.getElementById("submitButton").disabled = true;
+
+            // Show success message
+            document.getElementById("successMessage").innerText = "Donation submitted successfully";
+        }
+
+        // Enable submit button when all fields are filled
+        function checkForm() {
+            var food = document.getElementById("food").value;
+            var quantity = document.getElementById("quantity").value;
+
+            if (food !== "" && quantity > 0) {
+                document.getElementById("submitButton").disabled = false;
+            } else {
+                document.getElementById("submitButton").disabled = true;
+            }
+        }
+
+        // Call checkForm() on input change
+        document.getElementById("food").addEventListener("change", checkForm);
+        document.getElementById("quantity").addEventListener("input", checkForm);
+
+        // Function to navigate to category selection
+        function returnToCategorySelection() {
+            window.location.href = 'catselection.html'; // Redirect to catselection.html
+        }
+
+        // Function to navigate to home
+        function goToHome() {
+            window.location.href = 'index.html'; // Redirect to index.html
+        }
+    </script>
+</body>
+</html>

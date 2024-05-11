@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Black background */
+            margin: 0;
+            padding: 0;
+            color: #ccc; /* Default text color */
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        input[type="password"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="password"]:focus {
+            border-color: #007bff;
+        }
+
+        button[type="submit"] {
+            background-color: #28a745; /* Green color */
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838; /* Darker green color on hover */
+        }
+
+        .message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        /* Style for the return button */
+        .return-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Style for the link */
+        .return-button a {
+            color: #000; /* Black text color */
+            text-decoration: none; /* Remove underline */
+        }
+
+        /* Hover effect */
+        .return-button a:hover {
+            text-decoration: underline; /* Add underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Change Password</h1>
+        <form id="change-password-form">
+            <label for="current-password">Current Password:</label>
+            <input type="password" id="current-password" name="current-password">
+
+            <label for="new-password">New Password:</label>
+            <input type="password" id="new-password" name="new-password">
+
+            <label for="confirm-new-password">Confirm New Password:</label>
+            <input type="password" id="confirm-new-password" name="confirm-new-password">
+
+            <button type="submit">Change Password</button>
+
+            <div class="message" id="password-change-message"></div>
+        </form>
+        
+        <!-- Return button -->
+        <div class="return-button">
+            <a href="admin2.html">Return to Main Page</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('change-password-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            var currentPassword = document.getElementById('current-password').value;
+            var newPassword = document.getElementById('new-password').value;
+            var confirmNewPassword = document.getElementById('confirm-new-password').value;
+
+            // Validation for empty fields
+            if (!currentPassword || !newPassword || !confirmNewPassword) {
+                displayMessage('Please fill in all fields.', 'error');
+                return;
+            }
+
+            // Perform validation for matching passwords
+            if (newPassword !== confirmNewPassword) {
+                displayMessage('Passwords do not match!', 'error');
+                return;
+            }
+
+            // Simulate password change process
+            // Replace this with your actual password change logic
+
+            // Reset the form
+            document.getElementById('change-password-form').reset();
+            displayMessage('Password changed successfully!', 'success');
+        });
+
+        function displayMessage(message, type) {
+            var messageElement = document.getElementById('password-change-message');
+            messageElement.textContent = message;
+            messageElement.className = 'message ' + type;
+            messageElement.style.display = 'block';
+            
+        }
+    </script>
+</body>
+</html>

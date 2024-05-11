@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #FFC107;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .donation-form {
+            display: inline-block;
+            width: 45%;
+            vertical-align: top;
+            margin-right: 5%;
+            box-sizing: border-box;
+        }
+        .donation-form:last-child {
+            margin-right: 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        select, input, textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin-top: 6px;
+        }
+        button {
+            background-color: #ffffff;
+            color: rgb(235, 141, 10);
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #000000;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .message {
+            text-align: center;
+            color: #555;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .return-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .home-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px; /* Adjusted padding */
+            font-size: 14px; /* Adjusted font size */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button onclick="returnToCategorySelection()" class="return-button">Return to category selection</button>
+        <button onclick="goToHome()" class="home-button">Home</button>
+        <h1>Donation Form</h1>
+
+        <!-- Quantity Selection for Book Donations -->
+        <div class="donation-form">
+            <h2>Quantity Selection for Book Donations</h2>
+            <div class="form-group">
+                <label for="bookGenre">Book genre:</label>
+                <select id="bookGenre">
+                    <option value="fiction">Fiction</option>
+                    <option value="non-fiction">Non-fiction</option>
+                    <option value="science-fiction">Science fiction</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="romance">Romance</option>
+                    <option value="horror">Horror</option>
+                    <option value="historical-fiction">Historical fiction</option>
+                    <option value="young-adult">Young adult (YA)</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bookName">Book name:</label>
+                <input type="text" id="bookName" placeholder="Enter book name">
+            </div>
+            <div class="form-group">
+                <label for="bookQuantity">Quantity:</label>
+                <input type="number" id="bookQuantity" min="1" value="1">
+            </div>
+            <div class="form-group">
+                <label for="bookDetails">Additional Details:</label>
+                <textarea id="bookDetails" rows="4" placeholder="Enter any additional details"></textarea>
+            </div>
+            <div class="form-group">
+                <button onclick="submitBookDonation()" id="bookSubmitButton" disabled>Submit Donation</button>
+            </div>
+            <div class="message" id="bookSuccessMessage"></div>
+        </div>
+
+        <!-- Quantity Selection for Stationery Donations -->
+        <div class="donation-form">
+            <h2>Quantity Selection for Stationery Donations</h2>
+            <div class="form-group">
+                <label for="stationeryItem">Stationery Item:</label>
+                <select id="stationeryItem">
+                    <option value="pen">Pen</option>
+                    <option value="pencil">Pencil</option>
+                    <option value="notebook">Notebook</option>
+                    <option value="crayons">Crayons</option>
+                    <option value="markers">Markers</option>
+                    <option value="ruler">Ruler</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="stationeryName">Item name:</label>
+                <input type="text" id="stationeryName" placeholder="Enter item name">
+            </div>
+            <div class="form-group">
+                <label for="stationeryQuantity">Quantity:</label>
+                <input type="number" id="stationeryQuantity" min="1" value="1">
+            </div>
+            <div class="form-group">
+                <label for="stationeryDetails">Additional Details:</label>
+                <textarea id="stationeryDetails" rows="4" placeholder="Enter any additional details"></textarea>
+            </div>
+            <div class="form-group">
+                <button onclick="submitStationeryDonation()" id="stationerySubmitButton" disabled>Submit Donation</button>
+            </div>
+            <div class="message" id="stationerySuccessMessage"></div>
+        </div>
+    </div>
+
+    <script>
+        // Book Donation Form Functions
+        function submitBookDonation() {
+            var genre = document.getElementById("bookGenre").value;
+            var name = document.getElementById("bookName").value;
+            var quantity = document.getElementById("bookQuantity").value;
+            var details = document.getElementById("bookDetails").value;
+
+            // Here you can perform further actions with the donation data, like sending it to a server or storing it locally
+            console.log("Book Donation submitted:");
+            console.log("Book Genre:", genre);
+            console.log("Book Name:", name);
+            console.log("Quantity:", quantity);
+            console.log("Additional Details:", details);
+
+            // Reset the form after submission
+            document.getElementById("bookQuantity").value = 1;
+            document.getElementById("bookDetails").value = "";
+
+            // Disable submit button after submission
+            document.getElementById("bookSubmitButton").disabled = true;
+
+            // Show success message
+            document.getElementById("bookSuccessMessage").innerText = "Donation submitted successfully";
+        }
+
+        // Stationery Donation Form Functions
+        function submitStationeryDonation() {
+            var item = document.getElementById("stationeryItem").value;
+            var name = document.getElementById("stationeryName").value;
+            var quantity = document.getElementById("stationeryQuantity").value;
+            var details = document.getElementById("stationeryDetails").value;
+
+            // Here you can perform further actions with the donation data, like sending it to a server or storing it locally
+            console.log("Stationery Donation submitted:");
+            console.log("Stationery Item:", item);
+            console.log("Item Name:", name);
+            console.log("Quantity:", quantity);
+            console.log("Additional Details:", details);
+
+            // Reset the form after submission
+            document.getElementById("stationeryQuantity").value = 1;
+            document.getElementById("stationeryDetails").value = "";
+
+            // Disable submit button after submission
+            document.getElementById("stationerySubmitButton").disabled = true;
+
+            // Show success message
+            document.getElementById("stationerySuccessMessage").innerText = "Donation submitted successfully";
+        }
+
+        // Enable submit button when all fields are filled - Book Donation
+        function checkBookForm() {
+            var genre = document.getElementById("bookGenre").value;
+            var name = document.getElementById("bookName").value;
+            var quantity = document.getElementById("bookQuantity").value;
+
+            if (genre !== "" && name !== "" && quantity > 0) {
+                document.getElementById("bookSubmitButton").disabled = false;
+            } else {
+                document.getElementById("bookSubmitButton").disabled = true;
+            }
+        }
+
+        // Enable submit button when all fields are filled - Stationery Donation
+        function checkStationeryForm() {
+            var item = document.getElementById("stationeryItem").value;
+            var name = document.getElementById("stationeryName").value;
+            var quantity = document.getElementById("stationeryQuantity").value;
+
+            if (item !== "" && name !== "" && quantity > 0) {
+                document.getElementById("stationerySubmitButton").disabled = false;
+            } else {
+                document.getElementById("stationerySubmitButton").disabled = true;
+            }
+        }
+
+        // Call checkForm() on input change - Book Donation
+        document.getElementById("bookGenre").addEventListener("change", checkBookForm);
+        document.getElementById("bookName").addEventListener("input", checkBookForm);
+        document.getElementById("bookQuantity").addEventListener("input", checkBookForm);
+
+        // Call checkForm() on input change - Stationery Donation
+        document.getElementById("stationeryItem").addEventListener("change", checkStationeryForm);
+        document.getElementById("stationeryName").addEventListener("input", checkStationeryForm);
+        document.getElementById("stationeryQuantity").addEventListener("input", checkStationeryForm);
+
+        // Function to navigate to category selection
+        function returnToCategorySelection() {
+            window.location.href = 'catselection.html'; // Redirect to catselection.html
+        }
+
+        // Function to navigate to home
+        function goToHome() {
+            window.location.href = 'index.html'; // Redirect to index.html
+        }
+    </script>
+</body>
+</html>

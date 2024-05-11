@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Selection for Donation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+        .container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 50px;
+            border-radius: 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 42px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        .category-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 20px;
+            justify-items: center;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+        .category-button {
+            background-color: #FFC107;
+            color: #333;
+            width: 180px;
+            height: 70px;
+            border: none;
+            border-radius: 35px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s, transform 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .category-button:hover {
+            background-color: #FFD54F;
+            transform: translateY(-3px);
+        }
+        .category-button:active {
+            transform: translateY(0);
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .category-button:focus {
+            outline: none;
+        }
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.7);
+            animation: rippleEffect 1s linear;
+        }
+        @keyframes rippleEffect {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .top-left-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #FFC107;
+            color: #333;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .top-left-button:hover {
+            background-color: #FFD54F;
+            transform: translateY(-3px);
+        }
+        .top-right-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #FFC107;
+            color: #333;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .top-right-button:hover {
+            background-color: #FFD54F;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="top-left-button" onclick="returnToDonorMain()">Return to Donor Main</button>
+        <h1>Category Selection for Donation</h1>
+        <button class="top-right-button" onclick="goToHome()">Home</button>
+        <div class="category-buttons">
+            <button class="category-button" onclick="selectCategory('Clothes')">Clothes</button>
+            <button class="category-button" onclick="selectCategory('Toys')">Toys</button>
+            <button class="category-button" onclick="selectCategory('Food')">Food</button>
+            <button class="category-button" onclick="selectCategory('Medical Supplies')">Medical Supplies</button>
+            <button class="category-button" onclick="selectCategory('School Supplies')">School Supplies</button>
+            <button class="category-button" onclick="selectCategory('Blood Donations')">Blood Donations</button>
+        </div>
+        <div class="ripple"></div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.category-button').forEach(button => {
+            button.addEventListener('click', function (e) {
+                const ripple = document.createElement('div');
+                ripple.classList.add('ripple');
+                ripple.style.left = e.clientX - e.target.offsetLeft + 'px';
+                ripple.style.top = e.clientY - e.target.offsetTop + 'px';
+                this.appendChild(ripple);
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            });
+        });
+
+        function selectCategory(category) {
+            if (category === 'Clothes') {
+                window.location.href = 'clothselection.html';
+            } else if (category === 'Toys') {
+                window.location.href = 'toyselection.html';
+            } else if (category === 'Food') {
+                window.location.href = 'foodselection.html';
+            } else if (category === 'Medical Supplies') {
+                window.location.href = 'medsupply.html';
+            } else if (category === 'School Supplies') {
+                window.location.href = 'stat&book.html';
+            } else if (category === 'Blood Donations') {
+                window.location.href = 'bloodselection.html';
+            } else {
+                console.log("Selected Category:", category);
+            }
+        }
+
+        function returnToDonorMain() {
+            window.location.href = 'DonorMain.html';
+        }
+
+        function goToHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

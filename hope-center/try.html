@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Registered Organizations</title>
+    <style>
+        /* Styles for the organization list */
+        body {
+            background-color: black;
+            color: #0a0a0a;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px; /* Increased max-width */
+            margin: 20px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .organization-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .organization-card {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px 0;
+            width: 90%; /* Adjusted width */
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        .organization-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .organization-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .organization-description {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .details-container {
+            display: none;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .details-container p {
+            margin: 5px 0;
+            color:#e8af04;
+        }
+
+        .close-btn {
+            float: right;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: rgb(255, 255, 255);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: hsl(0, 100%, 99%);
+            color: hsl(35, 100%, 52%);
+        }
+
+        .filter-input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            background-color: hsl(0, 100%, 100%);
+            color: hsl(35, 100%, 52%);
+        }
+        .details-container img {
+            width: 500px; /* Adjust to your desired width */
+            height: auto; /* This will maintain the aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Search input -->
+        <input type="text" id="searchInput" class="search-input" placeholder="Search organizations...">
+        
+        <!-- Filter inputs -->
+        <input type="text" id="areaFilter" class="filter-input" placeholder="Filter by Area...">
+        <input type="text" id="governorateFilter" class="filter-input" placeholder="Filter by Governorate...">
+        <input type="text" id="typeFilter" class="filter-input" placeholder="Filter by Type...">
+        
+        <!-- Organization list -->
+        <ul class="organization-list">
+            <!-- Organization cards -->
+            <li class="organization-card" data-area="Cairo" data-governorate="Cairo" data-type="Hospital" onclick="toggleDetails('magdi-details')">
+                <div class="organization-title">Magdi Yacoub Hospital</div>
+                <div class="organization-description">Global Heart Centre for Kids</div>
+                <div id="magdi-details" class="details-container">
+                    <span class="close-btn" onclick="toggleDetails('magdi-details')">&times;</span>
+                    <p>Contact: +01154456783</p>
+                    <p>Address: 456 Street, Zamalek, Cairo, Egypt</p>
+                    <p>Type: Hospital</p>
+                    <figure>
+                        <img src="images/magdi.jpeg" alt="Location">
+                        <figcaption>Location</figcaption>
+                    </figure>
+                </div>
+            </li>
+            <li class="organization-card" data-area="Nasrcity" data-governorate="Cairo" data-type="Hospital" onclick="toggleDetails('57357-details')">
+                <div class="organization-title">57357</div>
+                <div class="organization-description">Children's Cancer Hospital</div>
+                <div id="57357-details" class="details-container">
+                    <span class="close-btn" onclick="toggleDetails('57357-details')">&times;</span>
+                    <p>Contact: 0115445673</p>
+                    <p>Address: 456 Street, Nasrcity,cairo, Egypt</p>
+                    <p>Type: Hospital</p>
+                    <figure>
+                        <img src="images/57357.jpeg" alt="Location">
+                        <figcaption>Location</figcaption>
+                    </figure>
+                </div>
+            </li>
+            <li class="organization-card" data-area="New Cairo" data-governorate="Cairo" data-type="School" onclick="toggleDetails('PRI-details')">
+                <div class="organization-title">PRI School</div>
+                <div class="organization-description">School for Children</div>
+                <div id="PRI-details" class="details-container">
+                    <span class="close-btn" onclick="toggleDetails('PRI-details')">&times;</span>
+                    <p>Contact: 01134567891</p>
+                    <p>Address: street 12, New Cairo,cairo, Egypt</p>
+                    <p>Type: School</p>
+                    <figure>
+                        <img src="images/map pri.jpeg" alt="Location">
+                        <figcaption>Location</figcaption>
+                    </figure>
+                </div>
+            </li>
+            <li class="organization-card" data-area="Nasr City" data-governorate="Cairo" data-type="Charity" onclick="toggleDetails('resala-details')">
+                <div class="organization-title">Resala Charity</div>
+                <div class="organization-description">Charity Organization</div>
+                <div id="resala-details" class="details-container">
+                    <span class="close-btn" onclick="toggleDetails('resala-details')">&times;</span>
+                    <p>Contact: 01154478456</p>
+                    <p>Address: Street 12, Nasr City, Cairo, Egypt</p>
+                    <p>Type: Charity</p>
+                    <figure>
+                        <img src="images/Resala.jpeg" alt="Location">
+                        <figcaption>Location</figcaption>
+                    </figure>
+                </div>
+            </li>
+            <!-- Add more organizations as needed -->
+        </ul>
+    </div>
+
+    <script>
+        function toggleDetails(detailsId) {
+            var detailsContainer = document.getElementById(detailsId);
+            if (detailsContainer.style.display === "none" || detailsContainer.style.display === "") {
+                detailsContainer.style.display = "block";
+            } else {
+                detailsContainer.style.display = "none";
+            }
+        }
+
+        document.getElementById("searchInput").addEventListener("input", function() {
+            var input, filter, organizationCards, organization, title, i;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            organizationCards = document.querySelectorAll(".organization-card");
+
+            for (i = 0; i < organizationCards.length; i++) {
+                organization = organizationCards[i];
+                title = organization.querySelector(".organization-title").textContent.toUpperCase();
+                if (title.includes(filter)) {
+                    organization.style.display = "block";
+                } else {
+                    organization.style.display = "none";
+                }
+            }
+        });
+
+        // Filter by area, governorate, and type
+        document.querySelectorAll(".filter-input").forEach(function(input) {
+            input.addEventListener("input", function() {
+                var areaFilter, governorateFilter, typeFilter, organizationCards, i;
+                areaFilter = document.getElementById("areaFilter").value.toUpperCase();
+                governorateFilter = document.getElementById("governorateFilter").value.toUpperCase();
+                typeFilter = document.getElementById("typeFilter").value.toUpperCase();
+                organizationCards = document.querySelectorAll(".organization-card");
+
+                for (i = 0; i < organizationCards.length; i++) {
+                    var organization = organizationCards[i];
+                    var area = organization.dataset.area.toUpperCase();
+                    var governorate = organization.dataset.governorate.toUpperCase();
+                    var type = organization.dataset.type.toUpperCase();
+
+                    if ((area.includes(areaFilter) || areaFilter === "") &&
+                        (governorate.includes(governorateFilter) || governorateFilter === "") &&
+                        (type.includes(typeFilter) || typeFilter === "")) {
+                        organization.style.display = "block";
+                    } else {
+                        organization.style.display = "none";
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
