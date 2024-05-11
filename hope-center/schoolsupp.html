@@ -17,7 +17,7 @@
             padding: 20px 15px;
             text-align: center;
             font-size: 24px;
-            position: relative; /* Needed for button positioning */
+            position: relative;
         }
         .button {
             padding: 10px 20px;
@@ -26,8 +26,8 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            text-decoration: none; /* Removes underline from links styled as buttons */
-            position: absolute; /* Positioning inside the header */
+            text-decoration: none;
+            position: absolute;
             top: 20px;
         }
         .button-home {
@@ -55,12 +55,23 @@
             background-color: #ffffff;
             transition: background-color 0.3s, box-shadow 0.3s;
             border-radius: 5px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
         }
         li:hover {
             background-color: #f9f9f9;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        .item-details {
+    .book-image {
+    width: 200px;  /* Width of the frame */
+    height: 300px; /* Height of the frame */
+    margin-right: 15px;
+    object-fit: contain;  /* Ensures the entire image is visible */
+    border-radius: 5px; /* Optional: adds rounded corners to the image */
+    background-color: #ddd; /* Optional: sets a background color for empty areas */
+}
+        .details {
             display: none;
             font-size: 0.9em;
             padding: 10px;
@@ -75,37 +86,49 @@
             text-align: center;
             padding: 10px 20px;
         }
-
-        /* New styles for filter options */
+        /* Styles for the filter container and select element */
         .filter-container {
-            margin-bottom: 20px;
-            text-align: center;
-        }
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.filter-label {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+.filter-select {
+    padding: 10px 20px;
+    border: 2px solid #0066cc;
+    border-radius: 30px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    transition: all 0.3s;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
 
-        .filter-label {
-            margin-right: 10px;
-        }
+.filter-select:hover,
+.filter-select:focus {
+    border-color: #0055a5;
+    background-color: #f5f5f5;
+    outline: none;
+}
 
-        .filter-select {
-            padding: 8px;
-            border: 2px solid #0066cc;
-            border-radius: 5px;
-            background-color: #f8f8f8;
-            color: #333;
-            font-size: 16px;
-            transition: border-color 0.3s, background-color 0.3s;
-        }
-
-        .filter-select:focus {
-            outline: none;
-            border-color: #0055a5;
-            background-color: #fff;
-        }
-
-        .filter-select:hover {
-            border-color: #0055a5;
-            background-color: #fff;
-        }
+.filter-select option {
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    padding: 10px;
+}
     </style>
 </head>
 <body>
@@ -127,44 +150,94 @@
         <!-- List of school supplies -->
         <ul id="schoolSuppliesList">
             <!-- Books -->
-            <li data-category="books" onclick="toggleDetails(this)">Mathematics Textbooks
-                <div class="item-details">
-                    Type: Textbook, Amount Requested: 50
+            <li data-category="books" onclick="toggleDetails(event)">
+                <strong>Smart Minds Mathematics Textbook</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/MathBook.jpg" alt="Mathematics Textbook" class="book-image">
+                    <div>
+                        <strong>Title:</strong> Smart Minds Mathematics Textbook<br>
+                        <strong>Author:</strong> Beatrice Mwendo and Josephat Wambua<br>
+                        <strong>Language:</strong> English<br>
+                        <strong>Edition:</strong> Normal Edition<br>
+                        <strong>Summary:</strong> Comprehensive guide covering all essential high school math topics for Grade 7 students.<br>
+                        <strong>Quantity Required:</strong> 30
+                    </div>
                 </div>
             </li>
-            <li data-category="books" onclick="toggleDetails(this)">Science Encyclopedias
-                <div class="item-details">
-                    Type: Encyclopedia, Amount Requested: 30
+            <li data-category="books" onclick="toggleDetails(event)">
+                <strong>To Kill a Mockingbird</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/Mockingbird.jpeg" alt="Novel" class="book-image">
+                    <div>
+                        <strong>Title:</strong> To Kill a Mockingbird<br>
+                        <strong>Author:</strong>Harper Lee<br>
+                        <strong>Language:</strong> English<br>
+                        <strong>Edition:</strong> 50th Anniversary Edition, 2010<br>
+                        <strong>Summary:</strong> A novel set in the Deep South and a coming-of-age story that deals with serious issues like racial inequality and moral growth.<br>
+                        <strong>Quantity Required:</strong> 40
+                    </div>
                 </div>
             </li>
-            <li data-category="books" onclick="toggleDetails(this)">Literature Novels
-                <div class="item-details">
-                    Type: Novel, Amount Requested: 40
+            <li data-category="books" onclick="toggleDetails(event)">
+                <strong>US History Book</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/history.jpg" alt="History" class="book-image">
+                    <div>
+                        <strong>Title:</strong> A People's History of the United States<br>
+                        <strong>Author:</strong>Howard Zinn<br>
+                        <strong>Language:</strong> English<br>
+                        <strong>Edition:</strong> Reissue Edition, 2015<br>
+                        <strong>Summary:</strong> Presents American history through the lens of working people, immigrants, Native Americans, and other groups too often excluded from mainstream historical accounts.<br>
+                        <strong>Quantity Required:</strong> 20
+                    </div>
                 </div>
             </li>
-            <li data-category="books" onclick="toggleDetails(this)">History Textbooks
-                <div class="item-details">
-                    Type: Textbook, Amount Requested: 60
+            <li data-category="books" onclick="toggleDetails(event)">
+                <strong>The Very Hungry Caterpillar</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/caterpillar.jpeg" alt="story" class="book-image">
+                    <div>
+                        <strong>Title:</strong> The Very Hungry Caterpillar<br>
+                        <strong>Author:</strong>Eric Carle<br>
+                        <strong>Language:</strong> English<br>
+                        <strong>Edition:</strong> Normal Edition<br>
+                        <strong>Summary:</strong> This classic picture book depicts a caterpillar who eats his way through a wide variety of foodstuffs before pupating and emerging as a butterfly. It teaches days of the week, counting, and more.<br>
+                        <strong>Quantity Required:</strong> 45
+                    </div>
+                </div>
+            </li>
+            <li data-category="books" onclick="toggleDetails(event)">
+                <strong> Harry Potter and the Sorcerer's Stone</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/harry.jpg" alt="novel" class="book-image">
+                    <div>
+                        <strong>Title:</strong> Harry Potter and the Sorcerer's Stone<br>
+                        <strong>Author:</strong>J.K. Rowling<br>
+                        <strong>Language:</strong> English<br>
+                        <strong>Edition:</strong> Normal Edition<br>
+                        <strong>Summary:</strong> The first book in the Harry Potter series, it introduces young Harry Potter and his adventures upon enrolling in Hogwarts School of Witchcraft and Wizardry.<br>
+                        <strong>Quantity Required:</strong> 34
+                    </div>
                 </div>
             </li>
             <!-- Stationery -->
-            <li data-category="stationery" onclick="toggleDetails(this)">Pencils (No. 2)
-                <div class="item-details">
+            <li data-category="stationery" onclick="toggleDetails(event)">Pencils (No. 2)
+                <div class="details" style="display: none;">
                     Type: Pencil, Amount Requested: 100
                 </div>
             </li>
-            <li data-category="stationery" onclick="toggleDetails(this)">Erasers
-                <div class="item-details">
+            <li data-category="stationery" onclick="toggleDetails(event)">Erasers
+                <div class="details" style="display: none;">
                     Type: Eraser, Amount Requested: 80
                 </div>
             </li>
-            <li data-category="stationery" onclick="toggleDetails(this)">Crayons (24-Pack)
-                <div class="item-details">
+            <li data-category="stationery" onclick="toggleDetails(event)">Crayons (24-Pack)
+                <div class="details" style="display: none;">
                     Type: Crayons, Amount Requested: 120
                 </div>
             </li>
-            <li data-category="stationery" onclick="toggleDetails(this)">Glue Sticks
-                <div class="item-details">
+            <li data-category="stationery" onclick="toggleDetails(event)">Glue Sticks
+                <div class="details" style="display: none;">
                     Type: Glue Stick, Amount Requested: 50
                 </div>
             </li>
@@ -195,14 +268,21 @@
         }
 
         // Function to toggle item details visibility
-        function toggleDetails(element) {
-            var details = element.querySelector('.item-details');
-            if (details.style.display === 'none' || !details.style.display) {
-                details.style.display = 'block'; // Show details
-            } else {
-                details.style.display = 'none'; // Hide details
-            }
+        function toggleDetails(event) {
+        // Prevent the default event from bubbling up to higher-level elements
+        event.stopPropagation();
+
+        // Find the closest parent <li> element from the source of the event
+        var listItem = event.currentTarget;
+
+        // Assuming details are always directly within the clicked <li>
+        var details = listItem.querySelector('.details');
+
+        // Toggle the visibility of the details
+        if (details) {
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
         }
+    }
 
         // Initial call to filterSupplies() to show all items
         filterSupplies();

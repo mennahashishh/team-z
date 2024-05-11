@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Cases</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #004d99;
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+            font-size: 24px;
+            position: relative; /* Needed for button positioning */
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Removes underline from links styled as buttons */
+            position: absolute; /* Positioning inside the header */
+            top: 20px;
+        }
+        .button-home {
+            right: 20px;
+        }
+        .button-requests {
+            left: 20px;
+        }
+        .button:hover {
+            background-color: #0055a5;
+        }
+        .main {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 15px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            background-color: #ffffff;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border-radius: 5px;
+            position: relative;
+        }
+        li:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .item-details {
+            display: none;
+            font-size: 0.9em;
+            padding: 10px;
+            background-color: #e6e6e6;
+            margin-top: 5px;
+            border-left: 4px solid #0066cc;
+            border-radius: 4px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .filter-container {
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.filter-label {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+.filter-select {
+    padding: 10px 20px;
+    border: 2px solid #0066cc;
+    border-radius: 30px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    transition: all 0.3s;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.filter-select:hover,
+.filter-select:focus {
+    border-color: #0055a5;
+    background-color: #f5f5f5;
+    outline: none;
+}
+
+.filter-select option {
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    padding: 10px;
+}
+.button, .fulfill-button {
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .button:hover, .fulfill-button:hover {
+            background-color: #0055a5;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Medical Cases Requests</h1>
+        <a href="index.html" class="button button-home">Home</a>
+        <a href="DonReq.html" class="button button-requests">Return to Requests</a>
+        <div class="filter-container">
+            <label class="filter-label" for="specialtyFilter">Specialty:</label>
+            <select id="specialtyFilter" class="filter-select" onchange="filterCases()">
+                <option value="">All Specialties</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Neurology">Neurology</option>
+                <option value="Oncology">Oncology</option>
+            </select>
+            <label class="filter-label" for="organizationFilter">Organization:</label>
+            <select id="organizationFilter" class="filter-select" onchange="filterCases()">
+                <option value="">All Organizations</option>
+                <option value="City Hospital">City Hospital</option>
+                <option value="Regional Children's Hospital">Regional Children's Hospital</option>
+                <option value="Neurological Institute">Neurological Institute</option>
+                <option value="Cancer Treatment Center">Cancer Treatment Center</option>
+            </select>
+            <label class="filter-label" for="areaFilter">Area:</label>
+            <select id="areaFilter" class="filter-select" onchange="filterCases()">
+                <option value="">All Areas</option>
+                <option value="Downtown">Downtown</option>
+                <option value="Suburbs">Suburbs</option>
+            </select>
+            <label class="filter-label" for="governorateFilter">Governorate:</label>
+            <select id="governorateFilter" class="filter-select" onchange="filterCases()">
+                <option value="">All Governorates</option>
+                <option value="Capital District">Capital District</option>
+                <option value="Northern Province">Northern Province</option>
+            </select>
+        </div>
+    </header>
+    <div class="main">
+        <ul id="medicalCasesList">
+            <li data-specialty="Cardiology" data-organization="City Hospital" data-area="Downtown" data-governorate="Capital District" onclick="toggleDetails(this)">
+                <strong>Case #1: John Doe - Surgery Assistance</strong>
+                <div class="item-details">
+                    <p><strong>Hospital:</strong> City Hospital</p>
+                    <p><strong>Patient Name:</strong> John Doe</p>
+                    <p><strong>Age:</strong> 45</p>
+                    <p><strong>Gender:</strong> Male</p>
+                    <p><strong>Weight:</strong> 80 kg</p>
+                    <p><strong>Location:</strong> <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/case1.png" alt="Map Location for Sarah Johnson" style="width: 100%; height: auto;"></p>
+                    <p><strong>Address:</strong> 123 Example St, Downtown</p>
+                    <p><strong>Organization Name:</strong> City Hospital</p>
+                    <p><strong>Medical Specialty:</strong> Cardiothoracic Surgery</p>
+                    <p><strong>Case Description:</strong> Assist in a complex cardiac surgery.</p>
+                    <button class="fulfill-button" onclick="fulfillCase(this)">Fulfill This Case</button>
+                  
+                </div>
+            </li>
+            <li data-specialty="Pediatrics" data-organization="Regional Children's Hospital" data-area="Suburbs" data-governorate="Northern Province" onclick="toggleDetails(this)">
+                <strong>Case #2: Jane Smith - Pediatric Care</strong>
+                <div class="item-details">
+                    <p><strong>Hospital:</strong> Regional Children's Hospital</p>
+                    <p><strong>Patient Name:</strong> Jane Smith</p>
+                    <p><strong>Age:</strong> 8</p>
+                    <p><strong>Gender:</strong> Female</p>
+                    <p><strong>Weight:</strong> 25 kg</p>
+                    <p><strong>Location:</strong> <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/case2.png" alt="Map Location for Sarah Johnson" style="width: 100%; height: auto;"></p>
+                    <p><strong>Address:</strong> 456 Another St, Suburbs</p>
+                    <p><strong>Organization Name:</strong> Regional Children's Hospital</p>
+                    <p><strong>Medical Specialty:</strong> Pediatrics</p>
+                    <p><strong>Case Description:</strong> Provide care for pediatric patients with chronic illnesses.</p>
+                    <button class="fulfill-button" onclick="fulfillCase(this)">Fulfill This Case</button>
+                
+                </div>
+            </li>
+            <li data-specialty="Neurology" data-organization="Neurological Institute" data-area="Downtown" data-governorate="Capital District" onclick="toggleDetails(this)">
+                <strong>Case #3: Ahmed Ali - Neurological Evaluation</strong>
+                <div class="item-details">
+                    <p><strong>Hospital:</strong> Neurological Institute</p>
+                    <p><strong>Patient Name:</strong> Ahmed Ali</p>
+                    <p><strong>Age:</strong> 30</p>
+                    <p><strong>Gender:</strong> Male</p>
+                    <p><strong>Weight:</strong> 70 kg</p>
+                    <p><strong>Location:</strong> <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/case3.png" alt="Map Location for Sarah Johnson" style="width: 100%; height: auto;"></p>
+                    <p><strong>Address:</strong> 320 Brain St, Downtown</p>
+                    <p><strong>Organization Name:</strong> Neurological Institute</p>
+                    <p><strong>Medical Specialty:</strong> Neurology</p>
+                    <p><strong>Case Description:</strong> Detailed neurological evaluation needed after a recent stroke.</p>
+                    <button class="fulfill-button" onclick="fulfillCase(this)">Fulfill This Case</button>
+                  
+                </div>
+            </li>
+            <li data-specialty="Oncology" data-organization="Cancer Treatment Center" data-area="Suburbs" data-governorate="Northern Province" onclick="toggleDetails(this)">
+                <strong>Case #4: Sarah Johnson - Oncological Therapy</strong>
+                <div class="item-details">
+                    <p><strong>Hospital:</strong> Cancer Treatment Center</p>
+                    <p><strong>Patient Name:</strong> Sarah Johnson</p>
+                    <p><strong>Age:</strong> 45</p>
+                    <p><strong>Gender:</strong> Female</p>
+                    <p><strong>Weight:</strong> 65 kg</p>
+                    <p><strong>Location:</strong> <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/case4.png" alt="Map Location for Sarah Johnson" style="width: 100%; height: auto;"></p>
+                    <p><strong>Address:</strong> 100 Oncology Rd, Suburbs</p>
+                    <p><strong>Organization Name:</strong> Cancer Treatment Center</p>
+                    <p><strong>Medical Specialty:</strong> Oncology</p>
+                    <p><strong>Case Description:</strong> Requires assistance in chemotherapy and radiation therapy for advanced breast cancer.</p>
+                    <button class="fulfill-button" onclick="fulfillCase(this)">Fulfill This Case</button>
+            
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Thank you for choosing to fulfill this case!</p>
+        </div>
+    </div>
+    <footer>
+        <p>Hope Center Donations</p>
+    </footer>
+    <script>
+        function toggleDetails(element) {
+            var details = element.querySelector('.item-details');
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function filterCases() {
+    var selectedSpecialty = document.getElementById('specialtyFilter').value;
+    var selectedOrganization = document.getElementById('organizationFilter').value;
+    var selectedArea = document.getElementById('areaFilter').value;
+    var selectedGovernorate = document.getElementById('governorateFilter').value;
+    var cases = document.querySelectorAll('#medicalCasesList li');
+
+    cases.forEach(function(caseItem) {
+        var specialtyMatches = selectedSpecialty === "" || caseItem.getAttribute('data-specialty') === selectedSpecialty;
+        var organizationMatches = selectedOrganization === "" || caseItem.getAttribute('data-organization') === selectedOrganization;
+        var areaMatches = selectedArea === "" || caseItem.getAttribute('data-area') === selectedArea;
+        var governorateMatches = selectedGovernorate === "" || caseItem.getAttribute('data-governorate') === selectedGovernorate;
+
+        if (specialtyMatches && organizationMatches && areaMatches && governorateMatches) {
+            caseItem.style.display = 'block';
+        } else {
+            caseItem.style.display = 'none';
+        }
+    });
+}
+function fulfillCase() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+        }
+
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var fulfillButtons = document.querySelectorAll('.fulfill-button');
+            fulfillButtons.forEach(function(btn) {
+                btn.addEventListener('click', fulfillCase);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', filterCases);
+    </script>
+</body>
+</html>
