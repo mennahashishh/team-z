@@ -9,68 +9,82 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #000000;
         }
-
         .container {
-            max-width: 600px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 100px;
+            border-radius: 50px;
+            background-color: #FFC107;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-
         h1 {
             text-align: center;
+            color: #333;
+            margin-bottom: 20px;
         }
-
-        form {
-            margin-top: 20px;
+        .form-group {
+            margin-bottom: 20px;
         }
-
         label {
             font-weight: bold;
+            color: #555;
+            text-align: left; /* Align label text to the left */
+            display: block; /* Make label a block-level element for full width */
         }
-
-        input[type="text"], input[type="password"], button {
+        select, input, textarea {
             width: 100%;
             padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin-top: 6px;
         }
-
-        input[type="submit"], input[type="reset"], .deleteBtn {
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px 20px;
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #ffffff;
+            color: rgb(235, 141, 10);
+            padding: 10px 15px; /* Adjusted padding */
+            margin: 8px 0;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 14px; /* Adjusted font size */
+            transition: background-color 0.3s;
         }
-
-        input[type="submit"]:hover, input[type="reset"]:hover, .deleteBtn:hover {
-            background-color: #45a049;
+        button:hover {
+            background-color: #000000;
         }
-
-        input[type="submit"]:focus, input[type="reset"]:focus {
-            outline: none;
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
         }
-
         .message {
-            margin-top: 20px;
             text-align: center;
+            color: #ffffff; /* Set font color to white */
+            font-weight: bold;
+            margin-top: 20px;
         }
-
+        .return-button {
+            left: 20px;
+            top: 20px;
+        }
+        .home-button {
+            right: 20px;
+            top: 20px;
+        }
         .confirmation {
-            margin-top: 20px;
-            text-align: center;
+            display: none; /* Initially hide the confirmation message */
         }
-
         .hide {
-            display: none;
+            display: none; /* Initially hide the new password input */
         }
     </style>
 </head>
@@ -87,90 +101,72 @@
             <label for="newPassword" class="newPwdLabel hide">New Password:</label>
             <input type="password" id="newPassword" name="newPassword" placeholder="Enter your new password" class="newPwdInput hide">
 
-            <button type="button" onclick="updateAccount()" id="updateBtn" disabled>Update Account</button>
-            <button type="button" onclick="confirmDelete()" id="deleteBtn" disabled>Delete Account</button>
+            <button type="button" onclick="updateAccount()">Update Account</button>
+            <button type="button" onclick="showConfirmation()">Delete Account</button>
         </form>
         <div class="message" id="message"></div>
-        <div class="confirmation hide" id="confirmation">
+        <div class="confirmation" id="confirmation">
             <label for="confirmDelete">Are you sure you want to delete the account?</label><br>
             <button onclick="deleteAccount()">Yes</button>
             <button onclick="cancelDelete()">No</button>
         </div>
+        <div id="returnHome" class="hide">
+            <button onclick="returnHome()">Return to Home</button>
+        </div>
     </div>
 
     <script>
+        var updateClicks = 0;
+        var accountUpdated = false;
+
         function updateAccount() {
             var newPasswordInputs = document.querySelectorAll('.newPwdInput');
             var newPasswordLabels = document.querySelectorAll('.newPwdLabel');
-            var submitBtn = document.querySelector('button[type="submit"]');
-            
-            for (var i = 0; i < newPasswordInputs.length; i++) {
-                newPasswordInputs[i].classList.toggle('hide');
-                newPasswordLabels[i].classList.toggle('hide');
-            }
-
-            var updateBtn = document.getElementById('updateBtn');
-            updateBtn.innerHTML = 'Update';
-            updateBtn.setAttribute('onclick', 'submitUpdate()');
-            updateBtn.setAttribute('disabled', 'true');
-        }
-
-        function submitUpdate() {
+            var messageDiv = document.getElementById('message');
+            var updateBtn = document.querySelector('button[type="button"]');
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
-            var newPassword = document.getElementById('newPassword').value;
-            var messageDiv = document.getElementById('message');
 
-            if (username && password && newPassword) {
-                messageDiv.innerHTML = '<p>Account updated successfully!</p>';
+            if (username && password) {
+                for (var i = 0; i < newPasswordInputs.length; i++) {
+                    newPasswordInputs[i].classList.toggle('hide');
+                    newPasswordLabels[i].classList.toggle('hide');
+                }
+
+                if (!newPasswordInputs[0].classList.contains('hide')) {
+                    updateClicks++;
+                    if (updateClicks === 2 && !accountUpdated) {
+                        messageDiv.innerHTML = '<p style="color: #ffffff;">Account updated successfully!</p>'; // Set font color to white
+                        accountUpdated = true;
+                    }
+                } else {
+                    updateBtn.innerHTML = 'Update';
+                    updateBtn.setAttribute('disabled', 'true');
+                }
             } else {
-                messageDiv.innerHTML = '<p>Please fill all fields!</p>';
+                messageDiv.innerHTML = '<p>Please fill in the username and password fields!</p>';
             }
         }
 
-        function confirmDelete() {
-            document.getElementById('confirmation').classList.toggle('hide');
+        function showConfirmation() {
+            document.getElementById('confirmation').style.display = 'block';
         }
 
         function deleteAccount() {
             document.getElementById('message').innerHTML = '<p>Account deleted successfully!</p>';
             document.getElementById('accountForm').classList.toggle('hide');
             document.getElementById('confirmation').classList.toggle('hide');
+            document.getElementById('returnHome').classList.toggle('hide');
         }
 
         function cancelDelete() {
             document.getElementById('confirmation').classList.toggle('hide');
         }
 
-        document.getElementById('username').addEventListener('input', function() {
-            var updateBtn = document.getElementById('updateBtn');
-            var deleteBtn = document.getElementById('deleteBtn');
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-
-            if (username && password) {
-                updateBtn.removeAttribute('disabled');
-                deleteBtn.removeAttribute('disabled');
-            } else {
-                updateBtn.setAttribute('disabled', 'true');
-                deleteBtn.setAttribute('disabled', 'true');
-            }
-        });
-
-        document.getElementById('password').addEventListener('input', function() {
-            var updateBtn = document.getElementById('updateBtn');
-            var deleteBtn = document.getElementById('deleteBtn');
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-
-            if (username && password) {
-                updateBtn.removeAttribute('disabled');
-                deleteBtn.removeAttribute('disabled');
-            } else {
-                updateBtn.setAttribute('disabled', 'true');
-                deleteBtn.setAttribute('disabled', 'true');
-            }
-        });
+        function returnHome() {
+            // Code to return to the home page
+            alert('Returning to home page...');
+        }
     </script>
 </body>
 </html>

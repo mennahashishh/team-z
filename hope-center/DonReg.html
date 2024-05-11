@@ -1,108 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donor Registration</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #587ac4; /* Changed the background color */
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px; /* Increased maximum width */
-            max-height: 90vh; /* Added maximum height */
-            overflow-y: auto; /* Added overflow for vertical scrolling */
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-top: 10px; /* Adjusted margin */
-            margin-bottom: 20px;
-            font-size: 24px; /* Increased font size */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Added font family */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Added text shadow */
-            letter-spacing: 0.5px; /* Added letter spacing */
-        }
-
-        label {
-            font-weight: bold;
-            color: #555;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="password"],
-        select,
-        textarea,
-        input[type="number"],
-        input[type="file"] {
-            width: calc(100% - 22px); /* Adjusted width */
-            padding: 8px; /* Reduced padding */
-            margin-top: 3px; /* Reduced margin */
-            margin-bottom: 10px; /* Reduced margin */
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            background-color: #f9f9f9;
-        }
-
-        input[type="submit"] {
-            background-color: #4caf50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        /* Add some color to labels */
-        label {
-            color: #007bff;
-        }
-
-        /* Add some color to form fields */
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="password"],
-        select,
-        textarea {
-            background-color: #e9f5f7;
-            border: 1px solid #007bff;
-        }
-
-        /* Add some color to submit button on hover */
-        input[type="submit"]:hover {
-            background-color: #007bff;
-        }
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quantity Selection for Clothing Donations</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #000000;
+            }
+            .container {
+                max-width: 1000px;
+                margin: 40px auto;
+                padding: 100px;
+                border-radius: 50px;
+                background-color: #FFC107;
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+            h1 {
+                text-align: center;
+                color: #333;
+                margin-bottom: 20px;
+            }
+            .form-group {
+                margin-bottom: 20px;
+            }
+            label {
+                font-weight: bold;
+                color: #555;
+                text-align: left; /* Align label text to the left */
+                display: block; /* Make label a block-level element for full width */
+            }
+            select, input, textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                box-sizing: border-box;
+                font-size: 16px;
+                margin-top: 6px;
+            }
+            .button-container {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+            }
+            button {
+                background-color: #ffffff;
+                color: rgb(235, 141, 10);
+                padding: 10px 15px; /* Adjusted padding */
+                margin: 8px 0;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 14px; /* Adjusted font size */
+                transition: background-color 0.3s;
+            }
+            button:hover {
+                background-color: #000000;
+            }
+            button:disabled {
+                background-color: #cccccc;
+                cursor: not-allowed;
+            }
+            .message {
+                text-align: center;
+                color: #555;
+                font-weight: bold;
+                margin-top: 20px;
+            }
+            .return-button {
+                left: 20px;
+                top: 20px;
+            }
+            .home-button {
+                right: 20px;
+                top: 20px;
+            }
+        </style>
+    </head>
 <body>
     <div class="container">
-        <h2>✨ Donor Registration ✨</h2> <!-- Added fancy title -->
+        <h2>✨ Donor Registration ✨</h2>
         <form action="submit_donor_registration.php" method="post" enctype="multipart/form-data">
-            <!-- Your form fields here -->
             <label for="firstname">First Name:</label>
             <input type="text" id="firstname" name="firstname" required>
 
@@ -135,24 +118,20 @@
             <input type="text" id="governorate" name="governorate" required>
 
             <label for="role">Volunteer Role:</label>
-            <select id="role" name="role" required onchange="showFields()">
+            <select id="role" name="role" required>
                 <option value="" disabled selected>Select role</option>
                 <option value="regular">Regular Donor</option>
                 <option value="teacher">Teacher</option>
                 <option value="doctor">Doctor</option>
             </select>
 
-            <div id="speciality" style="display: none;">
-                <label for="specialityField">Speciality:</label>
-                <input type="text" id="specialityField" name="specialityField">
-            </div>
-
-            <div id="proBono" style="display: none;">
-                <label for="proBonoField">Pro-bono Cases or Classes:</label>
-                <input type="number" id="proBonoField" name="proBonoField">
-            </div>
-
             <div id="document-upload" style="display: none;">
+                <label for="specialty">Specialty:</label>
+                <input type="text" id="specialty" name="specialty">
+
+                <label for="probono">Pro Bono Cases:</label>
+                <input type="text" id="probono" name="probono">
+                
                 <label for="verification_document">Upload Document:</label>
                 <input type="file" id="verification_document" name="verification_document" accept="image/*, .pdf">
             </div>
@@ -163,26 +142,16 @@
     </div>
     
     <script>
-        function showFields() {
-            var role = document.getElementById('role').value;
-            var speciality = document.getElementById('speciality');
-            var proBono = document.getElementById('proBono');
-            var documentUpload = document.getElementById('document-upload');
+        document.getElementById('role').addEventListener('change', function() {
+            const role = this.value;
+            const documentUpload = document.getElementById('document-upload');
             
-            if (role === 'teacher') {
-                speciality.style.display = 'block';
-                proBono.style.display = 'block';
-                documentUpload.style.display = 'block';
-            } else if (role === 'doctor') {
-                speciality.style.display = 'block';
-                proBono.style.display = 'block';
+            if (role === 'teacher' || role === 'doctor') {
                 documentUpload.style.display = 'block';
             } else {
-                speciality.style.display = 'none';
-                proBono.style.display = 'none';
                 documentUpload.style.display = 'none';
             }
-        }
+        });
     </script>
 </body>
 </html>
