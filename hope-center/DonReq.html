@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View and Search Donation Items</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #0056b3; /* Updated color */
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+            font-size: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .main {
+            max-width: 960px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .category-button {
+            padding: 10px 20px;
+            background-color: #007bff; /* Bootstrap primary color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            margin: 5px;
+        }
+        .category-button:hover {
+            background-color: #0069d9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 22px); /* Responsive width adjustment */
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            padding: 15px;
+            margin-top: 10px;
+            border-bottom: 1px solid #ddd;
+            background-color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 5px;
+        }
+        li:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.02); /* Slight scale on hover */
+        }
+        footer {
+            background-color: #212529; /* Slightly darker footer */
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Removes underline from links styled as buttons */
+            position: absolute; /* Positioning inside the header */
+            top: 20px;
+        }
+        .button-home {
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>View and Search Requested Donation Items</h1>
+        <a href="index.html" class="button button-home">Home</a>
+    </header>
+    <div class="main">
+        <div class="controls">
+            <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search items by category (e.g., clothes, toys)">
+            <a href="clothes.html" class="category-button">Clothes</a>
+            <a href="schoolsupp.html" class="category-button">School Supplies</a>
+            <a href="medicalsupp.html" class="category-button">Medical Supplies</a>
+            <a href="toys.html" class="category-button">Toys</a>
+            <a href="food.html" class="category-button">Food</a>
+            <a href="blood.html" class="category-button">Blood Donations</a>
+            <a href="medicalcases.html" class="category-button">Medical Cases</a>
+        </div>
+        <ul id="itemList">
+            <!-- Expanded list of items -->
+            <li data-category="clothes">Winter jackets for children</li>
+            <li data-category="clothes">T-shirts for teenagers</li>
+            <li data-category="clothes">Business suits for adults</li>
+            <li data-category="books">Math textbooks for high school</li>
+            <li data-category="books">Science fiction novels</li>
+            <li data-category="books">Children's storybooks</li>
+            <li data-category="medical">Sanitizers and masks</li>
+            <li data-category="medical">First aid kits</li>
+            <li data-category="toys">Puzzles and educational games</li>
+            <li data-category="toys">Action figures</li>
+            <li data-category="food">Canned foods and non-perishables</li>
+            <li data-category="food">Baby formula and cereals</li>
+        </ul>
+    </div>
+    <footer>
+        <p>Hope Center Donations</p>
+    </footer>
+    <script>
+        function filterItems() {
+            var input = document.getElementById('searchInput');
+            var filter = input.value.toLowerCase();
+            var items = document.querySelectorAll('#itemList li');
+
+            items.forEach(function(item) {
+                const category = item.getAttribute('data-category');
+                if (category.toLowerCase().includes(filter)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

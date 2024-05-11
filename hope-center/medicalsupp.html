@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Supplies Donation Requests</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #004d99;
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+            font-size: 24px;
+            position: relative;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+        }
+        .button-home {
+            right: 20px;
+        }
+        .button-requests {
+            left: 20px;
+        }
+        .main {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 15px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            background-color: #ffffff;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        li:hover {
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    .med-image {
+    width: 200px;  /* Width of the frame */
+    height: 300px; /* Height of the frame */
+    margin-right: 15px;
+    object-fit: contain;  /* Ensures the entire image is visible */
+    border-radius: 5px; /* Optional: adds rounded corners to the image */
+    background-color: #ddd; /* Optional: sets a background color for empty areas */
+}
+        .details {
+            display: none;
+            font-size: 0.9em;
+            padding: 10px;
+            background-color: #e6e6e6;
+            margin-top: 5px;
+            border-left: 4px solid #0066cc;
+            border-radius: 4px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+        }
+        /* Styles for the filter container and select element */
+        .filter-container {
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.filter-label {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+.filter-select {
+    padding: 10px 20px;
+    border: 2px solid #0066cc;
+    border-radius: 30px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    transition: all 0.3s;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.filter-select:hover,
+.filter-select:focus {
+    border-color: #0055a5;
+    background-color: #f5f5f5;
+    outline: none;
+}
+
+.filter-select option {
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    padding: 10px;
+}
+        .med-use-filter {
+            display: none; /* Hidden by default */
+            margin-top: 10px;
+        }
+        .visible {
+            display: block; /* Show the filter when Medication is selected */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Medical Supplies Donation Requests</h1>
+        <a href="index.html" class="button button-home">Home</a>
+        <a href="DonReq.html" class="button button-requests">Return to Requests</a>
+        <div class="filter-container">
+            <label class="filter-label" for="categoryFilter">Category:</label>
+            <select id="categoryFilter" class="filter-select" onchange="filterSupplies()">
+                <option value="all">All Categories</option>
+                <option value="medical devices">Medical Devices</option>
+                <option value="medical equipment">Medical Equipment</option>
+                <option value="medication">Medication</option>
+            </select>
+            <div id="medUseFilterContainer" class="med-use-filter">
+                <label class="filter-label" for="medUseFilter">Medication Use:</label>
+                <select id="medUseFilter" class="filter-select" onchange="filterMedication()">
+                    <option value="all">All Uses</option>
+                    <option value="antibiotics">Antibiotics</option>
+                    <option value="pain relief">Pain Relief</option>
+                    <option value="chronic">Chronic Conditions</option>
+                    <option value="vaccines">Vaccines</option>
+                </select>
+            </div>
+        </div>
+    </header>
+    <div class="main">
+        <ul id="medicalSuppliesList">
+            <!-- Medical Devices -->
+            <li data-category="medical devices" onclick="toggleDetails(event)">
+                <strong>Stethoscopes</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/steth.png" alt="Stethoscopes" class="med-image">
+                    <div>
+                        <strong>Type:</strong> Medical Device<br>
+                        <strong>Use:</strong> Auscultating patients.<br>
+                        <strong>Quantity:</strong> 50 units<br>
+                        <strong>Description:</strong> Essential for checking the heart and lungs.
+                    </div>
+                </div>
+            </li>
+            <li data-category="medical devices" onclick="toggleDetails(event)">
+                <strong>Pulse Oximeters</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/pulse.png" alt="Pulse Oximeters" class="med-image">
+                    <div>
+                        <strong>Type:</strong> Medical Device<br>
+                        <strong>Use:</strong> Measuring oxygen saturation.<br>
+                        <strong>Quantity:</strong> 100 units<br>
+                        <strong>Description:</strong> Critical for monitoring patients with respiratory issues.
+                    </div>
+                </div>
+            </li>
+        
+            <!-- Medical Equipment -->
+            <li data-category="medical equipment" onclick="toggleDetails(event)">
+                <strong>Surgical Gloves</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/glove.png" alt="Surgical Gloves" class="med-image">
+                    <div>
+                        <strong>Type:</strong> Medical Equipment<br>
+                        <strong>Use:</strong> Protection during procedures.<br>
+                        <strong>Quantity:</strong> 300 boxes<br>
+                        <strong>Description:</strong> Ensures sterility in a variety of medical settings.
+                    </div>
+                </div>
+            </li>
+            <li data-category="medical equipment" onclick="toggleDetails(event)">
+                <strong>Wheelchairs</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/wheelchair.png" alt="Wheelchairs" class="med-image">
+                    <div>
+                        <strong>Type:</strong> Medical Equipment<br>
+                        <strong>Use:</strong> Mobility aid.<br>
+                        <strong>Quantity:</strong> 20 units<br>
+                        <strong>Description:</strong> Enables mobility for patients with walking impairments.
+                    </div>
+                </div>
+            </li>
+            <li data-category="medical equipment" onclick="toggleDetails(event)">
+                <strong>Hospital Beds</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/hospital.png" alt="Hospital Beds" class="med-image">
+                    <div>
+                        <strong>Type:</strong> Medical Equipment<br>
+                        <strong>Use:</strong> Patient care in hospitals.<br>
+                        <strong>Quantity:</strong> 25 beds<br>
+                        <strong>Description:</strong> Adjustable for patient comfort and clinical accessibility.
+                    </div>
+                </div>
+            </li>
+        
+            <!-- Medication -->
+            <li data-category="medication" data-use="antibiotic" onclick="toggleDetails(event)">
+                <strong>Amoxicillin</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/amox.jpg" alt="Amoxicillin" class="med-image">
+                    <div>
+                        <strong>Type:</strong> Antibiotic<br>
+                        <strong>Use:</strong> Treating bacterial infections.<br>
+                        <strong>Quantity:</strong> 40 bottles<br>
+                        <strong>Description:</strong> Broad-spectrum antibiotic commonly used for various infections.
+                    </div>
+                </div>
+            </li>
+            <li data-category="medication" data-use="pain relief" onclick="toggleDetails(event)">
+                <strong>Acetaminophen (Tylenol)</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/act.png" alt="Acetaminophen" class="med-image">
+                    <div>
+                        <strong>Type:</strong> Pain Reliever<br>
+                        <strong>Use:</strong> Relief from mild to moderate pain.<br>
+                        <strong>Quantity:</strong> 100 packs<br>
+                        <strong>Description:</strong> Effective for reducing pain and fever in various conditions.
+                    </div>
+                </div>
+            </li>
+            <li data-category="medication" data-use="chronic" onclick="toggleDetails(event)">
+                <strong>Insulin</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/insulin.png" alt="Insulin" class="med-image">
+                    <div>
+                        <strong>Type:</strong> Medication<br>
+                        <strong>Use:</strong> Diabetes management.<br>
+                        <strong>Quantity:</strong> 100 units<br>
+                        <strong>Description:</strong> Critical for controlling blood sugar levels in diabetic patients.
+                    </div>
+                </div>
+            </li>
+            <li data-category="medication" data-use="vaccines" onclick="toggleDetails(event)">
+                <strong>Flu Vaccine</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/flu.jpg" alt="Flu Vaccine" class="med-image">
+                    <div>
+                        <strong>Type:</strong> Vaccine<br>
+                        <strong>Use:</strong> Prevention of influenza.<br>
+                        <strong>Description:</strong> Administered annually to protect against the prevalent flu strains.<br>
+                        <strong>Quantity Required:</strong> 300 doses
+                    </div>
+                </div>
+            </li>
+        
+            <!-- Disposables -->
+            <li data-category="disposables" onclick="toggleDetails(event)">
+                <strong>Surgical Masks</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/mask.png" alt="Surgical Masks" class="med-image">
+                    <div>
+                        <strong>Type:</strong> Disposables<br>
+                        <strong>Use:</strong> Infection control.<br>
+                        <strong>Quantity:</strong> 500 packs<br>
+                        <strong>Description:</strong> Prevents the spread of pathogens during medical procedures.
+                    </div>
+                </div>
+            </li>
+            <li data-category="disposables" onclick="toggleDetails(event)">
+                <strong>Syringes</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/syringe.png" alt="Syringes" class="med-image">
+                    <div>
+                        <strong>Type:</strong> Disposables<br>
+                        <strong>Use:</strong> Drug administration.<br>
+                        <strong>Quantity:</strong> 1000 syringes<br>
+                        <strong>Description:</strong> Essential for delivering medications via injection.
+                    </div>
+                </div>
+            </li>
+            <li data-category="disposables" onclick="toggleDetails(event)">
+                <strong>Bandages</strong>
+                <div class="details" style="display: none;">
+                    <img src="C:/Users/Fares/Documents/GitHub/team-z/hope-center/images/bandage.png" alt="Bandages" class="med-image">
+                    <div>
+                        <strong>Type:</strong> Disposables<br>
+                        <strong>Use:</strong> Wound care.<br>
+                        <strong>Quantity:</strong> 200 boxes<br>
+                        <strong>Description:</strong> Necessary for dressing and protecting wounds.
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <footer>
+        <p>Hope Center Donations</p>
+    </footer>
+    <script>
+        function toggleDetails(event) {
+            event.stopPropagation();
+            var details = event.currentTarget.querySelector('.details');
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function filterSupplies() {
+            var category = document.getElementById('categoryFilter').value;
+            var supplies = document.querySelectorAll('#medicalSuppliesList li');
+            var medUseFilterContainer = document.getElementById('medUseFilterContainer');
+
+            // Hide or show medication use filter based on selection
+            if (category === 'medication') {
+                medUseFilterContainer.classList.add('visible');
+                filterMedication(); // Apply medication filter immediately
+            } else {
+                medUseFilterContainer.classList.remove('visible');
+            }
+
+            supplies.forEach(function(supply) {
+                if (category === 'all' || supply.getAttribute('data-category') === category) {
+                    supply.style.display = 'block';
+                } else {
+                    supply.style.display = 'none';
+                }
+            });
+        }
+
+        function filterMedication() {
+    var selectedUse = document.getElementById('medUseFilter').value;
+    var medications = document.querySelectorAll('#medicalSuppliesList li[data-category="medication"]');
+
+    medications.forEach(function(medication) {
+        var medUse = medication.getAttribute('data-use');
+        if (selectedUse === "all" || medUse === selectedUse) {
+            medication.style.display = 'block';
+        } else {
+            medication.style.display = 'none';
+        }
+    });
+}
+
+        document.addEventListener('DOMContentLoaded', filterSupplies);
+    </script>
+</body>
+</html>
