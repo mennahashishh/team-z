@@ -10,76 +10,88 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #000000;
         }
-
         .container {
-            max-width: 400px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 100px;
+            border-radius: 50px;
+            background-color: #FFC107;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-
-        h2 {
+        h1 {
             text-align: center;
             color: #333;
+            margin-bottom: 20px;
         }
-
         .form-group {
             margin-bottom: 20px;
         }
-
         label {
-            display: block;
-            margin-bottom: 5px;
-            color: #666;
+            font-weight: bold;
+            color: #555;
+            text-align: left; /* Align label text to the left */
+            display: block; /* Make label a block-level element for full width */
         }
-
-        input[type="text"],
-        input[type="password"] {
+        select, input, textarea {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin-top: 6px;
         }
-
-        input[type="submit"] {
-            background-color: #4caf50; /* green button */
-            color: #fff;
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #ffffff;
+            color: rgb(235, 141, 10);
+            padding: 10px 15px; /* Adjusted padding */
+            margin: 8px 0;
             border: none;
-            padding: 10px 20px;
+            border-radius: 6px;
             cursor: pointer;
-            border-radius: 5px;
+            font-size: 14px; /* Adjusted font size */
+            transition: background-color 0.3s;
         }
-
-        input[type="submit"]:hover {
-            background-color: #45a049; /* darker green on hover */
+        button:hover {
+            background-color: #000000;
         }
-
-        .register-link {
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .message {
             text-align: center;
+            color: #555;
+            font-weight: bold;
             margin-top: 20px;
         }
-
-        .register-button {
-            background-color: #4caf50; /* green button */
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            text-decoration: none; /* remove underlines */
+        .return-button {
+            left: 20px;
+            top: 20px;
         }
-
-        .register-button:hover {
-            background-color: #45a049; /* darker green on hover */
+        .home-button {
+            right: 20px;
+            top: 20px;
+        }
+        #organization_logo {
+            width: 200px; /* Adjusted width */
+            height: auto; /* Maintain aspect ratio */
+            margin: 20px auto; /* Adjusted margin */
         }
     </style>
 </head>
 
+
 <body>
+    <img src="/Users/mennaabouhashish/Documents/GitHub/team-z/hope-center/images/logo.png" alt="Logo">
     <div class="container">
         <h2>Organization Login</h2>
         <form action="#" method="POST">
@@ -98,6 +110,19 @@
         </div>
     </div>
 </body>
+<button class="btn" onclick="goToMainPage()">Back to Main Page</button>
+</div>
+
+<script>
+    document.getElementById('view-details-btn').addEventListener('click', function () {
+        document.getElementById('details-section').classList.toggle('show-details');
+    });
+
+    // Function to redirect to main page
+    function goToMainPage() {
+        window.location.href = "mainpage.html"; // Replace "/path/to/main/page.html" with the actual path to your main page
+    }
+</script>
 
 </html>
 
