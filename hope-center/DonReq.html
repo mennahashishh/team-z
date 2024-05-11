@@ -7,13 +7,13 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
+            background-color: #000000;
             margin: 0;
             padding: 0;
-            color: #333;
+            color: #000000;
         }
         header {
-            background-color: #0056b3; /* Updated color */
+            background-color: #FFC107; /* Updated color */
             color: white;
             padding: 20px 15px;
             text-align: center;
@@ -36,7 +36,7 @@
         }
         .category-button {
             padding: 10px 20px;
-            background-color: #007bff; /* Bootstrap primary color */
+            background-color: #FFC107; /* Bootstrap primary color */
             color: white;
             border: none;
             border-radius: 5px;
@@ -46,7 +46,7 @@
             margin: 5px;
         }
         .category-button:hover {
-            background-color: #0069d9;
+            background-color: #000000;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         input[type="text"] {
@@ -71,9 +71,11 @@
             border-radius: 5px;
         }
         li:hover {
-            background-color: #f8f9fa;
-            transform: scale(1.02); /* Slight scale on hover */
-        }
+    background-color: #ffffff;
+    transform: scale(1.02); /* Slight scale on hover */
+    box-shadow: 0 0 15px #FFD700; /* Gold color glow */
+}
+
         footer {
             background-color: #212529; /* Slightly darker footer */
             color: white;
@@ -83,7 +85,7 @@
         }
         .button {
             padding: 10px 20px;
-            background-color: #0066cc;
+            background-color: #000000;
             color: white;
             border: none;
             border-radius: 5px;
@@ -92,6 +94,7 @@
             position: absolute; /* Positioning inside the header */
             top: 20px;
         }
+        
         .button-home {
             right: 20px;
         }
@@ -112,6 +115,7 @@
             <a href="food.html" class="category-button">Food</a>
             <a href="blood.html" class="category-button">Blood Donations</a>
             <a href="medicalcases.html" class="category-button">Medical Cases</a>
+            <a href="techposts.html" class="category-button">Teaching Posts</a>
         </div>
         <ul id="itemList">
             <!-- Expanded list of items -->
