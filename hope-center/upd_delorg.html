@@ -111,16 +111,10 @@
             <button type="button" onclick="updateAccount()">Update Account</button>
             <button type="button" onclick="showConfirmation()" id="deleteButton">Delete Account</button>
         </div>
+        <div class="message" id="message"></div>
         <div class="button-container">
             <button class="return-button" onclick="returnHome()">Home</button>
-            <button class="home-button" onclick="returnToDonorPage()">Donor's Mainpage</button>
-        </div>
-        <div class="message" id="message"></div>
-        <div id="returnHome" class="hide">
-            <button onclick="returnHome()">Return to Home</button>
-        </div>
-        <div id="donorMainpage" class="hide">
-            <button onclick="returnToDonorPage()">Donor's Mainpage</button>
+            <button class="home-button" onclick="returnToDonorPage()">Organization's Mainpage</button>
         </div>
     </div>
 
@@ -191,6 +185,13 @@
             } else {
                 deleteBtn.setAttribute('disabled', 'true');
             }
+        }
+        function returnHome() {
+            window.location.href = "index.html"; // Adjust the path as necessary
+        }
+
+        function returnToDonorPage() {
+            window.location.href = "mainpage.html"; // Adjust the path as necessary
         }
 
         // Call checkDeleteButton function on username and password input change

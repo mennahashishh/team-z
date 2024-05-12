@@ -111,16 +111,10 @@
             <button type="button" onclick="updateAccount()">Update Account</button>
             <button type="button" onclick="showConfirmation()" id="deleteButton">Delete Account</button>
         </div>
+        <div class="message" id="message"></div>
         <div class="button-container">
             <button class="return-button" onclick="returnHome()">Home</button>
-            <button class="home-button" onclick="returnToorganizationPage()">organization's Mainpage</button>
-        </div>
-        <div class="message" id="message"></div>
-        <div id="returnHome" class="hide">
-            <button onclick="returnHome()">Return to Home</button>
-        </div>
-        <div id="organizationMainpage" class="hide">
-            <button onclick="returnToorganizationPage()">organization's Mainpage</button>
+            <button class="home-button" onclick="returnToDonorPage()">Donor's Mainpage</button>
         </div>
     </div>
 
@@ -178,9 +172,9 @@
             alert('Returning to home page...');
         }
 
-        function returnToorganizationPage() {
-            // Code to return to the organization's main page
-            alert('Returning to organization\'s main page...');
+        function returnToDonorPage() {
+            // Code to return to the donor's main page
+            alert('Returning to donor\'s main page...');
         }
 
         // Enable or disable delete button based on username and password input
@@ -191,6 +185,13 @@
             } else {
                 deleteBtn.setAttribute('disabled', 'true');
             }
+        }
+        function returnHome() {
+            window.location.href = "index.html"; // Adjust the path as necessary
+        }
+
+        function returnToDonorPage() {
+            window.location.href = "DonorMain.html"; // Adjust the path as necessary
         }
 
         // Call checkDeleteButton function on username and password input change
